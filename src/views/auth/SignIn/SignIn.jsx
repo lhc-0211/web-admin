@@ -6,8 +6,7 @@ import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
 import SignInForm from './components/SignInForm'
 
 export const SignInBase = ({
-    signUpUrl = '/sign-up',
-    forgetPasswordUrl = '/forgot-password',
+    changePasswordUrl = '/change-password',
     disableSubmit,
 }) => {
     const [message, setMessage] = useTimeOutMessage()
@@ -40,7 +39,7 @@ export const SignInBase = ({
                 <div className="mt-6 text-center">
                     <span>{`Bạn có muốn đổi mật khẩu?`} </span>
                     <ActionLink
-                        to={signUpUrl}
+                        to={changePasswordUrl}
                         className="heading-text font-bold"
                         themeColor={false}
                     >

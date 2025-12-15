@@ -1,16 +1,16 @@
-import { useState, useEffect, Fragment } from 'react'
-import Menu from '@/components/ui/Menu'
-import VerticalSingleMenuItem from './VerticalSingleMenuItem'
-import VerticalCollapsedMenuItem from './VerticalCollapsedMenuItem'
 import AuthorityCheck from '@/components/shared/AuthorityCheck'
+import Menu from '@/components/ui/Menu'
 import { themeConfig } from '@/configs/theme.config'
 import {
-    NAV_ITEM_TYPE_TITLE,
     NAV_ITEM_TYPE_COLLAPSE,
     NAV_ITEM_TYPE_ITEM,
+    NAV_ITEM_TYPE_TITLE,
 } from '@/constants/navigation.constant'
 import useMenuActive from '@/utils/hooks/useMenuActive'
 import useTranslation from '@/utils/hooks/useTranslation'
+import { Fragment, useEffect, useState } from 'react'
+import VerticalCollapsedMenuItem from './VerticalCollapsedMenuItem'
+import VerticalSingleMenuItem from './VerticalSingleMenuItem'
 
 const { MenuGroup } = Menu
 
@@ -100,10 +100,7 @@ const VerticalMenuContent = (props) => {
                                 userAuthority={userAuthority}
                                 authority={nav.authority}
                             >
-                                <MenuGroup
-                                    key={nav.key}
-                                    label={t(nav.translateKey) || nav.title}
-                                >
+                                <MenuGroup key={nav.key}>
                                     {nav.subMenu &&
                                         nav.subMenu.length > 0 &&
                                         renderNavigation(

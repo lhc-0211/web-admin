@@ -1,5 +1,5 @@
-import { SignUpBase } from '@/views/auth/SignUp'
 import Simple from '@/components/layouts/AuthLayout/Simple'
+import { SignUpBase } from '@/views/auth/ChangePassword'
 
 const SignUpDemoSimple = () => {
     return (

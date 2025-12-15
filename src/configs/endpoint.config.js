@@ -1,7 +1,7 @@
 const endpointConfig = {
     signIn: '/api/auth/login',
     me: '/api/auth/me',
-    forgotPassword: '/forgot-password',
+    changePassword: '/api/auth/change-password',
 }
 
 export default endpointConfig

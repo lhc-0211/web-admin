@@ -1,5 +1,5 @@
-import { SignUpBase } from '@/views/auth/SignUp'
 import Split from '@/components/layouts/AuthLayout/Split'
+import { SignUpBase } from '@/views/auth/ChangePassword'
 
 const SignUpDemoSplit = () => {
     return (

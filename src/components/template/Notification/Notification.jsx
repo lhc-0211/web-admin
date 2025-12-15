@@ -1,21 +1,21 @@
-import { useEffect, useState, useRef } from 'react'
-import classNames from 'classnames'
-import withHeaderItem from '@/utils/hoc/withHeaderItem'
+import Badge from '@/components/ui/Badge'
+import Button from '@/components/ui/Button'
 import Dropdown from '@/components/ui/Dropdown'
 import ScrollBar from '@/components/ui/ScrollBar'
 import Spinner from '@/components/ui/Spinner'
-import Badge from '@/components/ui/Badge'
-import Button from '@/components/ui/Button'
+import {
+    apiGetNotificationCount,
+    apiGetNotificationList,
+} from '@/services/CommonService'
+import withHeaderItem from '@/utils/hoc/withHeaderItem'
+import useResponsive from '@/utils/hooks/useResponsive'
+import isLastChild from '@/utils/isLastChild'
+import classNames from 'classnames'
+import { useEffect, useRef, useState } from 'react'
+import { HiOutlineMailOpen } from 'react-icons/hi'
+import { useNavigate } from 'react-router'
 import NotificationAvatar from './NotificationAvatar'
 import NotificationToggle from './NotificationToggle'
-import { HiOutlineMailOpen } from 'react-icons/hi'
-import {
-    apiGetNotificationList,
-    apiGetNotificationCount,
-} from '@/services/CommonService'
-import isLastChild from '@/utils/isLastChild'
-import useResponsive from '@/utils/hooks/useResponsive'
-import { useNavigate } from 'react-router'
 
 const notificationHeight = 'h-[280px]'
 
@@ -102,7 +102,7 @@ const _Notification = ({ className }) => {
         >
             <Dropdown.Item variant="header">
                 <div className="dark:border-gray-700 px-2 flex items-center justify-between mb-1">
-                    <h6>Notifications</h6>
+                    <h6>Thông báo</h6>
                     <Button
                         variant="plain"
                         shape="circle"

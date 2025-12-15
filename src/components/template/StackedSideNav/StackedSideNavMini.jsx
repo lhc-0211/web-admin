@@ -1,17 +1,17 @@
-import { useEffect } from 'react'
+import AuthorityCheck from '@/components/shared/AuthorityCheck'
 import Logo from '@/components/template/Logo'
 import Menu from '@/components/ui/Menu'
 import ScrollBar from '@/components/ui/ScrollBar'
-import AuthorityCheck from '@/components/shared/AuthorityCheck'
-import {
-    SIDE_NAV_CONTENT_GUTTER,
-    HEADER_HEIGHT,
-} from '@/constants/theme.constant'
-import { NAV_ITEM_TYPE_ITEM } from '@/constants/navigation.constant'
 import appConfig from '@/configs/app.config'
 import navigationIcon from '@/configs/navigation-icon.config'
+import { NAV_ITEM_TYPE_ITEM } from '@/constants/navigation.constant'
+import {
+    HEADER_HEIGHT,
+    SIDE_NAV_CONTENT_GUTTER,
+} from '@/constants/theme.constant'
 import useMenuActive from '@/utils/hooks/useMenuActive'
 import isEmpty from 'lodash/isEmpty'
+import { useEffect } from 'react'
 import { Link } from 'react-router'
 
 const StackedSideNavMini = (props) => {

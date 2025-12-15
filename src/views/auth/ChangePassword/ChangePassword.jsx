@@ -1,71 +1,53 @@
 import ActionLink from '@/components/shared/ActionLink'
+import Logo from '@/components/template/Logo'
 import Alert from '@/components/ui/Alert'
-import Button from '@/components/ui/Button'
+import { useThemeStore } from '@/store/themeStore'
 import useTimeOutMessage from '@/utils/hooks/useTimeOutMessage'
-import { useState } from 'react'
-import { useNavigate } from 'react-router'
-import ChangePasswordForm from './components/ChangePasswordForm'
+import SignUpForm from './components/ChangePasswordForm'
 
-export const ChangePasswordBase = ({ signInUrl = '/sign-in' }) => {
-    const [emailSent, setEmailSent] = useState(false)
+export const ChangePasswordBase = ({
+    signInUrl = '/sign-in',
+    disableSubmit,
+}) => {
     const [message, setMessage] = useTimeOutMessage()
 
-    const navigate = useNavigate()
-
-    const handleContinue = () => {
-        navigate(signInUrl)
-    }
+    const mode = useThemeStore((state) => state.mode)
 
     return (
-        <div>
-            <div className="mb-6">
-                {emailSent ? (
-                    <>
-                        <h3 className="mb-2">Check your email</h3>
-                        <p className="font-semibold heading-text">
-                            We have sent a password recovery to your email
-                        </p>
-                    </>
-                ) : (
-                    <>
-                        <h3 className="mb-2">Forgot Password</h3>
-                        <p className="font-semibold heading-text">
-                            Please enter your email to receive a verification
-                            code
-                        </p>
-                    </>
-                )}
+        <>
+            <div className="mb-8">
+                <Logo
+                    type="streamline"
+                    mode={mode}
+                    imgClass="mx-auto"
+                    logoWidth={60}
+                />
+            </div>
+            <div className="mb-8">
+                <h3 className="mb-1">Đổi mật khẩu</h3>
+                <p className="font-semibold heading-text">
+                    Vui lòng nhập thông tin để đổi mật khẩu
+                </p>
             </div>
             {message && (
                 <Alert showIcon className="mb-4" type="danger">
                     <span className="break-all">{message}</span>
                 </Alert>
             )}
-            <ChangePasswordForm
-                emailSent={emailSent}
-                setMessage={setMessage}
-                setEmailSent={setEmailSent}
-            >
-                <Button
-                    block
-                    variant="solid"
-                    type="button"
-                    onClick={handleContinue}
-                >
-                    Continue
-                </Button>
-            </ChangePasswordForm>
-            <div className="mt-4 text-center">
-                <span>Back to </span>
-                <ActionLink
-                    to={signInUrl}
-                    className="heading-text font-bold"
-                    themeColor={false}
-                >
-                    Sign in
-                </ActionLink>
+            <SignUpForm disableSubmit={disableSubmit} setMessage={setMessage} />
+            <div>
+                <div className="mt-6 text-center">
+                    <span>Bạn đã có tài khoản? </span>
+                    <ActionLink
+                        to={signInUrl}
+                        className="heading-text font-bold"
+                        themeColor={false}
+                    >
+                        Đăng nhập
+                    </ActionLink>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

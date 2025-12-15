@@ -1,10 +1,10 @@
 import appConfig from '@/configs/app.config'
 import { REDIRECT_URL_KEY } from '@/constants/app.constant'
 import {
+    apiChangePassword,
     apiGetMe,
     apiSignIn,
     apiSignOut,
-    apiSignUp,
 } from '@/services/AuthService'
 import { useSessionUser, useToken } from '@/store/authStore'
 import { useImperativeHandle, useRef, useState } from 'react'
@@ -96,25 +96,27 @@ function AuthProvider({ children }) {
         }
     }
 
-    const signUp = async (values) => {
+    const changePassword = async (values) => {
         try {
-            const resp = await apiSignUp(values)
-            if (resp) {
-                handleSignIn({ accessToken: resp.token })
-                redirect()
-                return {
-                    status: 'success',
-                    message: '',
-                }
-            }
+            await apiChangePassword({
+                currentPassword: values.currentPassword,
+                newPassword: values.newPassword,
+                confirmPassword: values.confirmPassword,
+            })
+
+            redirect()
+
             return {
-                status: 'failed',
-                message: 'Unable to sign up',
+                status: 'success',
+                message: 'Đổi mật khẩu thành công. Vui lòng đăng nhập lại.',
             }
         } catch (errors) {
             return {
                 status: 'failed',
-                message: errors?.response?.data?.message || errors.toString(),
+                message:
+                    errors?.response?.data?.message ||
+                    errors?.message ||
+                    'Đổi mật khẩu thất bại',
             }
         }
     }
@@ -140,7 +142,7 @@ function AuthProvider({ children }) {
                 authenticated,
                 user,
                 signIn,
-                signUp,
+                changePassword,
                 signOut,
                 oAuthSignIn,
             }}

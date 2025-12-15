@@ -1,15 +1,13 @@
-import SideNav from '@/components/template/SideNav'
-import Header from '@/components/template/Header'
-import SideNavToggle from '@/components/template/SideNavToggle'
-import MobileNav from '@/components/template/MobileNav'
-import Search from '@/components/template/Search'
-import LanguageSelector from '@/components/template/LanguageSelector'
-import Notification from '@/components/template/Notification'
-import UserProfileDropdown from '@/components//template/UserProfileDropdown'
-import SidePanel from '@/components//template/SidePanel'
 import LayoutBase from '@/components//template/LayoutBase'
-import useResponsive from '@/utils/hooks/useResponsive'
+import UserProfileDropdown from '@/components//template/UserProfileDropdown'
+import Header from '@/components/template/Header'
+import MobileNav from '@/components/template/MobileNav'
+import Notification from '@/components/template/Notification'
+import Search from '@/components/template/Search'
+import SideNav from '@/components/template/SideNav'
+import SideNavToggle from '@/components/template/SideNavToggle'
 import { LAYOUT_COLLAPSIBLE_SIDE } from '@/constants/theme.constant'
+import useResponsive from '@/utils/hooks/useResponsive'
 
 const CollapsibleSide = ({ children }) => {
     const { larger, smaller } = useResponsive()
@@ -33,9 +31,9 @@ const CollapsibleSide = ({ children }) => {
                         }
                         headerEnd={
                             <>
-                                <LanguageSelector />
+                                {/* <LanguageSelector /> */}
                                 <Notification />
-                                <SidePanel />
+                                {/* <SidePanel /> */}
                                 <UserProfileDropdown hoverable={false} />
                             </>
                         }

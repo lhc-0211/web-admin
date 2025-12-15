@@ -19,7 +19,7 @@ const AuthContext = createContext({
     authenticated: false,
     user: {},
     signIn: async () => defaultFunctionPlaceHolder(),
-    signUp: async () => defaultFunctionPlaceHolder(),
+    changePassword: async () => defaultFunctionPlaceHolder(),
     signOut: () => {},
     oAuthSignIn: defaultOAuthSignInPlaceHolder,
 })

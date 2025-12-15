@@ -1,20 +1,20 @@
-import classNames from '@/utils/classNames'
-import ScrollBar from '@/components/ui/ScrollBar'
 import Logo from '@/components/template/Logo'
 import VerticalMenuContent from '@/components/template/VerticalMenuContent'
-import { useThemeStore } from '@/store/themeStore'
-import { useSessionUser } from '@/store/authStore'
-import { useRouteKeyStore } from '@/store/routeKeyStore'
-import navigationConfig from '@/configs/navigation.config'
+import ScrollBar from '@/components/ui/ScrollBar'
 import appConfig from '@/configs/app.config'
-import { Link } from 'react-router'
+import navigationConfig from '@/configs/navigation.config'
 import {
-    SIDE_NAV_WIDTH,
-    SIDE_NAV_COLLAPSED_WIDTH,
-    SIDE_NAV_CONTENT_GUTTER,
     HEADER_HEIGHT,
     LOGO_X_GUTTER,
+    SIDE_NAV_COLLAPSED_WIDTH,
+    SIDE_NAV_CONTENT_GUTTER,
+    SIDE_NAV_WIDTH,
 } from '@/constants/theme.constant'
+import { useSessionUser } from '@/store/authStore'
+import { useRouteKeyStore } from '@/store/routeKeyStore'
+import { useThemeStore } from '@/store/themeStore'
+import classNames from '@/utils/classNames'
+import { Link } from 'react-router'
 
 const sideNavStyle = {
     width: SIDE_NAV_WIDTH,

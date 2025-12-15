@@ -18,6 +18,15 @@ export async function apiGetMe() {
     })
 }
 
+// Đổi mật khẩu
+export async function apiChangePassword(data) {
+    return ApiService.fetchDataWithAxios({
+        url: endpointConfig.changePassword,
+        method: 'post',
+        data,
+    })
+}
+
 export async function apiSignUp(data) {
     return ApiService.fetchDataWithAxios({
         url: endpointConfig.signUp,
