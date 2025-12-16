@@ -4,7 +4,7 @@ import Select from '@/components/ui/Select'
 import { Controller, useForm } from 'react-hook-form'
 import { TbSearch } from 'react-icons/tb'
 import { useAnnouncementCategories } from '../hooks/useAnnouncementCategories'
-import useAnnouncePrivateList from '../hooks/useAnnouncePrivateList'
+import useAnnouncePublicList from '../hooks/useAnnouncePublicList'
 
 export default function AnnouncePrivateListTableTools({ onSubmit }) {
     const { control, getValues } = useForm({
@@ -17,7 +17,7 @@ export default function AnnouncePrivateListTableTools({ onSubmit }) {
     })
 
     const { options: categoryOptions, isLoading } = useAnnouncementCategories()
-    const { filterData, setFilterData, mutate } = useAnnouncePrivateList()
+    const { filterData, setFilterData } = useAnnouncePublicList()
 
     const priorityOptions = [
         { label: 'Thấp', value: 'Low' },

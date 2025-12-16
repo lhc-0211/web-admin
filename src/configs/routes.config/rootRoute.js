@@ -17,6 +17,12 @@ const dashboardsRoute = [
         component: lazy(() => import('@/views/announce/AnnouncePrivateList')),
         authority: [ADMIN, USER],
     },
+    {
+        key: 'public',
+        path: `/announcements/public`,
+        component: lazy(() => import('@/views/announce/AnnouncePublicList')),
+        authority: [ADMIN, USER],
+    },
 ]
 
 export default dashboardsRoute

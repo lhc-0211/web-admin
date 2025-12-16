@@ -1,7 +1,7 @@
 import DataTable from '@/components/shared/DataTable'
 import Tag from '@/components/ui/Tag'
 import { useMemo } from 'react'
-import useAnnouncePrivateList from '../hooks/useAnnouncePrivateList'
+import useAnnouncePublicList from '../hooks/useAnnouncePublicList'
 
 const priorityColor = {
     Low: 'bg-green-200 text-gray-900',
@@ -12,12 +12,12 @@ const priorityColor = {
 
 const AnnouncePrivateListTable = () => {
     const {
-        announcePrivateLis,
-        announcePrivateLisTotal,
+        announcePublicList,
+        announcePublicListTotal,
         tableData,
         isLoading,
         setTableData,
-    } = useAnnouncePrivateList()
+    } = useAnnouncePublicList()
 
     const columns = useMemo(
         () => [
@@ -82,11 +82,11 @@ const AnnouncePrivateListTable = () => {
         <DataTable
             selectable={false} // thông báo không cần chọn hàng
             columns={columns}
-            data={announcePrivateLis}
-            noData={!isLoading && announcePrivateLis.length === 0}
+            data={announcePublicList}
+            noData={!isLoading && announcePublicList.length === 0}
             loading={isLoading}
             pagingData={{
-                total: announcePrivateLisTotal,
+                total: announcePublicListTotal,
                 pageIndex: tableData.pageIndex,
                 pageSize: tableData.pageSize,
             }}

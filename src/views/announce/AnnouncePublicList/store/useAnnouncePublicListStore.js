@@ -20,7 +20,7 @@ const initialState = {
     selectedCustomer: [],
 }
 
-export const useAnnouncePrivateListStore = create((set) => ({
+export const useAnnouncePublicListStore = create((set) => ({
     ...initialState,
     setTableData: (payload) => set(() => ({ tableData: payload })),
     setFilterData: (payload) => set(() => ({ filterData: payload })),

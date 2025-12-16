@@ -1,9 +1,9 @@
-import { apiGetAnnouncements } from '@/services/AnnounceService'
+import { apiGetPublicAnnouncements } from '@/services/AnnounceService'
 import React from 'react'
 import useSWR from 'swr'
-import { useAnnouncePrivateListStore } from '../store/useAnnouncePrivateListStore'
+import { useAnnouncePublicListStore } from '../store/useAnnouncePublicListStore'
 
-export default function useAnnouncePrivateList() {
+export default function useAnnouncePublicList() {
     const {
         tableData,
         filterData,
@@ -12,7 +12,7 @@ export default function useAnnouncePrivateList() {
         setSelectedCustomer,
         setSelectAllCustomer,
         setFilterData,
-    } = useAnnouncePrivateListStore((state) => state)
+    } = useAnnouncePublicListStore((state) => state)
 
     // Chỉ gửi param cần thiết
     const params = React.useMemo(
@@ -29,14 +29,14 @@ export default function useAnnouncePrivateList() {
     )
 
     const { data, error, isLoading, mutate } = useSWR(
-        ['/api/announcements', params],
-        ([_, p]) => apiGetAnnouncements(p),
+        ['/api/announcements/public', params],
+        ([_, p]) => apiGetPublicAnnouncements(p),
         { revalidateOnFocus: false },
     )
 
     return {
-        announcePrivateLis: data?.items || [],
-        announcePrivateLisTotal: data?.totalItems || 0,
+        announcePublicList: data?.items || [],
+        announcePublicListTotal: data?.totalItems || 0,
         error,
         isLoading,
         tableData,

@@ -1,7 +1,6 @@
 import AdaptiveCard from '@/components/shared/AdaptiveCard'
 import Container from '@/components/shared/Container'
 import AnnouncePrivateListActionTools from './components/AnnouncePrivateListActionTools'
-import AnnouncePrivateListSelected from './components/AnnouncePrivateListSelected'
 import AnnouncePrivateListTable from './components/AnnouncePrivateListTable'
 import AnnouncePrivateListTableTools from './components/AnnouncePrivateListTableTools'
 
@@ -20,7 +19,6 @@ const CustomerList = () => {
                     </div>
                 </AdaptiveCard>
             </Container>
-            <AnnouncePrivateListSelected />
         </>
     )
 }

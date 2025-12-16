@@ -1,17 +1,17 @@
 import Button from '@/components/ui/Button'
 import { CSVLink } from 'react-csv'
 import { TbCloudDownload } from 'react-icons/tb'
-import useAnnouncePrivateList from '../hooks/useAnnouncePrivateList'
+import useAnnouncePublicList from '../hooks/useAnnouncePublicList'
 
-const AnnouncePrivateListActionTools = () => {
-    const { announcePrivateLis } = useAnnouncePrivateList()
+const AnnouncePublicListActionTools = () => {
+    const { announcePublicList } = useAnnouncePublicList()
 
     return (
         <div className="flex flex-col md:flex-row gap-3">
             <CSVLink
                 className="w-full"
-                filename="announcePrivateLis.csv"
-                data={announcePrivateLis}
+                filename="announcePublicList.csv"
+                data={announcePublicList}
             >
                 <Button
                     icon={<TbCloudDownload className="text-xl" />}
@@ -24,4 +24,4 @@ const AnnouncePrivateListActionTools = () => {
     )
 }
 
-export default AnnouncePrivateListActionTools
+export default AnnouncePublicListActionTools

@@ -2,7 +2,6 @@ import LayoutBase from '@/components//template/LayoutBase'
 import UserProfileDropdown from '@/components//template/UserProfileDropdown'
 import Header from '@/components/template/Header'
 import MobileNav from '@/components/template/MobileNav'
-import Notification from '@/components/template/Notification'
 import Search from '@/components/template/Search'
 import SideNav from '@/components/template/SideNav'
 import SideNavToggle from '@/components/template/SideNavToggle'
@@ -32,7 +31,7 @@ const CollapsibleSide = ({ children }) => {
                         headerEnd={
                             <>
                                 {/* <LanguageSelector /> */}
-                                <Notification />
+                                {/* <Notification /> */}
                                 {/* <SidePanel /> */}
                                 <UserProfileDropdown hoverable={false} />
                             </>
