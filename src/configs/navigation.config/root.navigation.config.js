@@ -1,0 +1,106 @@
+import {
+    NAV_ITEM_TYPE_ITEM,
+    NAV_ITEM_TYPE_TITLE,
+} from '@/constants/navigation.constant'
+import { ADMIN, USER } from '@/constants/roles.constant'
+
+const rootNavigationConfig = [
+    {
+        key: 'root',
+        path: '',
+        title: 'root',
+        translateKey: 'root',
+        icon: 'dashboard',
+        type: NAV_ITEM_TYPE_TITLE,
+        authority: [ADMIN, USER],
+        meta: {
+            horizontalMenu: {
+                layout: 'default',
+            },
+        },
+        subMenu: [
+            {
+                key: 'home',
+                path: `/home`,
+                title: 'Trang chủ',
+                translateKey: 'Home',
+                icon: 'home',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN, USER],
+                subMenu: [],
+            },
+            {
+                key: 'user',
+                path: `/user`,
+                title: 'Người dùng',
+                translateKey: 'user',
+                icon: 'user',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN, USER],
+                subMenu: [],
+            },
+            {
+                key: 'file',
+                path: `/file`,
+                title: 'Quản lý file',
+                translateKey: 'file',
+                icon: 'file',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN, USER],
+                subMenu: [],
+            },
+            {
+                key: 'news',
+                path: `/news`,
+                title: 'Tin tức',
+                translateKey: 'news',
+                icon: 'news',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN, USER],
+                subMenu: [],
+            },
+            {
+                key: 'announce',
+                path: `/announce`,
+                title: 'Thông báo',
+                translateKey: 'announce',
+                icon: 'announce',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN, USER],
+                subMenu: [],
+            },
+            {
+                key: 'violations',
+                path: `/violations`,
+                title: 'Quản lý vi phạm',
+                translateKey: 'violations',
+                icon: 'violations',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN, USER],
+                subMenu: [],
+            },
+            {
+                key: 'documents',
+                path: `/documents`,
+                title: 'Văn bản',
+                translateKey: 'documents',
+                icon: 'documents',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN, USER],
+                subMenu: [],
+            },
+            {
+                key: 'schedules',
+                path: `/schedules`,
+                title: 'Lịch công việc',
+                translateKey: 'schedules',
+                icon: 'schedules',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN, USER],
+                subMenu: [],
+            },
+        ],
+    },
+]
+
+export default rootNavigationConfig

@@ -1,9 +1,9 @@
-import { DASHBOARDS_PREFIX_PATH } from '@/constants/route.constant'
 import {
-    NAV_ITEM_TYPE_TITLE,
     NAV_ITEM_TYPE_ITEM,
+    NAV_ITEM_TYPE_TITLE,
 } from '@/constants/navigation.constant'
 import { ADMIN, USER } from '@/constants/roles.constant'
+import { DASHBOARDS_PREFIX_PATH } from '@/constants/route.constant'
 
 const dashboardsNavigationConfig = [
     {
