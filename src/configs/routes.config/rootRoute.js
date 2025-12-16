@@ -12,13 +12,10 @@ const dashboardsRoute = [
         },
     },
     {
-        key: 'announce',
-        path: `/announce`,
-        component: lazy(() => import('@/views/announce')),
+        key: 'private',
+        path: `/announcements/private`,
+        component: lazy(() => import('@/views/announce/AnnouncePrivateList')),
         authority: [ADMIN, USER],
-        meta: {
-            pageContainerType: 'contained',
-        },
     },
 ]
 

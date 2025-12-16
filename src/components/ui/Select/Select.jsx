@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
-import cn from '../utils/classNames'
+import { HiChevronDown, HiX } from 'react-icons/hi'
 import ReactSelect from 'react-select'
 import { useConfig } from '../ConfigProvider'
 import { useForm, useFormItem } from '../Form/context'
 import { useInputGroup } from '../InputGroup/context'
-import { HiChevronDown, HiX } from 'react-icons/hi'
-import DefaultOption from './Option'
 import Spinner from '../Spinner/Spinner'
+import cn from '../utils/classNames'
 import { CONTROL_SIZES } from '../utils/constants'
+import DefaultOption from './Option'
 
 const DefaultDropdownIndicator = () => {
     return (

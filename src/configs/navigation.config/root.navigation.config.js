@@ -1,4 +1,5 @@
 import {
+    NAV_ITEM_TYPE_COLLAPSE,
     NAV_ITEM_TYPE_ITEM,
     NAV_ITEM_TYPE_TITLE,
 } from '@/constants/navigation.constant'
@@ -60,14 +61,41 @@ const rootNavigationConfig = [
                 subMenu: [],
             },
             {
-                key: 'announce',
-                path: `/announce`,
+                key: 'announcements',
+                path: '',
                 title: 'Thông báo',
-                translateKey: 'announce',
+                translateKey: 'announcements',
                 icon: 'announce',
-                type: NAV_ITEM_TYPE_ITEM,
+                type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [ADMIN, USER],
-                subMenu: [],
+                meta: {
+                    description: {
+                        translateKey: 'announcements',
+                        label: 'announcements',
+                    },
+                },
+                subMenu: [
+                    {
+                        key: 'private',
+                        path: `/announcements/private`,
+                        title: 'Thông báo nội bộ',
+                        translateKey: 'announcements-private',
+                        icon: 'announcements',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'public',
+                        path: `/announcements/public`,
+                        title: 'Thông báo công khai',
+                        translateKey: 'announcements-public',
+                        icon: 'announcements',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                ],
             },
             {
                 key: 'violations',
