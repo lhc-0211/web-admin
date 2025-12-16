@@ -23,6 +23,34 @@ const dashboardsRoute = [
         component: lazy(() => import('@/views/announce/AnnouncePublicList')),
         authority: [ADMIN, USER],
     },
+    {
+        key: 'list',
+        path: `/admin/violations/list`,
+        component: lazy(() => import('@/views/admin/violations/list')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'list-violators',
+        path: `/admin/violations/list-violators`,
+        component: lazy(
+            () => import('@/views/admin/violations/list-violators'),
+        ),
+        authority: [ADMIN],
+    },
+    {
+        key: 'violation-types',
+        path: `/admin/violations/violation-types`,
+        component: lazy(
+            () => import('@/views/admin/violations/violation-types'),
+        ),
+        authority: [ADMIN],
+    },
+    {
+        key: 'waterways',
+        path: `/admin/violations/waterways`,
+        component: lazy(() => import('@/views/admin/violations/waterways')),
+        authority: [ADMIN],
+    },
 ]
 
 export default dashboardsRoute
