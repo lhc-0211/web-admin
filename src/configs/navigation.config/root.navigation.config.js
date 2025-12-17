@@ -63,7 +63,7 @@ const rootNavigationConfig = [
                 translateKey: 'announcements',
                 icon: 'announce',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [USER],
                 meta: {
                     description: {
                         translateKey: 'announcements',
@@ -77,7 +77,7 @@ const rootNavigationConfig = [
                         title: 'Thông báo nội bộ',
                         translateKey: 'announcements-private',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [USER],
                         subMenu: [],
                     },
                     {
@@ -86,7 +86,42 @@ const rootNavigationConfig = [
                         title: 'Thông báo công khai',
                         translateKey: 'announcements-public',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [USER],
+                        subMenu: [],
+                    },
+                ],
+            },
+            {
+                key: 'announcements',
+                path: '',
+                title: 'Thông báo',
+                translateKey: 'announcements',
+                icon: 'announce',
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN],
+                meta: {
+                    description: {
+                        translateKey: 'announcements',
+                        label: 'announcements',
+                    },
+                },
+                subMenu: [
+                    {
+                        key: 'announcements',
+                        path: `/admin/announcements`,
+                        title: 'Danh sách thông báo',
+                        translateKey: 'announcements-list',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'announcements-categories',
+                        path: `/admin/announcements/categories`,
+                        title: 'Danh mục thông báo',
+                        translateKey: 'announcements-categories',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN],
                         subMenu: [],
                     },
                 ],
@@ -107,12 +142,12 @@ const rootNavigationConfig = [
                 },
                 subMenu: [
                     {
-                        key: 'list',
-                        path: `/admin/violations/list`,
+                        key: 'violations',
+                        path: `/admin/violations`,
                         title: 'Danh sách vi phạm',
                         translateKey: 'violations-list',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [ADMIN],
                         subMenu: [],
                     },
                     {
@@ -121,7 +156,7 @@ const rootNavigationConfig = [
                         title: 'Lịch sử xử lý vi phạm',
                         translateKey: 'violations-history',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [ADMIN],
                         subMenu: [],
                     },
                     {
@@ -130,7 +165,7 @@ const rootNavigationConfig = [
                         title: 'Đối tượng vi phạm',
                         translateKey: 'violations-history',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [ADMIN],
                         subMenu: [],
                     },
                     {
@@ -139,7 +174,7 @@ const rootNavigationConfig = [
                         title: 'Loại vi phạm',
                         translateKey: 'violation-types',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [ADMIN],
                         subMenu: [],
                     },
                     {
@@ -148,7 +183,7 @@ const rootNavigationConfig = [
                         title: 'Tuyến kênh',
                         translateKey: 'waterways',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [ADMIN],
                         subMenu: [],
                     },
                 ],

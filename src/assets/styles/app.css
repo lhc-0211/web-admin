@@ -5,4 +5,5 @@
 @import './others/index.css';
 @import './vendors/index.css';
 @import './docs/index.css';
+@import 'leaflet/dist/leaflet.css';
 
