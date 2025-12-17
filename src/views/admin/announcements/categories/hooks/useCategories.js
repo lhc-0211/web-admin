@@ -47,16 +47,6 @@ export default function useCategories() {
     const categories = data?.items || [] // Mảng loại thông báo
     const totalItems = data?.totalItems || 0 // Tổng số bản ghi
 
-    // Cập nhật total trong tableData để TanStack Table biết tổng số trang
-    React.useEffect(() => {
-        if (data && totalItems !== tableData.total) {
-            setTableData((prev) => ({
-                ...prev,
-                total: totalItems,
-            }))
-        }
-    }, [totalItems, data, setTableData, tableData.total])
-
     return {
         categories, // Danh sách loại thông báo (dùng để render bảng)
         total: totalItems, // Tổng số bản ghi (cho pagination)
