@@ -7,6 +7,7 @@ import { FormItem } from '@/components/ui/Form'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
 import { apiUpdateWaterwayAdmin } from '@/services/Violations' // API update tuyến đường thủy
+import useAllDepartments from '@/views/admin/user/departments/hooks/userAllDepartments'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -32,12 +33,20 @@ const editWaterwaySchema = z.object({
     type: z.string().min(1, 'Vui lòng chọn loại tuyến'),
     description: z.string().optional(),
     location: z.string().optional(),
-    length: z.number().nonnegative('Chiều dài phải là số không âm').optional(),
+    length: z.number().positive('Chiều dài phải lớn hơn 0'),
     displayOrder: z.number().int().nonnegative('Thứ tự phải là số không âm'),
 })
 
 const WaterwaysEditModal = ({ isOpen, onClose, waterway }) => {
     const { mutate } = useWaterways()
+
+    const { departments, isLoading: loadingDepartments } = useAllDepartments() // Lấy danh sách phòng ban
+
+    const departmentOptions =
+        departments?.map((dep) => ({
+            label: `${dep.name} (${dep.code})`,
+            value: dep.id,
+        })) || []
 
     const {
         control,
@@ -220,14 +229,23 @@ const WaterwaysEditModal = ({ isOpen, onClose, waterway }) => {
                                 control={control}
                                 render={({ field }) => (
                                     <>
-                                        <Input
-                                            placeholder="Nhập GUID phòng ban quản lý"
-                                            {...field}
-                                            className={`w-full transition-all duration-200 ${
-                                                errors.departmentId
-                                                    ? 'border-red-500 ring-2 ring-red-200 focus:border-red-600 focus:ring-red-300'
-                                                    : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
-                                            }`}
+                                        <Select
+                                            options={departmentOptions}
+                                            value={departmentOptions.find(
+                                                (opt) =>
+                                                    opt.value === field.value,
+                                            )}
+                                            onChange={(opt) =>
+                                                field.onChange(opt?.value ?? '')
+                                            }
+                                            placeholder={
+                                                loadingDepartments
+                                                    ? 'Đang tải phòng ban...'
+                                                    : 'Chọn phòng ban'
+                                            }
+                                            isLoading={loadingDepartments}
+                                            isSearchable
+                                            isClearable={false}
                                         />
                                         {errors.departmentId && (
                                             <p className="mt-2 text-sm text-red-600 flex items-center gap-1">

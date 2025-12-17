@@ -33,7 +33,7 @@ export async function apiCreateViolatorAdmin(data) {
     })
 }
 
-export async function apiGetViolationAdmin({ id }) {
+export async function apiGetViolationAdmin(id) {
     return ApiService.fetchDataWithAxios({
         url: `/api/admin/violations/${id}`,
         method: 'get',
@@ -48,7 +48,7 @@ export async function apiUpdateViolatorAdmin(id, data) {
     })
 }
 
-export async function apiDeleteViolatorAdmin({ id }) {
+export async function apiDeleteViolatorAdmin(id) {
     return ApiService.fetchDataWithAxios({
         url: `/api/admin/violators/${id}`,
         method: 'delete',

@@ -1,6 +1,6 @@
 @layer components {
   .form-item {
-    @apply mb-7 relative;
+    @apply relative;
   
     &.horizontal {
       @apply flex flex-auto;

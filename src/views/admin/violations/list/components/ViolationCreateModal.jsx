@@ -12,6 +12,8 @@ import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { HiExclamationCircle, HiUpload, HiX } from 'react-icons/hi'
 import * as z from 'zod'
+import useAllViolationTypes from '../../violation-types/hooks/useAllViolationTypes'
+import useAllWaterways from '../../waterways/hooks/useAllWaterways'
 import useViolationsList from '../hooks/useViolationsList'
 
 // Schema validation với Zod
@@ -29,7 +31,6 @@ const createViolationSchema = z.object({
     latitude: z.number().optional(),
     longitude: z.number().optional(),
     severity: z.string().min(1, 'Vui lòng chọn mức độ nghiêm trọng'),
-    assignedToId: z.string().min(1, 'Vui lòng nhập ID người được giao'),
 })
 
 const severityOptions = [
@@ -48,6 +49,20 @@ const sideOptions = [
 const ViolationCreateModal = ({ isOpen, onClose }) => {
     const { mutate } = useViolationsList()
     const [selectedFiles, setSelectedFiles] = useState([])
+
+    const { waterways, isLoading: isLoadingWaterways } = useAllWaterways()
+    const { violationTypes, isLoading: isLoadingViolationTypes } =
+        useAllViolationTypes()
+
+    const waterwaysOptions = waterways.map((wat) => ({
+        label: `${wat.name} (${wat.code})`,
+        value: wat.id,
+    }))
+
+    const violationTypesOptions = violationTypes.map((vio) => ({
+        label: `${vio.name} (${vio.code})`,
+        value: vio.id,
+    }))
 
     const {
         control,
@@ -93,7 +108,6 @@ const ViolationCreateModal = ({ isOpen, onClose }) => {
             WaterwayId: 'waterwayId',
             ViolationTypeId: 'violationTypeId',
             ViolatorId: 'violatorId',
-            AssignedToId: 'assignedToId',
         }
 
         Object.keys(backendErrors).forEach((key) => {
@@ -194,14 +208,30 @@ const ViolationCreateModal = ({ isOpen, onClose }) => {
                                     control={control}
                                     render={({ field }) => (
                                         <>
-                                            <Input
-                                                placeholder="Nhập ID tuyến đường thủy"
-                                                {...field}
-                                                className={`w-full transition-all duration-200 ${errors.waterwayId ? 'border-red-500 ring-2 ring-red-200 focus:border-red-600 focus:ring-red-300' : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'}`}
+                                            <Select
+                                                options={waterwaysOptions}
+                                                value={waterwaysOptions.find(
+                                                    (opt) =>
+                                                        opt.value ===
+                                                        field.value,
+                                                )}
+                                                onChange={(opt) =>
+                                                    field.onChange(
+                                                        opt?.value ?? '',
+                                                    )
+                                                }
+                                                placeholder={
+                                                    isLoadingWaterways
+                                                        ? 'Đang tải phòng ban...'
+                                                        : 'Chọn phòng ban'
+                                                }
+                                                isLoading={isLoadingWaterways}
+                                                isSearchable
+                                                isClearable={false}
                                             />
                                             {errors.waterwayId && (
-                                                <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                                                    <HiExclamationCircle className="text-lg" />
+                                                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+                                                    <HiExclamationCircle className="text-base" />
                                                     {errors.waterwayId.message}
                                                 </p>
                                             )}
@@ -224,14 +254,32 @@ const ViolationCreateModal = ({ isOpen, onClose }) => {
                                     control={control}
                                     render={({ field }) => (
                                         <>
-                                            <Input
-                                                placeholder="Nhập ID loại vi phạm"
-                                                {...field}
-                                                className={`w-full transition-all duration-200 ${errors.violationTypeId ? 'border-red-500 ring-2 ring-red-200 focus:border-red-600 focus:ring-red-300' : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'}`}
+                                            <Select
+                                                options={violationTypesOptions}
+                                                value={violationTypesOptions.find(
+                                                    (opt) =>
+                                                        opt.value ===
+                                                        field.value,
+                                                )}
+                                                onChange={(opt) =>
+                                                    field.onChange(
+                                                        opt?.value ?? '',
+                                                    )
+                                                }
+                                                placeholder={
+                                                    isLoadingViolationTypes
+                                                        ? 'Đang tải loại vi phạm...'
+                                                        : 'Chọn loại vi phạm'
+                                                }
+                                                isLoading={
+                                                    isLoadingViolationTypes
+                                                }
+                                                isSearchable
+                                                isClearable={false}
                                             />
                                             {errors.violationTypeId && (
-                                                <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                                                    <HiExclamationCircle className="text-lg" />
+                                                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+                                                    <HiExclamationCircle className="text-base" />
                                                     {
                                                         errors.violationTypeId
                                                             .message
@@ -504,39 +552,6 @@ const ViolationCreateModal = ({ isOpen, onClose }) => {
                                                 <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
                                                     <HiExclamationCircle className="text-lg" />
                                                     {errors.severity.message}
-                                                </p>
-                                            )}
-                                        </>
-                                    )}
-                                />
-                            </FormItem>
-
-                            {/* Người được giao - Tùy chọn */}
-                            <FormItem
-                                label={
-                                    <span>
-                                        Người được giao (ID){' '}
-                                        <span className="text-red-600">*</span>
-                                    </span>
-                                }
-                            >
-                                <Controller
-                                    name="assignedToId"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <>
-                                            <Input
-                                                placeholder="Nhập ID người được giao (tùy chọn)"
-                                                {...field}
-                                                className={`w-full transition-all duration-200 ${errors.assignedToId ? 'border-red-500 ring-2 ring-red-200 focus:border-red-600 focus:ring-red-300' : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'}`}
-                                            />
-                                            {errors.assignedToId && (
-                                                <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                                                    <HiExclamationCircle className="text-lg" />
-                                                    {
-                                                        errors.assignedToId
-                                                            .message
-                                                    }
                                                 </p>
                                             )}
                                         </>

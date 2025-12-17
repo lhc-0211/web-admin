@@ -94,15 +94,8 @@ const WaterwaysTable = () => {
                 accessorKey: 'departmentName',
                 size: 250,
                 cell: ({ row }) => (
-                    <div>
-                        <div className="font-medium">
-                            {row.original.departmentName || '-'}
-                        </div>
-                        {row.original.departmentCode && (
-                            <div className="text-xs text-gray-500">
-                                Mã: {row.original.departmentCode}
-                            </div>
-                        )}
+                    <div className="font-medium">
+                        {row.original.departmentName || '-'}
                     </div>
                 ),
             },

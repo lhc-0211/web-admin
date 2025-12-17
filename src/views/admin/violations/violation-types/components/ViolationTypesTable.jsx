@@ -168,7 +168,6 @@ const ViolationTypesTable = () => {
                 onPaginationChange={handlePaginationChange}
                 onSelectChange={handleSelectChange}
                 selectable={false}
-                sortable={false}
             />
 
             {/* Modal sửa loại vi phạm */}

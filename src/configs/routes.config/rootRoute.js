@@ -51,6 +51,12 @@ const dashboardsRoute = [
         component: lazy(() => import('@/views/admin/violations/waterways')),
         authority: [ADMIN],
     },
+    {
+        key: 'departments',
+        path: `/admin/user/departments`,
+        component: lazy(() => import('@/views/admin/user/departments')),
+        authority: [ADMIN],
+    },
 ]
 
 export default dashboardsRoute

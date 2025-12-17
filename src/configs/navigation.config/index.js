@@ -1,13 +1,5 @@
 import rootNavigationConfig from './root.navigation.config'
 
-const navigationConfig = [
-    ...rootNavigationConfig,
-    // ...dashboardsNavigationConfig,
-    // ...conceptsNavigationConfig,
-    // ...uiComponentNavigationConfig,
-    // ...authNavigationConfig,
-    // ...othersNavigationConfig,
-    // ...guideNavigationConfig,
-]
+const navigationConfig = [...rootNavigationConfig]
 
 export default navigationConfig
