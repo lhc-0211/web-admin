@@ -10,7 +10,6 @@ export default function useAllCategories() {
         {
             revalidateOnFocus: false,
             revalidateOnReconnect: false,
-            dedupingInterval: 60000, // Cache 1 phút
         },
     )
 

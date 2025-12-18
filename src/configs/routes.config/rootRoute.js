@@ -69,6 +69,24 @@ const dashboardsRoute = [
         component: lazy(() => import('@/views/admin/announcements/categories')),
         authority: [ADMIN],
     },
+    {
+        key: 'news',
+        path: `/admin/news`,
+        component: lazy(() => import('@/views/admin/news/list')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'news-categories',
+        path: `/admin/news/categories`,
+        component: lazy(() => import('@/views/admin/news/categories')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'news-tags',
+        path: `/admin/news/tags`,
+        component: lazy(() => import('@/views/admin/news/tags')),
+        authority: [ADMIN],
+    },
 ]
 
 export default dashboardsRoute
