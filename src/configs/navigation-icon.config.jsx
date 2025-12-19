@@ -1,6 +1,8 @@
 import { CiCalendarDate, CiFileOn, CiWarning } from 'react-icons/ci'
 import { FaRegUser } from 'react-icons/fa'
+import { FaClipboardUser } from 'react-icons/fa6'
 import { GoBell, GoHome } from 'react-icons/go'
+import { ImUserTie } from 'react-icons/im'
 import {
     PiBoneDuotone,
     PiBookDuotone,
@@ -205,6 +207,8 @@ const navigationIcon = {
     news: <PiNewspaperThin />,
     documents: <PiFileTextDuotone />,
     schedules: <CiCalendarDate />,
+    positions: <FaClipboardUser />,
+    employees: <ImUserTie />,
 }
 
 export default navigationIcon

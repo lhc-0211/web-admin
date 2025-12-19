@@ -87,6 +87,36 @@ const dashboardsRoute = [
         component: lazy(() => import('@/views/admin/news/tags')),
         authority: [ADMIN],
     },
+    {
+        key: 'files',
+        path: `/admin/files`,
+        component: lazy(() => import('@/views/admin/files')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'positions',
+        path: `/admin/positions`,
+        component: lazy(() => import('@/views/admin/positions')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'employees',
+        path: `/admin/employees`,
+        component: lazy(() => import('@/views/admin/employees')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'document-categories',
+        path: `/admin/document/categories`,
+        component: lazy(() => import('@/views/admin/documents/categories')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'document-types',
+        path: `/admin/document/types`,
+        component: lazy(() => import('@/views/admin/documents/type')),
+        authority: [ADMIN],
+    },
 ]
 
 export default dashboardsRoute
