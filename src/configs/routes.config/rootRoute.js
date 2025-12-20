@@ -58,6 +58,13 @@ const dashboardsRoute = [
         authority: [ADMIN],
     },
     {
+        key: 'issuing-authorities',
+        path: `/admin/user/issuing-authorities`,
+        component: lazy(() => import('@/views/admin/user/issuing-authorities')),
+        authority: [ADMIN],
+    },
+
+    {
         key: 'announcements',
         path: `/admin/announcements`,
         component: lazy(() => import('@/views/admin/announcements/list')),
@@ -106,6 +113,12 @@ const dashboardsRoute = [
         authority: [ADMIN],
     },
     {
+        key: 'documents',
+        path: `/admin/documents`,
+        component: lazy(() => import('@/views/admin/documents/list')),
+        authority: [ADMIN],
+    },
+    {
         key: 'document-categories',
         path: `/admin/document/categories`,
         component: lazy(() => import('@/views/admin/documents/categories')),
@@ -115,6 +128,24 @@ const dashboardsRoute = [
         key: 'document-types',
         path: `/admin/document/types`,
         component: lazy(() => import('@/views/admin/documents/type')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'document-fields',
+        path: `/admin/document/fields`,
+        component: lazy(() => import('@/views/admin/documents/fields')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'schedules',
+        path: `/admin/schedules`,
+        component: lazy(() => import('@/views/admin/schedules/list')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'schedules-types',
+        path: `/admin/schedules/types`,
+        component: lazy(() => import('@/views/admin/schedules/types')),
         authority: [ADMIN],
     },
 ]

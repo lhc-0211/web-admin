@@ -28,7 +28,7 @@ const editCategorySchema = z.object({
         .optional(),
 })
 
-const TagsEditModal = ({ isOpen, onClose, category }) => {
+const TagsEditModal = ({ isOpen, onClose, tag }) => {
     const { mutate } = useTags()
 
     const {
@@ -42,16 +42,16 @@ const TagsEditModal = ({ isOpen, onClose, category }) => {
 
     // Reset form khi mở modal với dữ liệu mới
     React.useEffect(() => {
-        if (isOpen && category) {
+        if (isOpen && tag) {
             reset({
-                name: category.name || '',
-                description: category.description || '',
-                icon: category.icon || '',
-                color: category.color || '',
-                displayOrder: category.displayOrder ?? 0,
+                name: tag.name || '',
+                description: tag.description || '',
+                icon: tag.icon || '',
+                color: tag.color || '',
+                displayOrder: tag.displayOrder ?? 0,
             })
         }
-    }, [isOpen, category, reset])
+    }, [isOpen, tag, reset])
 
     const onSubmit = async (data) => {
         try {
@@ -63,7 +63,7 @@ const TagsEditModal = ({ isOpen, onClose, category }) => {
                 displayOrder: data.displayOrder ?? 0,
             }
 
-            await apiUpdateNewsTagsAdmin(category.id, body)
+            await apiUpdateNewsTagsAdmin(tag.id, body)
 
             mutate() // Refresh bảng tag
             onClose()
@@ -89,7 +89,7 @@ const TagsEditModal = ({ isOpen, onClose, category }) => {
         onClose()
     }
 
-    if (!category) return null
+    if (!tag) return null
 
     return (
         <Dialog isOpen={isOpen} onClose={handleClose} width={700}>
@@ -98,9 +98,7 @@ const TagsEditModal = ({ isOpen, onClose, category }) => {
                     <h3 className="text-2xl font-bold text-gray-900">
                         Sửa tag
                     </h3>
-                    <p className="text-sm text-gray-600 mt-1">
-                        ID: {category.id}
-                    </p>
+                    <p className="text-sm text-gray-600 mt-1">ID: {tag.id}</p>
                 </div>
 
                 <form
@@ -175,20 +173,20 @@ const TagsEditModal = ({ isOpen, onClose, category }) => {
                                 render={({ field }) => (
                                     <div className="flex items-center gap-3">
                                         <Input
+                                            type="color"
+                                            className="w-20 h-10 cursor-pointer"
+                                            {...field}
+                                        />
+                                        <Input
                                             placeholder="#3B82F6"
                                             {...field}
                                             invalid={!!errors.color}
-                                            className="flex-1"
+                                            onChange={(e) =>
+                                                field.onChange(
+                                                    e.target.value.toUpperCase(),
+                                                )
+                                            }
                                         />
-                                        {field.value && (
-                                            <div
-                                                className="w-12 h-12 rounded-lg border-2 border-gray-300 shadow-sm"
-                                                style={{
-                                                    backgroundColor:
-                                                        field.value,
-                                                }}
-                                            />
-                                        )}
                                     </div>
                                 )}
                             />

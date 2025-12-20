@@ -175,20 +175,20 @@ const CategoriesEditModal = ({ isOpen, onClose, category }) => {
                                 render={({ field }) => (
                                     <div className="flex items-center gap-3">
                                         <Input
+                                            type="color"
+                                            className="w-20 h-10 cursor-pointer"
+                                            {...field}
+                                        />
+                                        <Input
                                             placeholder="#3B82F6"
                                             {...field}
                                             invalid={!!errors.color}
-                                            className="flex-1"
+                                            onChange={(e) =>
+                                                field.onChange(
+                                                    e.target.value.toUpperCase(),
+                                                )
+                                            }
                                         />
-                                        {field.value && (
-                                            <div
-                                                className="w-12 h-12 rounded-lg border-2 border-gray-300 shadow-sm"
-                                                style={{
-                                                    backgroundColor:
-                                                        field.value,
-                                                }}
-                                            />
-                                        )}
                                     </div>
                                 )}
                             />

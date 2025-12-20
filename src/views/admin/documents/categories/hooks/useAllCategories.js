@@ -1,10 +1,10 @@
-import { apiGetNewsCategoriesAdmin } from '@/services/News'
+import { apiGetDocumentCategoriesAdmin } from '@/services/DocumentsService'
 import useSWR from 'swr'
 
 export default function useAllCategories() {
     const { data, error, isLoading, mutate } = useSWR(
-        ['/news/categories', { page: 1, pageSize: 99 }],
-        ([_, params]) => apiGetNewsCategoriesAdmin(params),
+        ['/admin/document-categories', { page: 1, pageSize: 99 }],
+        ([_, params]) => apiGetDocumentCategoriesAdmin(params),
         {
             revalidateOnFocus: false,
             revalidateOnReconnect: false,
