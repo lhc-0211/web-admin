@@ -1,10 +1,7 @@
 import LayoutBase from '@/components//template/LayoutBase'
-import SidePanel from '@/components//template/SidePanel'
 import UserProfileDropdown from '@/components//template/UserProfileDropdown'
 import Header from '@/components/template/Header'
-import LanguageSelector from '@/components/template/LanguageSelector'
 import MobileNav from '@/components/template/MobileNav'
-import Notification from '@/components/template/Notification'
 import StackedSideNav from '@/components/template/StackedSideNav'
 import { LAYOUT_STACKED_SIDE } from '@/constants/theme.constant'
 import useResponsive from '@/utils/hooks/useResponsive'
@@ -25,9 +22,6 @@ const StackedSide = ({ children }) => {
                         headerStart={<>{smaller.lg && <MobileNav />}</>}
                         headerEnd={
                             <>
-                                <LanguageSelector />
-                                <Notification />
-                                <SidePanel />
                                 <UserProfileDropdown hoverable={false} />
                             </>
                         }

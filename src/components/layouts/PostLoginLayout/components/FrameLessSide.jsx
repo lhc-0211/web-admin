@@ -1,11 +1,8 @@
 import LayoutBase from '@/components//template/LayoutBase'
-import SidePanel from '@/components//template/SidePanel'
 import UserProfileDropdown from '@/components//template/UserProfileDropdown'
 import FrameLessGap from '@/components/template/FrameLessGap'
 import Header from '@/components/template/Header'
-import LanguageSelector from '@/components/template/LanguageSelector'
 import MobileNav from '@/components/template/MobileNav'
-import Notification from '@/components/template/Notification'
 import SideNav from '@/components/template/SideNav'
 import SideNavToggle from '@/components/template/SideNavToggle'
 import { LAYOUT_FRAMELESS_SIDE } from '@/constants/theme.constant'
@@ -97,9 +94,6 @@ const FrameLessSide = ({ children }) => {
                             }
                             headerEnd={
                                 <>
-                                    <LanguageSelector />
-                                    <Notification />
-                                    <SidePanel />
                                     <UserProfileDropdown hoverable={false} />
                                 </>
                             }
