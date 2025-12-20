@@ -1,4 +1,4 @@
-import { apiGetNewsTagsAdmin } from '@/services/News'
+import { apiGetNewsTagsAdmin } from '@/services/NewsService'
 import React from 'react'
 import useSWR from 'swr'
 import { useTagsStore } from '../store/useTagsStore'

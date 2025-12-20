@@ -1,4 +1,4 @@
-import { apiGetNewsCategoriesAdmin } from '@/services/News'
+import { apiGetNewsCategoriesAdmin } from '@/services/NewsService'
 import useSWR from 'swr'
 
 export default function useAllCategories() {

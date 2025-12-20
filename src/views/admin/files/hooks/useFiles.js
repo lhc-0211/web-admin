@@ -1,8 +1,7 @@
-import { apiGetNewsAdmin } from '@/services/News'
+import { apiGetFilesAdmin } from '@/services/FileService'
 import React from 'react'
 import useSWR from 'swr'
 import { useFilesStore } from '../store/useFilesStore'
-import { apiGetFilesAdmin } from '@/services/FileService'
 
 export default function useFiles() {
     const {

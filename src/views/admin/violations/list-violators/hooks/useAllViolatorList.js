@@ -1,5 +1,5 @@
 // hooks/useAllViolatorList.js
-import { apiGetViolatorAdmin } from '@/services/Violations'
+import { apiGetViolatorAdmin } from '@/services/ViolationsService'
 import useSWR from 'swr'
 
 export default function useAllViolatorList() {

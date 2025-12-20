@@ -3,7 +3,7 @@ import Button from '@/components/ui/Button'
 import Dialog from '@/components/ui/Dialog'
 import { FormItem } from '@/components/ui/Form'
 import Input from '@/components/ui/Input'
-import { apiUpdateViolationTypeAdmin } from '@/services/Violations' // API update loại vi phạm
+import { apiUpdateViolationTypeAdmin } from '@/services/ViolationsService' // API update loại vi phạm
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'

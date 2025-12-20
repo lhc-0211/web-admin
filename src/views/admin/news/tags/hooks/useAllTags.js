@@ -1,4 +1,4 @@
-import { apiGetNewsTagsAdmin } from '@/services/News'
+import { apiGetNewsTagsAdmin } from '@/services/NewsService'
 import useSWR from 'swr'
 
 export default function useAllTags() {

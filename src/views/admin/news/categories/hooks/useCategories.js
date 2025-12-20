@@ -1,4 +1,4 @@
-import { apiGetNewsCategoriesAdmin } from '@/services/News'
+import { apiGetNewsCategoriesAdmin } from '@/services/NewsService'
 import React from 'react'
 import useSWR from 'swr'
 import { useNewsCategoriesStore } from '../store/useNewsCategoriesStore'

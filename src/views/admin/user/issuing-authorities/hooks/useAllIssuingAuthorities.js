@@ -1,4 +1,4 @@
-import { apiGetIssuingAuthoritiesAdmin } from '@/services/User'
+import { apiGetIssuingAuthoritiesAdmin } from '@/services/UserService'
 import useSWR from 'swr'
 
 export default function useAllIssuingAuthorities() {

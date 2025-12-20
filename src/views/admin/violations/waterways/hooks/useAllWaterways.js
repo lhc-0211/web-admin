@@ -1,4 +1,4 @@
-import { apiGetWaterwaysAdmin } from '@/services/Violations'
+import { apiGetWaterwaysAdmin } from '@/services/ViolationsService'
 import useSWR from 'swr'
 
 export default function useAllWaterways() {

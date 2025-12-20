@@ -1,4 +1,4 @@
-import { apiGetViolationsAdmin } from '@/services/Violations'
+import { apiGetViolationsAdmin } from '@/services/ViolationsService'
 import React from 'react'
 import useSWR from 'swr'
 import { useViolationsListStore } from '../store/useViolationsListStore'

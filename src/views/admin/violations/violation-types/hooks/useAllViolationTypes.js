@@ -1,4 +1,4 @@
-import { apiGetViolationTypesAdmin } from '@/services/Violations'
+import { apiGetViolationTypesAdmin } from '@/services/ViolationsService'
 import useSWR from 'swr'
 
 export default function useAllViolationTypes() {

@@ -1,7 +1,7 @@
 import DataTable from '@/components/shared/DataTable'
 import { Dialog, Notification, toast } from '@/components/ui'
 import Button from '@/components/ui/Button'
-import { apiDeleteViolatorAdmin } from '@/services/Violations'
+import { apiDeleteViolatorAdmin } from '@/services/ViolationsService'
 import { useMemo, useState } from 'react'
 import { HiPencil, HiTrash } from 'react-icons/hi'
 import { HiExclamationTriangle } from 'react-icons/hi2'

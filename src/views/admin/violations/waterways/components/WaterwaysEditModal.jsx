@@ -6,7 +6,7 @@ import Dialog from '@/components/ui/Dialog'
 import { FormItem } from '@/components/ui/Form'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
-import { apiUpdateWaterwayAdmin } from '@/services/Violations' // API update tuyến đường thủy
+import { apiUpdateWaterwayAdmin } from '@/services/ViolationsService' // API update tuyến đường thủy
 import useAllDepartments from '@/views/admin/user/departments/hooks/userAllDepartments'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'

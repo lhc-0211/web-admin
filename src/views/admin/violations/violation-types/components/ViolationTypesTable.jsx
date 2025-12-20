@@ -2,7 +2,7 @@ import DataTable from '@/components/shared/DataTable'
 import { Notification, toast } from '@/components/ui'
 import Button from '@/components/ui/Button'
 import Dialog from '@/components/ui/Dialog'
-import { apiDeleteViolationTypeAdmin } from '@/services/Violations' // Đổi tên API phù hợp
+import { apiDeleteViolationTypeAdmin } from '@/services/ViolationsService' // Đổi tên API phù hợp
 import { useMemo, useState } from 'react'
 import { HiPencil, HiTrash } from 'react-icons/hi'
 import { HiExclamationTriangle } from 'react-icons/hi2'

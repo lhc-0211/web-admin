@@ -44,8 +44,8 @@ export default function useEmployees() {
     )
 
     // Dữ liệu từ API
-    const employees = data || [] // Mảng loại chức vụ
-    const totalItems = data?.length || 0 // Tổng số bản ghi
+    const employees = data?.items || [] // Mảng loại chức vụ
+    const totalItems = data?.totalItems || 0 // Tổng số bản ghi
 
     return {
         employees, // Danh sách loại chức vụ (dùng để render bảng)

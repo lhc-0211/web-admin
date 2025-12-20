@@ -13,7 +13,7 @@ import EmployeesEditModal from './EmployeesEditModal'
 const EmployeesTable = () => {
     const {
         employees, // Danh sách nhân viên
-        total: employeesTotal,
+        total: totalItems,
         tableData,
         isLoading,
         setTableData,
@@ -223,7 +223,7 @@ const EmployeesTable = () => {
                 loading={isLoading}
                 noData={!isLoading && employees?.length === 0}
                 pagingData={{
-                    total: employeesTotal,
+                    total: totalItems,
                     pageIndex: tableData.pageIndex + 1,
                     pageSize: tableData.pageSize,
                 }}

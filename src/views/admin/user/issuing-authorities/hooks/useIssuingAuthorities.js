@@ -1,4 +1,4 @@
-import { apiGetIssuingAuthoritiesAdmin } from '@/services/User'
+import { apiGetIssuingAuthoritiesAdmin } from '@/services/UserService'
 import React from 'react'
 import useSWR from 'swr'
 import { useIssuingAuthoritiesStore } from '../store/useIssuingAuthoritiesStore'
