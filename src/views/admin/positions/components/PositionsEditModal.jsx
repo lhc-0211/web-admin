@@ -105,7 +105,10 @@ const PositionsEditModal = ({ isOpen, onClose, position }) => {
                         Sửa chức vụ
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        ID: {position.id}
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {position.id}
+                        </code>
                     </p>
                 </div>
 

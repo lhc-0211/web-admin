@@ -73,20 +73,24 @@ const WaterwaysTable = () => {
     const columns = useMemo(
         () => [
             {
-                header: 'Tên tuyến',
-                accessorKey: 'name',
-                size: 280,
+                header: 'Mã tuyến',
+                accessorKey: 'code',
+                size: 150,
                 cell: ({ row }) => (
                     <span className="font-semibold text-primary">
-                        {row.original.name || '-'}
+                        {row.original.code || '-'}
                     </span>
                 ),
             },
             {
-                header: 'Mã tuyến',
-                accessorKey: 'code',
-                size: 150,
-                cell: ({ row }) => row.original.code || '-',
+                header: 'Tên tuyến',
+                accessorKey: 'name',
+                size: 280,
+                cell: ({ row }) => (
+                    <span className="font-semibold text-gray-700">
+                        {row.original.name || '-'}
+                    </span>
+                ),
             },
 
             {

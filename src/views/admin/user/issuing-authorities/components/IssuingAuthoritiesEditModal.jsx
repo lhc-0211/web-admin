@@ -117,7 +117,10 @@ const IssuingAuthoritiesEditModal = ({ isOpen, onClose, authority }) => {
                         Sửa cơ quan ban hành
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        ID: {authority.id}
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {authority.id}
+                        </code>
                     </p>
                 </div>
 

@@ -74,15 +74,19 @@ const DepartmentsTable = () => {
             {
                 header: 'Mã phòng ban',
                 accessorKey: 'code',
-                size: 150,
-                cell: ({ row }) => row.original.code || '-',
+                size: 180,
+                cell: ({ row }) => (
+                    <span className="font-semibold text-primary">
+                        {row.original.code || '-'}
+                    </span>
+                ),
             },
             {
                 header: 'Tên phòng ban',
                 accessorKey: 'name',
-                size: 300,
+                size: 250,
                 cell: ({ row }) => (
-                    <span className="font-semibold text-primary">
+                    <span className="font-semibold text-gray-700">
                         {row.original.name || '-'}
                     </span>
                 ),

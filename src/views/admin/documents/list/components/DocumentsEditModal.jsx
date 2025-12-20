@@ -132,10 +132,13 @@ const DocumentsEditModal = ({ isOpen, onClose, announcement }) => {
             <div className="flex flex-col">
                 <div className="border-b px-6 py-5 bg-gray-50">
                     <h3 className="text-2xl font-bold text-gray-900">
-                        Sửa thông báo
+                        Sửa tài liệu
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        ID: {announcement.id}
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {announcement.id}
+                        </code>
                     </p>
                 </div>
 

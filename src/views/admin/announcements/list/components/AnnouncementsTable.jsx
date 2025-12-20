@@ -251,7 +251,7 @@ const AnnouncementsTable = () => {
                 accessorKey: 'title',
                 size: 280,
                 cell: ({ row }) => (
-                    <span className="font-medium">
+                    <span className="font-medium text-primary">
                         {row.original.title || '-'}
                     </span>
                 ),

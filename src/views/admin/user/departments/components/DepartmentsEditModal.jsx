@@ -110,7 +110,10 @@ const DepartmentsEditModal = ({ isOpen, onClose, department }) => {
                         Sửa phòng ban
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        ID: {department.id}
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {department.id}
+                        </code>
                     </p>
                 </div>
 

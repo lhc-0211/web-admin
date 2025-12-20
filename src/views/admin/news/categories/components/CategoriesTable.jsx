@@ -75,7 +75,7 @@ const CategoriesTable = () => {
                 accessorKey: 'name',
                 size: 250,
                 cell: ({ row }) => (
-                    <span className="font-medium">
+                    <span className="font-medium text-primary">
                         {row.original.name || '-'}
                     </span>
                 ),
@@ -85,7 +85,11 @@ const CategoriesTable = () => {
                 header: 'Mô tả',
                 accessorKey: 'description',
                 size: 300,
-                cell: ({ row }) => row.original.description || '-',
+                cell: ({ row }) => (
+                    <span className="font-medium">
+                        {row.original.description || '-'}
+                    </span>
+                ),
             },
             {
                 header: 'Ngày tạo',

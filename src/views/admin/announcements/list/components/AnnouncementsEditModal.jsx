@@ -12,6 +12,7 @@ import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { HiExclamationCircle } from 'react-icons/hi'
 import * as z from 'zod'
+import useAllCategories from '../../categories/hooks/userAllCategories'
 import useAnnouncements from '../hooks/useAnnouncements'
 
 // Schema validation cho form sửa thông báo
@@ -41,6 +42,13 @@ const editAnnouncementSchema = z.object({
 const AnnouncementsEditModal = ({ isOpen, onClose, announcement }) => {
     const { mutate } = useAnnouncements()
 
+    const { categories, isLoading: isLoadingCategories } = useAllCategories()
+
+    const categoriesOptions = categories.map((vio) => ({
+        label: `${vio.name}`,
+        value: vio.id,
+    }))
+
     const {
         control,
         handleSubmit,
@@ -52,8 +60,6 @@ const AnnouncementsEditModal = ({ isOpen, onClose, announcement }) => {
     })
 
     const isPinned = watch('isPinned')
-
-    console.log('announcement', announcement)
 
     React.useEffect(() => {
         if (isOpen && announcement) {
@@ -135,7 +141,10 @@ const AnnouncementsEditModal = ({ isOpen, onClose, announcement }) => {
                         Sửa thông báo
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        ID: {announcement.id}
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {announcement.id}
+                        </code>
                     </p>
                 </div>
 
@@ -178,11 +187,32 @@ const AnnouncementsEditModal = ({ isOpen, onClose, announcement }) => {
                                 name="categoryId"
                                 control={control}
                                 render={({ field }) => (
-                                    <Input
-                                        placeholder="Nhập GUID danh mục (tùy chọn)"
-                                        {...field}
-                                        invalid={!!errors.categoryId}
-                                    />
+                                    <>
+                                        <Select
+                                            options={categoriesOptions}
+                                            value={categoriesOptions.find(
+                                                (opt) =>
+                                                    opt.value === field.value,
+                                            )}
+                                            onChange={(opt) =>
+                                                field.onChange(opt?.value ?? '')
+                                            }
+                                            placeholder={
+                                                isLoadingCategories
+                                                    ? 'Đang tải...'
+                                                    : 'Chọn loại danh mục'
+                                            }
+                                            isLoading={isLoadingCategories}
+                                            isSearchable
+                                            isClearable={false}
+                                        />
+                                        {errors.categoryId && (
+                                            <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
+                                                <HiExclamationCircle className="text-base" />
+                                                {errors.categoryId.message}
+                                            </p>
+                                        )}
+                                    </>
                                 )}
                             />
                             {errors.categoryId && (

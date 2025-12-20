@@ -98,13 +98,16 @@ const SchedulesTypesEditModal = ({ isOpen, onClose, position }) => {
                         Sửa loại lịch
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        ID: {position.id}
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {position.id}
+                        </code>
                     </p>
                 </div>
 
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="p-6 space-y-6 overflow-y-auto max-h-[60vh]"
+                    className="p-6 space-y-6 overflow-y-auto max-h-[55vh]"
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Mã loại lịch */}

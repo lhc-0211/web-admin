@@ -148,6 +148,18 @@ const dashboardsRoute = [
         component: lazy(() => import('@/views/admin/schedules/types')),
         authority: [ADMIN],
     },
+    {
+        key: 'galleries',
+        path: `/admin/galleries`,
+        component: lazy(() => import('@/views/admin/galleries/list')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'gallery-categories',
+        path: `/admin/gallery/categories`,
+        component: lazy(() => import('@/views/admin/galleries/categories')),
+        authority: [ADMIN],
+    },
 ]
 
 export default dashboardsRoute

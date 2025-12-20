@@ -76,14 +76,18 @@ const IssuingAuthoritiesTable = () => {
                 header: 'Mã cơ quan',
                 accessorKey: 'code',
                 size: 150,
-                cell: ({ row }) => row.original.code || '-',
+                cell: ({ row }) => (
+                    <span className="font-semibold text-primary">
+                        {row.original.code || '-'}
+                    </span>
+                ),
             },
             {
                 header: 'Tên cơ quan',
                 accessorKey: 'name',
                 size: 300,
                 cell: ({ row }) => (
-                    <span className="font-semibold text-primary">
+                    <span className="font-semibold text-gray-700">
                         {row.original.name || '-'}
                     </span>
                 ),

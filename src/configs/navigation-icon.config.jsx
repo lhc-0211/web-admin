@@ -1,8 +1,10 @@
-import { CiCalendarDate, CiFileOn, CiWarning } from 'react-icons/ci'
-import { FaRegUser } from 'react-icons/fa'
+import { BsBellFill } from 'react-icons/bs'
+import { FaFile, FaUser } from 'react-icons/fa'
 import { FaClipboardUser } from 'react-icons/fa6'
-import { GoBell, GoHome } from 'react-icons/go'
 import { ImUserTie } from 'react-icons/im'
+import { IoIosWarning } from 'react-icons/io'
+import { IoDocumentText, IoNewspaper } from 'react-icons/io5'
+import { MdDateRange, MdHomeFilled } from 'react-icons/md'
 import {
     PiBoneDuotone,
     PiBookDuotone,
@@ -59,7 +61,6 @@ import {
     PiMedalDuotone,
     PiMegaphoneDuotone,
     PiNewspaperDuotone,
-    PiNewspaperThin,
     PiNotePencilDuotone,
     PiPackageDuotone,
     PiPasswordDuotone,
@@ -97,6 +98,7 @@ import {
     PiUsersDuotone,
     PiWarningDuotone,
 } from 'react-icons/pi'
+import { RiGalleryFill } from 'react-icons/ri'
 
 const navigationIcon = {
     uiComponents: <PiPuzzlePieceDuotone />,
@@ -199,16 +201,17 @@ const navigationIcon = {
     sharedComponentDoc: <PiShareNetworkDuotone />,
     utilsDoc: <PiToolboxDuotone />,
     changeLog: <PiCodeDuotone />,
-    home: <GoHome />,
-    announce: <GoBell />,
-    user: <FaRegUser />,
-    violations: <CiWarning />,
-    file: <CiFileOn />,
-    news: <PiNewspaperThin />,
-    documents: <PiFileTextDuotone />,
-    schedules: <CiCalendarDate />,
+    home: <MdHomeFilled />,
+    announce: <BsBellFill />,
+    user: <FaUser />,
+    violations: <IoIosWarning />,
+    file: <FaFile />,
+    news: <IoNewspaper />,
+    documents: <IoDocumentText />,
+    schedules: <MdDateRange />,
     positions: <FaClipboardUser />,
     employees: <ImUserTie />,
+    gallery: <RiGalleryFill />,
 }
 
 export default navigationIcon

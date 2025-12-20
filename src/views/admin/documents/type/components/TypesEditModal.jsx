@@ -100,7 +100,10 @@ const TypesEditModal = ({ isOpen, onClose, type }) => {
                         Sửa loại tài liệu
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        ID: {type.id} | Mã: {type.code}
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {type.id}
+                        </code>
                     </p>
                 </div>
 

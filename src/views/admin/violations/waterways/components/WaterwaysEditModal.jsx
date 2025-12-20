@@ -132,13 +132,16 @@ const WaterwaysEditModal = ({ isOpen, onClose, waterway }) => {
                         Sửa tuyến đường thủy
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        ID: {waterway.id}
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {waterway.id}
+                        </code>
                     </p>
                 </div>
 
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="p-8 space-y-8"
+                    className="p-6 space-y-6 overflow-y-auto max-h-[55vh]"
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Tên tuyến - Bắt buộc */}

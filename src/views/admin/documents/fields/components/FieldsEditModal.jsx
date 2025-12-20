@@ -112,13 +112,15 @@ const FieldsEditModal = ({ isOpen, onClose, field }) => {
                 {/* Header */}
                 <div className="border-b px-6 py-5 bg-gray-50">
                     <h3 className="text-2xl font-bold text-gray-900">
-                        Sửa trường thông tin
+                        Sửa danh mục
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        ID: {field.id} | Mã: {field.code}
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {field.id}
+                        </code>
                     </p>
                 </div>
-
                 {/* Form */}
                 <form
                     onSubmit={handleSubmit(onSubmit)}

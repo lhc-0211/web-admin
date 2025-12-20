@@ -6,6 +6,7 @@ import Input from '@/components/ui/Input'
 import Switcher from '@/components/ui/Switcher' // Nếu có component Switcher
 import { apiCreateDocumentCategoryAdmin } from '@/services/DocumentsService'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { HiExclamationCircle } from 'react-icons/hi'
 import * as z from 'zod'
@@ -17,7 +18,8 @@ const createCategorySchema = z.object({
     code: z
         .string()
         .min(1, 'Vui lòng nhập mã danh mục')
-        .max(20, 'Mã tối đa 20 ký tự'),
+        .max(20, 'Mã tối đa 20 ký tự')
+        .regex(/^[A-Z0-9_]+$/, 'Mã chỉ chứa chữ in hoa, số và dấu gạch dưới'),
     description: z.string().optional(),
     displayOrder: z
         .number({ invalid_type_error: 'Thứ tự phải là số' })
@@ -34,6 +36,8 @@ const CategoriesCreateModal = ({ isOpen, onClose }) => {
         control,
         handleSubmit,
         reset,
+        watch,
+        setValue,
         formState: { errors, isSubmitting },
     } = useForm({
         resolver: zodResolver(createCategorySchema),
@@ -45,6 +49,18 @@ const CategoriesCreateModal = ({ isOpen, onClose }) => {
             isActive: true,
         },
     })
+
+    const nameValue = watch('name')
+    useEffect(() => {
+        if (nameValue) {
+            const generatedCode = nameValue
+                .trim()
+                .toUpperCase()
+                .replace(/\s+/g, '_')
+                .replace(/[^A-Z0-9_]/g, '')
+            setValue('code', generatedCode, { shouldValidate: true })
+        }
+    }, [nameValue, setValue])
 
     const onSubmit = async (data) => {
         try {

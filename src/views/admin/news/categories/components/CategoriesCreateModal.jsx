@@ -67,7 +67,6 @@ const CategoriesCreateModal = ({ isOpen, onClose }) => {
                 </Notification>,
             )
         } catch (error) {
-            console.error('Lỗi tạo danh mục:', error)
             toast.push(
                 <Notification title="Lỗi" type="danger">
                     Tạo danh mục thất bại:{' '}

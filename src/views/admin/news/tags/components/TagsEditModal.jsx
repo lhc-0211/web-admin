@@ -98,7 +98,12 @@ const TagsEditModal = ({ isOpen, onClose, tag }) => {
                     <h3 className="text-2xl font-bold text-gray-900">
                         Sửa tag
                     </h3>
-                    <p className="text-sm text-gray-600 mt-1">ID: {tag.id}</p>
+                    <p className="text-sm text-gray-600 mt-1">
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {tag.id}
+                        </code>
+                    </p>
                 </div>
 
                 <form

@@ -8,6 +8,7 @@ import { FormItem } from '@/components/ui/Form'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
 import { apiCreateViolationAdmin } from '@/services/ViolationsService'
+import { useSessionUser } from '@/store/authStore'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -24,7 +25,7 @@ const createViolationSchema = z.object({
     waterwayId: z.string().min(1, 'Vui lòng nhập ID tuyến đường thủy'),
     violationTypeId: z.string().min(1, 'Vui lòng nhập ID loại vi phạm'),
     title: z.string().min(1, 'Vui lòng nhập tiêu đề vi phạm'),
-    description: z.string().optional(),
+    description: z.string().min(1, 'Vui lòng nhập mô tả'),
     violationDate: z.date({ required_error: 'Vui lòng chọn ngày vi phạm' }),
     violatorId: z.string().min(1, 'Vui lòng nhập ID đối tượng vi phạm'),
     detectedDate: z.date({ required_error: 'Vui lòng chọn ngày phát hiện' }),
@@ -53,6 +54,7 @@ const ViolationCreateModal = ({ isOpen, onClose }) => {
     const { mutate } = useViolationsList()
     const [selectedFiles, setSelectedFiles] = useState([])
     const [isMapOpen, setIsMapOpen] = useState(false)
+    const user = useSessionUser((state) => state.user)
 
     const { waterways, isLoading: isLoadingWaterways } = useAllWaterways()
     const { violationTypes, isLoading: isLoadingViolationTypes } =
@@ -117,44 +119,27 @@ const ViolationCreateModal = ({ isOpen, onClose }) => {
         setSelectedFiles((prev) => prev.filter((_, i) => i !== index))
     }
 
-    // Xử lý lỗi từ backend (nếu ID không tồn tại)
-    const mapBackendErrors = (backendErrors) => {
-        const fieldMap = {
-            WaterwayId: 'waterwayId',
-            ViolationTypeId: 'violationTypeId',
-            ViolatorId: 'violatorId',
-        }
-
-        Object.keys(backendErrors).forEach((key) => {
-            const fieldName = fieldMap[key]
-            if (fieldName && backendErrors[key].length > 0) {
-                setError(fieldName, {
-                    type: 'manual',
-                    message: backendErrors[key][0],
-                })
-            }
-        })
-    }
-
     const onSubmit = async (data) => {
-        clearErrors()
-
         try {
             const body = {
                 waterwayId: data.waterwayId || null,
                 violationTypeId: data.violationTypeId || null,
                 title: data.title?.trim() || null,
                 description: data.description?.trim() || null,
-                violationDate: data.violationDate.toISOString(),
+                violationDate: data.violationDate
+                    ? data.violationDate.toISOString()
+                    : null,
+                detectedDate: data.detectedDate
+                    ? data.detectedDate.toISOString()
+                    : null,
                 violatorId: data.violatorId || null,
-                detectedDate: data.detectedDate.toISOString(),
                 side: data.side,
                 specificLocation: data.specificLocation || null,
                 address: data.address || null,
                 latitude: data.latitude ?? 0,
                 longitude: data.longitude ?? 0,
                 severity: data.severity,
-                assignedToId: '09e8732a-64a8-430e-8a64-6b35e34bed5e' || null,
+                assignedToId: data.assignedToId || null,
                 evidenceFileIds: null,
             }
 
@@ -164,23 +149,16 @@ const ViolationCreateModal = ({ isOpen, onClose }) => {
             onClose()
             reset()
             setSelectedFiles([])
-            alert('Thêm vi phạm thành công!')
+            toast.push(
+                <Notification title="Thành công" type="success">
+                    Thêm vi phạm thành công!
+                </Notification>,
+            )
         } catch (error) {
-            const errorData = error.response?.data
-
-            let message = 'Lỗi hệ thống'
-
-            if (errorData?.errors) {
-                // Lấy lỗi đầu tiên từ backend
-                const firstKey = Object.keys(errorData.errors)[0]
-                message = errorData.errors[firstKey][0]
-            } else if (errorData?.detail) {
-                message = errorData.detail
-            }
-
             toast.push(
                 <Notification title="Lỗi" type="danger">
-                    Tạo vi phạm thất bại: {message}
+                    Tạo vi phạm thất bại:{' '}
+                    {error?.response?.data?.message || 'Vui lòng thử lại!'}
                 </Notification>,
             )
         }
@@ -706,7 +684,14 @@ const ViolationCreateModal = ({ isOpen, onClose }) => {
 
                                 {/* 12. Mô tả chi tiết - Đưa xuống dưới cùng phần thông tin chính */}
                                 <FormItem
-                                    label="Mô tả chi tiết"
+                                    label={
+                                        <span>
+                                            Mô tả chi tiết{' '}
+                                            <span className="text-red-600">
+                                                *
+                                            </span>
+                                        </span>
+                                    }
                                     className="lg:col-span-2"
                                 >
                                     <Controller

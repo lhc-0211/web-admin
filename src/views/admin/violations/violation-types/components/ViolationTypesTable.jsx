@@ -74,14 +74,18 @@ const ViolationTypesTable = () => {
                 header: 'Mã loại vi phạm',
                 accessorKey: 'code',
                 size: 180,
-                cell: ({ row }) => row.original.code || '-',
+                cell: ({ row }) => (
+                    <span className="font-semibold text-primary">
+                        {row.original.code || '-'}
+                    </span>
+                ),
             },
             {
                 header: 'Tên loại vi phạm',
                 accessorKey: 'name',
                 size: 300,
                 cell: ({ row }) => (
-                    <span className="font-semibold text-primary">
+                    <span className="font-semibold text-gray-700">
                         {row.original.name || '-'}
                     </span>
                 ),

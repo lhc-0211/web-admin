@@ -99,7 +99,10 @@ const CategoriesEditModal = ({ isOpen, onClose, category }) => {
                         Sửa danh mục
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        ID: {category.id}
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {category.id}
+                        </code>
                     </p>
                 </div>
 

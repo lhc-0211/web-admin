@@ -76,7 +76,7 @@ const SchedulesTypesTable = () => {
                 accessorKey: 'code',
                 size: 150,
                 cell: ({ row }) => (
-                    <span className="font-medium">
+                    <span className="font-medium text-primary">
                         {row.original.code || '-'}
                     </span>
                 ),
@@ -86,7 +86,7 @@ const SchedulesTypesTable = () => {
                 accessorKey: 'name',
                 size: 250,
                 cell: ({ row }) => (
-                    <span className="font-semibold text-primary">
+                    <span className="font-semibold text-gray-700">
                         {row.original.name || '-'}
                     </span>
                 ),

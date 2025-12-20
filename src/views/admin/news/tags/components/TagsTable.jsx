@@ -75,7 +75,7 @@ const TagsTable = () => {
                 accessorKey: 'name',
                 size: 250,
                 cell: ({ row }) => (
-                    <span className="font-medium">
+                    <span className="font-medium text-primary">
                         {row.original.name || '-'}
                     </span>
                 ),

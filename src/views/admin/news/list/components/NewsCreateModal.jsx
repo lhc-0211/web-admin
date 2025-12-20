@@ -6,6 +6,7 @@ import { FormItem } from '@/components/ui/Form'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
 import { apiCreateNewAdmin } from '@/services/NewsService'
+import { useSessionUser } from '@/store/authStore'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
 import { HiExclamationCircle } from 'react-icons/hi'
@@ -20,14 +21,10 @@ const createNewsSchema = z.object({
     content: z.string().min(1, 'Vui lòng nhập nội dung chi tiết'),
     categoryId: z
         .string()
-        .uuid('ID danh mục không hợp lệ')
+        .min(1, 'Vui lòng chọn danh mục')
         .optional()
         .or(z.literal('')),
-    featuredImageId: z
-        .string()
-        .uuid('ID ảnh nổi bật không hợp lệ')
-        .optional()
-        .or(z.literal('')),
+    featuredImageId: z.string().optional().or(z.literal('')),
     metaTitle: z.string().optional(),
     metaDescription: z.string().optional(),
     metaKeywords: z.string().optional(),
@@ -40,6 +37,7 @@ const NewsCreateModal = ({ isOpen, onClose }) => {
 
     const { categories, isLoading: isLoadingCategories } = useAllCategories()
     const { tags, isLoading: isLoadingTags } = useAllTags()
+    const user = useSessionUser((state) => state.user)
 
     const categoryOptions = categories.map((cat) => ({
         label: cat.name,
@@ -87,6 +85,7 @@ const NewsCreateModal = ({ isOpen, onClose }) => {
                     ? data.scheduledPublishAt.toISOString()
                     : null,
                 tagIds: data.tagIds || [],
+                assignedToId: user?.id,
             }
 
             await apiCreateNewAdmin(body)
@@ -159,7 +158,14 @@ const NewsCreateModal = ({ isOpen, onClose }) => {
                         </FormItem>
 
                         {/* Danh mục */}
-                        <FormItem label="Danh mục">
+                        <FormItem
+                            label={
+                                <span>
+                                    Danh mục{' '}
+                                    <span className="text-red-600">*</span>
+                                </span>
+                            }
+                        >
                             <Controller
                                 name="categoryId"
                                 control={control}
