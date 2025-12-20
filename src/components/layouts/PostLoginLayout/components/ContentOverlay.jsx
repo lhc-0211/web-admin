@@ -1,17 +1,13 @@
-import Header from '@/components/template/Header'
-import SidePanel from '@/components/template/SidePanel'
-import UserProfileDropdown from '@/components//template/UserProfileDropdown'
-import LanguageSelector from '@/components/template/LanguageSelector'
-import Notification from '@/components/template/Notification'
-import HeaderLogo from '@/components/template/HeaderLogo'
-import Search from '@/components/template/Search'
-import MobileNav from '@/components/template/MobileNav'
-import HorizontalNav from '@/components/template/HorizontalNav'
 import LayoutBase from '@/components//template/LayoutBase'
-import classNames from '@/utils/classNames'
-import useScrollTop from '@/utils/hooks/useScrollTop'
-import useResponsive from '@/utils/hooks/useResponsive'
+import UserProfileDropdown from '@/components//template/UserProfileDropdown'
+import Header from '@/components/template/Header'
+import HeaderLogo from '@/components/template/HeaderLogo'
+import HorizontalNav from '@/components/template/HorizontalNav'
+import MobileNav from '@/components/template/MobileNav'
 import { LAYOUT_CONTENT_OVERLAY } from '@/constants/theme.constant'
+import classNames from '@/utils/classNames'
+import useResponsive from '@/utils/hooks/useResponsive'
+import useScrollTop from '@/utils/hooks/useScrollTop'
 
 const ContentOverlay = ({ children }) => {
     const { isSticky } = useScrollTop()
@@ -111,10 +107,6 @@ const ContentOverlay = ({ children }) => {
                         headerMiddle={<>{larger.lg && <HorizontalNav />}</>}
                         headerEnd={
                             <>
-                                <Search />
-                                <LanguageSelector />
-                                <Notification />
-                                <SidePanel />
                                 <UserProfileDropdown hoverable={false} />
                             </>
                         }

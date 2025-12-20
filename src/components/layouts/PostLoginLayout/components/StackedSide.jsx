@@ -1,14 +1,13 @@
-import StackedSideNav from '@/components/template/StackedSideNav'
-import Header from '@/components/template/Header'
-import MobileNav from '@/components/template/MobileNav'
-import Search from '@/components/template/Search'
-import LanguageSelector from '@/components/template/LanguageSelector'
-import Notification from '@/components/template/Notification'
-import UserProfileDropdown from '@/components//template/UserProfileDropdown'
-import SidePanel from '@/components//template/SidePanel'
 import LayoutBase from '@/components//template/LayoutBase'
-import useResponsive from '@/utils/hooks/useResponsive'
+import SidePanel from '@/components//template/SidePanel'
+import UserProfileDropdown from '@/components//template/UserProfileDropdown'
+import Header from '@/components/template/Header'
+import LanguageSelector from '@/components/template/LanguageSelector'
+import MobileNav from '@/components/template/MobileNav'
+import Notification from '@/components/template/Notification'
+import StackedSideNav from '@/components/template/StackedSideNav'
 import { LAYOUT_STACKED_SIDE } from '@/constants/theme.constant'
+import useResponsive from '@/utils/hooks/useResponsive'
 
 const StackedSide = ({ children }) => {
     const { larger, smaller } = useResponsive()
@@ -23,12 +22,7 @@ const StackedSide = ({ children }) => {
                 <div className="flex flex-col flex-auto min-h-screen min-w-0 relative w-full">
                     <Header
                         className="shadow-sm dark:shadow-2xl"
-                        headerStart={
-                            <>
-                                {smaller.lg && <MobileNav />}
-                                <Search />
-                            </>
-                        }
+                        headerStart={<>{smaller.lg && <MobileNav />}</>}
                         headerEnd={
                             <>
                                 <LanguageSelector />
