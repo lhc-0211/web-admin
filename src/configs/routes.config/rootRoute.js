@@ -61,7 +61,7 @@ const dashboardsRoute = [
         key: 'roles-persmission',
         path: `/admin/user/roles-permission`,
         component: lazy(() => import('@/views/admin/roles-permission')),
-
+    },{
         key: 'issuing-authorities',
         path: `/admin/user/issuing-authorities`,
         component: lazy(() => import('@/views/admin/user/issuing-authorities')),

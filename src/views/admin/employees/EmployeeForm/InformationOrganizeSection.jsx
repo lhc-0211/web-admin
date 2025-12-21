@@ -5,7 +5,7 @@ import Card from '@/components/ui/Card'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
 import DatePicker from '@/components/ui/DatePicker'
-import Textarea from '@/views/ui-components/forms/Input/Textarea'
+
 import { FormItem } from '@/components/ui/Form'
 import { apiDropdownDepartment, apiDropdownPosition, apiDropdownEmployee } from '@/services/AdminEmployees'
 import { Controller } from 'react-hook-form'
@@ -158,7 +158,12 @@ const InformationOrganizeSection = ({ control, errors, watch, setValue }) => {
                         name="description"
                         control={control}
                         render={({ field }) => (
-                            <Textarea placeholder="Nhập mô tả" {...field} />
+                            <Input
+                            type="text"
+                            autoComplete="off"
+                            placeholder="Nhập mô tả"
+                            {...field}
+                        />
                         )}
                     />
                 </FormItem>
