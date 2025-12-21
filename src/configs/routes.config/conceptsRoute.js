@@ -23,59 +23,6 @@ const conceptsRoute = [
         },
     },
     {
-        key: 'concepts.customers.customerList',
-        path: `${CONCEPTS_PREFIX_PATH}/customers/customer-list`,
-        component: lazy(
-            () => import('@/views/concepts/customers/CustomerList'),
-        ),
-        authority: [ADMIN, USER],
-    },
-    {
-        key: 'concepts.customers.customerEdit',
-        path: `${CONCEPTS_PREFIX_PATH}/customers/customer-edit/:id`,
-        component: lazy(
-            () => import('@/views/concepts/customers/CustomerEdit'),
-        ),
-        authority: [ADMIN, USER],
-        meta: {
-            header: {
-                title: 'Edit customer',
-                description:
-                    'Manage customer details, purchase history, and preferences.',
-                contained: true,
-            },
-            footer: false,
-        },
-    },
-    {
-        key: 'concepts.customers.customerCreate',
-        path: `${CONCEPTS_PREFIX_PATH}/customers/customer-create`,
-        component: lazy(
-            () => import('@/views/concepts/customers/CustomerCreate'),
-        ),
-        authority: [ADMIN, USER],
-        meta: {
-            header: {
-                title: 'Create customer',
-                description:
-                    'Manage customer details, track purchases, and update preferences easily.',
-                contained: true,
-            },
-            footer: false,
-        },
-    },
-    {
-        key: 'concepts.customers.customerDetails',
-        path: `${CONCEPTS_PREFIX_PATH}/customers/customer-details/:id`,
-        component: lazy(
-            () => import('@/views/concepts/customers/CustomerDetails'),
-        ),
-        authority: [ADMIN, USER],
-        meta: {
-            pageContainerType: 'contained',
-        },
-    },
-    {
         key: 'concepts.products.productList',
         path: `${CONCEPTS_PREFIX_PATH}/products/product-list`,
         component: lazy(() => import('@/views/concepts/products/ProductList')),

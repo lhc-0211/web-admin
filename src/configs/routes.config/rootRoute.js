@@ -57,6 +57,30 @@ const dashboardsRoute = [
         component: lazy(() => import('@/views/admin/user/departments')),
         authority: [ADMIN],
     },
+    {
+        key: 'roles-persmission',
+        path: `/admin/user/roles-permission`,
+        component: lazy(() => import('@/views/admin/roles-permission')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'employees',
+        path: `/admin/user/employees`,
+        component: lazy(() => import('@/views/admin/employees/EmployeeList')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'employees-detail',
+        path: `admin/users/details-employee/:id`,
+        component: lazy(() => import('@/views/admin/employees/EmployeeDetails')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'employees-edit',
+        path: `/admin/users/edit-employee/:id`,
+        component: lazy(() => import('@/views/admin/employees/EmployeeEdit')),
+        authority: [ADMIN],
+    },
 ]
 
 export default dashboardsRoute
