@@ -1,4 +1,4 @@
-import { apiGetDepartmentsAdmin } from '@/services/User'
+import { apiGetDepartmentsAdmin } from '@/services/UserService'
 import React from 'react'
 import useSWR from 'swr'
 import { useDepartmentsStore } from '../store/useDepartmentsStore'

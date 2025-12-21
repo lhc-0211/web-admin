@@ -2,7 +2,7 @@ import DataTable from '@/components/shared/DataTable'
 import { Notification, toast } from '@/components/ui'
 import Button from '@/components/ui/Button'
 import Dialog from '@/components/ui/Dialog'
-import { apiDeleteViolationTypeAdmin } from '@/services/Violations' // Đổi tên API phù hợp
+import { apiDeleteViolationTypeAdmin } from '@/services/ViolationsService' // Đổi tên API phù hợp
 import { useMemo, useState } from 'react'
 import { HiPencil, HiTrash } from 'react-icons/hi'
 import { HiExclamationTriangle } from 'react-icons/hi2'
@@ -74,14 +74,18 @@ const ViolationTypesTable = () => {
                 header: 'Mã loại vi phạm',
                 accessorKey: 'code',
                 size: 180,
-                cell: ({ row }) => row.original.code || '-',
+                cell: ({ row }) => (
+                    <span className="font-semibold text-primary">
+                        {row.original.code || '-'}
+                    </span>
+                ),
             },
             {
                 header: 'Tên loại vi phạm',
                 accessorKey: 'name',
                 size: 300,
                 cell: ({ row }) => (
-                    <span className="font-semibold text-primary">
+                    <span className="font-semibold text-gray-700">
                         {row.original.name || '-'}
                     </span>
                 ),

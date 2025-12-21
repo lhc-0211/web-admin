@@ -3,7 +3,7 @@ import Button from '@/components/ui/Button'
 import Dialog from '@/components/ui/Dialog'
 import { FormItem } from '@/components/ui/Form'
 import Input from '@/components/ui/Input'
-import { apiCreateViolationTypeAdmin } from '@/services/Violations' // API thêm loại vi phạm
+import { apiCreateViolationTypeAdmin } from '@/services/ViolationsService' // API thêm loại vi phạm
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
 import { HiExclamationCircle } from 'react-icons/hi'

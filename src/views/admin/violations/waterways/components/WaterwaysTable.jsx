@@ -2,7 +2,7 @@ import DataTable from '@/components/shared/DataTable'
 import { Notification, toast } from '@/components/ui'
 import Button from '@/components/ui/Button'
 import Dialog from '@/components/ui/Dialog'
-import { apiDeleteWaterwayAdmin } from '@/services/Violations' // API xóa tuyến đường thủy
+import { apiDeleteWaterwayAdmin } from '@/services/ViolationsService' // API xóa tuyến đường thủy
 import { useMemo, useState } from 'react'
 import { HiPencil, HiTrash } from 'react-icons/hi'
 import { HiExclamationTriangle } from 'react-icons/hi2'
@@ -73,20 +73,24 @@ const WaterwaysTable = () => {
     const columns = useMemo(
         () => [
             {
-                header: 'Tên tuyến',
-                accessorKey: 'name',
-                size: 280,
+                header: 'Mã tuyến',
+                accessorKey: 'code',
+                size: 150,
                 cell: ({ row }) => (
                     <span className="font-semibold text-primary">
-                        {row.original.name || '-'}
+                        {row.original.code || '-'}
                     </span>
                 ),
             },
             {
-                header: 'Mã tuyến',
-                accessorKey: 'code',
-                size: 150,
-                cell: ({ row }) => row.original.code || '-',
+                header: 'Tên tuyến',
+                accessorKey: 'name',
+                size: 280,
+                cell: ({ row }) => (
+                    <span className="font-semibold text-gray-700">
+                        {row.original.name || '-'}
+                    </span>
+                ),
             },
 
             {

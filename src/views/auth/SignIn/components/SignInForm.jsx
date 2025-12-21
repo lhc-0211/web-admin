@@ -50,12 +50,13 @@ const SignInForm = (props) => {
     }
 
     return (
-        <div className={className}>
+        <div className={`${className}`}>
             <Form onSubmit={handleSubmit(onSignIn)}>
                 <FormItem
                     label="Tên đăng nhập"
                     invalid={Boolean(errors.email)}
                     errorMessage={errors.email?.message}
+                    className="mb-8"
                 >
                     <Controller
                         name="email"
@@ -99,6 +100,7 @@ const SignInForm = (props) => {
                     loading={isSubmitting}
                     variant="solid"
                     type="submit"
+                    className="mt-8"
                 >
                     {isSubmitting ? 'Đang đăng nhập ...' : 'Đăng nhập'}
                 </Button>

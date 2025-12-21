@@ -14,7 +14,7 @@ const DepartmentsActionTools = () => {
                     variant="solid"
                     onClick={() => setCreateModalOpen(true)}
                 >
-                    Thêm mới phòng ban
+                    Thêm mới
                 </Button>
             </div>
 

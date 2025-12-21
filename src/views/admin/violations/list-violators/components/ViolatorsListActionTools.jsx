@@ -14,7 +14,7 @@ const ViolatorsListActionTools = () => {
                     variant="solid"
                     onClick={() => setCreateModalOpen(true)}
                 >
-                    Thêm đối tượng vi phạm
+                    Thêm mới
                 </Button>
             </div>
 

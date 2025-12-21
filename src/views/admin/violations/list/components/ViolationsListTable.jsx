@@ -193,11 +193,6 @@ const ViolationsListTable = () => {
                     )
                 },
             },
-            {
-                header: 'Người được giao',
-                accessorKey: 'assignedToName',
-                cell: ({ row }) => row.original.assignedToName || '-',
-            },
             // CỘT HÀNH ĐỘNG
             {
                 header: 'Hành động',

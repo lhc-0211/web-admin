@@ -14,7 +14,7 @@ const ViolationTypesActionTools = () => {
                     variant="solid"
                     onClick={() => setCreateModalOpen(true)}
                 >
-                    Thêm loại vi phạm
+                    Thêm mới
                 </Button>
             </div>
 

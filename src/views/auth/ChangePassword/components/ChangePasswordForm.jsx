@@ -55,12 +55,13 @@ const ChangePasswordForm = (props) => {
     }
 
     return (
-        <div className={className}>
+        <div className={`${className}`}>
             <Form onSubmit={handleSubmit(onSignUp)}>
                 <FormItem
                     label="Mật khẩu hiện tại"
                     invalid={Boolean(errors.password)}
                     errorMessage={errors.password?.message}
+                    className="mb-4"
                 >
                     <Controller
                         name="currentPassword"
@@ -79,6 +80,7 @@ const ChangePasswordForm = (props) => {
                     label="Mật khẩu mới"
                     invalid={Boolean(errors.password)}
                     errorMessage={errors.password?.message}
+                    className="mb-4"
                 >
                     <Controller
                         name="password"
@@ -97,6 +99,7 @@ const ChangePasswordForm = (props) => {
                     label="Xác nhận lại mật khẩu"
                     invalid={Boolean(errors.confirmPassword)}
                     errorMessage={errors.confirmPassword?.message}
+                    className="mb-4"
                 >
                     <Controller
                         name="confirmPassword"

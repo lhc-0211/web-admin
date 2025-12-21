@@ -1,0 +1,11 @@
+{
+    "framework": "vite",
+    "outputDirectory": "build",
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "http://bhhapi.tthd.vn/api/$1"
+        },
+        { "source": "/(.*)", "destination": "/index.html" }
+    ]
+}

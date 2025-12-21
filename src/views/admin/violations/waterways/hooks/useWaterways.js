@@ -1,4 +1,4 @@
-import { apiGetWaterwaysAdmin } from '@/services/Violations'
+import { apiGetWaterwaysAdmin } from '@/services/ViolationsService'
 import React from 'react'
 import useSWR from 'swr'
 import { useWaterwaysStore } from '../store/useWaterwaysStore'

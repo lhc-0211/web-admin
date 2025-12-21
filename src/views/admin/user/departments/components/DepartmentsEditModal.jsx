@@ -3,7 +3,7 @@ import Button from '@/components/ui/Button'
 import Dialog from '@/components/ui/Dialog'
 import { FormItem } from '@/components/ui/Form'
 import Input from '@/components/ui/Input'
-import { apiUpdateDepartmentsAdmin } from '@/services/User'
+import { apiUpdateDepartmentsAdmin } from '@/services/UserService'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -110,7 +110,10 @@ const DepartmentsEditModal = ({ isOpen, onClose, department }) => {
                         Sửa phòng ban
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        ID: {department.id}
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {department.id}
+                        </code>
                     </p>
                 </div>
 

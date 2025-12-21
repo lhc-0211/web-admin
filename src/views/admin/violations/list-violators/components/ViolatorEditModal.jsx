@@ -3,7 +3,7 @@ import Button from '@/components/ui/Button'
 import { FormItem } from '@/components/ui/Form'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
-import { apiUpdateViolatorAdmin } from '@/services/Violations'
+import { apiUpdateViolatorAdmin } from '@/services/ViolationsService'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -104,12 +104,15 @@ const ViolatorEditModal = ({ isOpen, onClose, violator }) => {
     return (
         <Dialog isOpen={isOpen} onClose={handleClose} width={900}>
             <div className="flex flex-col">
-                <div className="border-b px-6 py-4">
-                    <h3 className="text-xl font-semibold">
+                <div className="border-b px-6 py-5 bg-gray-50">
+                    <h3 className="text-2xl font-bold text-gray-900">
                         Sửa đối tượng vi phạm
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        ID: {violator.id}
+                        ID:{' '}
+                        <code className="bg-gray-200 px-2 py-1 rounded">
+                            {violator.id}
+                        </code>
                     </p>
                 </div>
 
