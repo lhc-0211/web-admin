@@ -152,19 +152,38 @@ const rootNavigationConfig = [
             },
             {
                 key: 'files',
-                path: '/admin/files',
+                path: '',
                 title: 'Files',
                 translateKey: 'files',
                 icon: 'file',
-                type: NAV_ITEM_TYPE_ITEM,
-                authority: [ADMIN],
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN, USER],
                 meta: {
                     description: {
                         translateKey: 'files',
                         label: 'files',
                     },
                 },
-                subMenu: [],
+                subMenu: [
+                    {
+                        key: 'files-public',
+                        path: `/files`,
+                        title: 'Danh sách files',
+                        translateKey: 'files-public',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'files-admin',
+                        path: `/admin/files`,
+                        title: 'Quản lý files',
+                        translateKey: 'files',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN],
+                        subMenu: [],
+                    },
+                ],
             },
             {
                 key: 'news',

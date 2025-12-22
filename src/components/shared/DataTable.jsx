@@ -1,26 +1,26 @@
-import {
-    useMemo,
-    useRef,
-    useEffect,
-    useState,
-    useImperativeHandle,
-} from 'react'
-import classNames from 'classnames'
-import Table from '@/components/ui/Table'
+import FileNotFound from '@/assets/svg/FileNotFound'
+import Checkbox from '@/components/ui/Checkbox'
 import Pagination from '@/components/ui/Pagination'
 import Select from '@/components/ui/Select'
-import Checkbox from '@/components/ui/Checkbox'
-import TableRowSkeleton from './loaders/TableRowSkeleton'
-import Loading from './Loading'
-import FileNotFound from '@/assets/svg/FileNotFound'
+import Table from '@/components/ui/Table'
 import {
-    useReactTable,
+    flexRender,
     getCoreRowModel,
     getFilteredRowModel,
     getPaginationRowModel,
     getSortedRowModel,
-    flexRender,
+    useReactTable,
 } from '@tanstack/react-table'
+import classNames from 'classnames'
+import {
+    useEffect,
+    useImperativeHandle,
+    useMemo,
+    useRef,
+    useState,
+} from 'react'
+import TableRowSkeleton from './loaders/TableRowSkeleton'
+import Loading from './Loading'
 
 const { Tr, Th, Td, THead, TBody, Sorter } = Table
 
@@ -279,7 +279,7 @@ function DataTable(props) {
                                             <>
                                                 <FileNotFound />
                                                 <span className="font-semibold">
-                                                    No data found!
+                                                    Không có dữ liệu!
                                                 </span>
                                             </>
                                         )}

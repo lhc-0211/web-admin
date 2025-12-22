@@ -3,7 +3,7 @@ import Button from '@/components/ui/Button'
 import Dialog from '@/components/ui/Dialog'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
-import { apiUpdateFileAdmin } from '@/services/FileService'
+import { apiUpdateFilePublic } from '@/services/FileService'
 import { useCallback, useEffect, useState } from 'react'
 
 const categoryOptions = [
@@ -49,7 +49,7 @@ const FilesEditModal = ({ isOpen, onClose, file, onSuccess }) => {
                 category,
             }
 
-            await apiUpdateFileAdmin(file.id, payload)
+            await apiUpdateFilePublic(file.id, payload)
 
             toast.push(
                 <Notification title="Thành công" type="success">

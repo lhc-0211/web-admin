@@ -61,7 +61,8 @@ const dashboardsRoute = [
         key: 'roles-persmission',
         path: `/admin/user/roles-permission`,
         component: lazy(() => import('@/views/admin/roles-permission')),
-    },{
+    },
+    {
         key: 'issuing-authorities',
         path: `/admin/user/issuing-authorities`,
         component: lazy(() => import('@/views/admin/user/issuing-authorities')),
@@ -98,10 +99,18 @@ const dashboardsRoute = [
         component: lazy(() => import('@/views/admin/news/tags')),
         authority: [ADMIN],
     },
+
+    // =======FILE=======
     {
-        key: 'files',
+        key: 'files-admin',
         path: `/admin/files`,
         component: lazy(() => import('@/views/admin/files')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'files-public',
+        path: `/files`,
+        component: lazy(() => import('@/views/public/files')),
         authority: [ADMIN],
     },
     {
@@ -120,7 +129,9 @@ const dashboardsRoute = [
     {
         key: 'employees-detail',
         path: `admin/users/details-employee/:id`,
-        component: lazy(() => import('@/views/admin/employees/EmployeeDetails')),
+        component: lazy(
+            () => import('@/views/admin/employees/EmployeeDetails'),
+        ),
         authority: [ADMIN],
     },
     {

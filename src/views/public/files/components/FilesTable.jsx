@@ -2,30 +2,24 @@ import DataTable from '@/components/shared/DataTable'
 import { Notification, toast } from '@/components/ui'
 import Button from '@/components/ui/Button'
 import Dialog from '@/components/ui/Dialog'
-import { apiDeleteFileAdmin } from '@/services/FileService'
+import { apiDeleteFilePublic } from '@/services/FileService'
 import { useMemo, useState } from 'react'
 import { HiDownload, HiPencil, HiTrash } from 'react-icons/hi'
 import { HiExclamationTriangle } from 'react-icons/hi2'
 import useFiles from '../hooks/useFiles' // Hook lấy danh sách files
 import DownloadOptionsModal from './DownloadOptionsModal'
+import FilesCreateModal from './FilesCreateModal'
 import FilesEditModal from './FilesEditModal'
 
-const FilesTable = () => {
-    const {
-        files, // Danh sách file
-        filesTotal, // Tổng số file
-        tableData,
-        isLoading,
-        setTableData,
-        mutate, // Để refetch sau khi xóa/sửa
-    } = useFiles()
+const FilesTable = ({ uploadModalOpen, closeUploadModal }) => {
+    const { files, filesTotal, tableData, isLoading, setTableData, mutate } =
+        useFiles()
 
+    // Edit & Delete states
     const [editModalOpen, setEditModalOpen] = useState(false)
-    const [selectedFile, setSelectedFile] = useState(null)
-
-    // Modal xác nhận xóa
+    const [selectedFile, setSelectedFile] = useState()
     const [deleteModalOpen, setDeleteModalOpen] = useState(false)
-    const [fileToDelete, setFileToDelete] = useState(null)
+    const [fileToDelete, setFileToDelete] = useState()
 
     const [downloadModalOpen, setDownloadModalOpen] = useState(false)
     const [fileToDownload, setFileToDownload] = useState(null)
@@ -39,6 +33,7 @@ const FilesTable = () => {
         setEditModalOpen(false)
         setSelectedFile(null)
     }
+
     const openDeleteModal = (file) => {
         setFileToDelete(file)
         setDeleteModalOpen(true)
@@ -61,12 +56,9 @@ const FilesTable = () => {
 
     const confirmDelete = async () => {
         if (!fileToDelete) return
-
         try {
-            await apiDeleteFileAdmin(fileToDelete.id) // API xóa file
-            await apiGetFilesOrphanedAdmin()
+            await apiDeleteFilePublic(fileToDelete.id)
             mutate()
-
             toast.push(
                 <Notification title="Thành công" type="success">
                     Đã xóa file:{' '}
@@ -136,7 +128,6 @@ const FilesTable = () => {
                     })
                 },
             },
-            // CỘT HÀNH ĐỘNG
             {
                 header: 'Hành động',
                 id: 'actions',
@@ -144,7 +135,6 @@ const FilesTable = () => {
                 cell: ({ row }) => {
                     const file = row.original
                     const isImage = file.contentType?.startsWith('image/')
-
                     return (
                         <div className="flex items-center justify-center gap-2">
                             <Button
@@ -230,11 +220,9 @@ const FilesTable = () => {
                     <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-6">
                         <HiExclamationTriangle className="h-10 w-10 text-red-600" />
                     </div>
-
                     <h5 className="text-xl font-bold text-gray-900 mb-3">
                         Xác nhận xóa file
                     </h5>
-
                     <p className="text-base text-gray-600 mb-8 leading-relaxed">
                         Bạn có chắc chắn muốn xóa file
                         <br />
@@ -248,7 +236,6 @@ const FilesTable = () => {
                             Hành động này không thể hoàn tác!
                         </span>
                     </p>
-
                     <div className="flex justify-center gap-4">
                         <Button
                             variant="default"
@@ -270,6 +257,13 @@ const FilesTable = () => {
                     </div>
                 </div>
             </Dialog>
+
+            {/* Modal tạo mới*/}
+            <FilesCreateModal
+                isOpen={uploadModalOpen}
+                onClose={closeUploadModal}
+                onSuccess={mutate} // Refetch sau khi upload thành công
+            />
 
             {/* Modal Tải xuống với tùy chỉnh ảnh */}
             <Dialog

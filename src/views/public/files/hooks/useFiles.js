@@ -1,4 +1,4 @@
-import { apiGetFilesAdmin } from '@/services/FileService'
+import { apiGetFilesPublic } from '@/services/FileService'
 import React from 'react'
 import useSWR from 'swr'
 import { useFilesStore } from '../store/useFilesStore'
@@ -10,6 +10,7 @@ export default function useFiles() {
     const params = React.useMemo(() => {
         const p = {
             PageNumber: tableData.pageIndex + 1,
+            PageSize: tableData.pageSize,
         }
 
         if (filterData.Search?.trim()) {
@@ -53,9 +54,9 @@ export default function useFiles() {
 
     const swrKey = React.useMemo(() => {
         if (Object.keys(params).length === 2) {
-            return '/api/admin/files'
+            return '/api/files/my-files'
         }
-        return ['/api/admin/files', params]
+        return ['/api/files/my-files', params]
     }, [params])
 
     // Gọi API bằng SWR
@@ -63,9 +64,9 @@ export default function useFiles() {
         swrKey,
         (key) => {
             if (typeof key === 'string') {
-                return apiGetFilesAdmin()
+                return apiGetFilesPublic()
             }
-            return apiGetFilesAdmin(key[1])
+            return apiGetFilesPublic(key[1])
         },
         {
             revalidateOnFocus: false,
