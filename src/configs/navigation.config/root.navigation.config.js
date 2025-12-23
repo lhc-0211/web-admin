@@ -185,6 +185,8 @@ const rootNavigationConfig = [
                     },
                 ],
             },
+
+            // =======NEWS========
             {
                 key: 'news',
                 path: '',
@@ -201,9 +203,36 @@ const rootNavigationConfig = [
                 },
                 subMenu: [
                     {
-                        key: 'news',
-                        path: `/admin/news`,
+                        key: 'public-news',
+                        path: `/news`,
+                        title: 'Danh sách suất bản',
+                        translateKey: 'news-list',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'public-news-featured',
+                        path: `/news/featured`,
+                        title: 'Danh sách nổi bật',
+                        translateKey: 'news-list',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'public-my-news',
+                        path: `/news/my-news`,
                         title: 'Danh sách tin tức',
+                        translateKey: 'my-news',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'admin-news',
+                        path: `/admin/news`,
+                        title: 'Quản lý tin tức',
                         translateKey: 'news-list',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],
@@ -212,7 +241,7 @@ const rootNavigationConfig = [
                     {
                         key: 'news-categories',
                         path: `/admin/news/categories`,
-                        title: 'Danh mục tin tức',
+                        title: 'Quản lý danh mục',
                         translateKey: 'news-categories',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],
@@ -221,7 +250,7 @@ const rootNavigationConfig = [
                     {
                         key: 'news-tags',
                         path: `/admin/news/tags`,
-                        title: 'Danh sách tags',
+                        title: 'Quản lý tags',
                         translateKey: 'news-tags',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],

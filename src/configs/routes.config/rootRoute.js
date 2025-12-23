@@ -81,8 +81,28 @@ const dashboardsRoute = [
         component: lazy(() => import('@/views/admin/announcements/categories')),
         authority: [ADMIN],
     },
+
+    // =======NEWS========
     {
-        key: 'news',
+        key: 'public-news',
+        path: `/news`,
+        component: lazy(() => import('@/views/public/news/lists')),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'public-news-featured',
+        path: `/news/featured`,
+        component: lazy(() => import('@/views/public/news/featured')),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'public-my-news',
+        path: `/news/my-news`,
+        component: lazy(() => import('@/views/public/news/my-news')),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'admin-news',
         path: `/admin/news`,
         component: lazy(() => import('@/views/admin/news/list')),
         authority: [ADMIN],

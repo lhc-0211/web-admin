@@ -1,6 +1,81 @@
 import ApiService from './ApiService'
 
 // ========news===========
+
+//============PUCLIC===========
+export async function apiGetNewsPublic(params) {
+    return ApiService.fetchDataWithAxios({
+        url: '/api/news',
+        method: 'get',
+        params,
+    })
+}
+
+export async function apiGetNewPublic({ id, ...params }) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/news/${id}`,
+        method: 'get',
+        params,
+    })
+}
+
+export async function apiDeleteNewPublic(id) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/news/${id}`,
+
+        method: 'delete',
+    })
+}
+
+export async function apiUpdateNewPublic(id, data) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/news/${id}`,
+        method: 'put',
+        data,
+    })
+}
+
+export async function apiCreateNewPublic(data) {
+    return ApiService.fetchDataWithAxios({
+        url: '/api/news',
+        method: 'post',
+        data,
+    })
+}
+
+export async function apiGetNewsCategoriesPublic(params) {
+    return ApiService.fetchDataWithAxios({
+        url: '/api/news/categories/dropdown',
+        method: 'get',
+        params,
+    })
+}
+
+export async function apiGetRelatedNews(id, params) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/news/${id}/related`,
+        method: 'get',
+        params,
+    })
+}
+
+export async function apiGetFeaturedNews(params) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/news/featured`,
+        method: 'get',
+        params,
+    })
+}
+
+export async function apiGetMyNews(params) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/news/my-news`,
+        method: 'get',
+        params,
+    })
+}
+
+// ===========ADMIN==========
 export async function apiGetNewsAdmin(params) {
     return ApiService.fetchDataWithAxios({
         url: '/api/admin/news',

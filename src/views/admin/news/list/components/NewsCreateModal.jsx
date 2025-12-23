@@ -2,41 +2,20 @@ import { Notification, toast } from '@/components/ui'
 import Button from '@/components/ui/Button'
 import DatePicker from '@/components/ui/DatePicker'
 import Dialog from '@/components/ui/Dialog'
-import { FormItem } from '@/components/ui/Form'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
-import { apiCreateNewAdmin } from '@/services/NewsService'
+import { apiCreateNewPublic } from '@/services/NewsService' // API tạo bài viết
 import { useSessionUser } from '@/store/authStore'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Controller, useForm } from 'react-hook-form'
-import { HiExclamationCircle } from 'react-icons/hi'
-import * as z from 'zod'
-import useAllCategories from '../../categories/hooks/userAllCategories'
+import { useCallback, useState } from 'react'
+import useAllCategories from '../../categories/hooks/useAllCategories'
 import useAllTags from '../../tags/hooks/useAllTags'
 import useNews from '../hooks/useNews'
-
-const createNewsSchema = z.object({
-    title: z.string().min(1, 'Vui lòng nhập tiêu đề tin tức'),
-    summary: z.string().min(1, 'Vui lòng nhập tóm tắt'),
-    content: z.string().min(1, 'Vui lòng nhập nội dung chi tiết'),
-    categoryId: z
-        .string()
-        .min(1, 'Vui lòng chọn danh mục')
-        .optional()
-        .or(z.literal('')),
-    featuredImageId: z.string().optional().or(z.literal('')),
-    metaTitle: z.string().optional(),
-    metaDescription: z.string().optional(),
-    metaKeywords: z.string().optional(),
-    scheduledPublishAt: z.date().optional().nullable(),
-    tagIds: z.array(z.string()).optional(),
-})
 
 const NewsCreateModal = ({ isOpen, onClose }) => {
     const { mutate } = useNews()
 
-    const { categories, isLoading: isLoadingCategories } = useAllCategories()
-    const { tags, isLoading: isLoadingTags } = useAllTags()
+    const { categories } = useAllCategories()
+    const { tags } = useAllTags()
     const user = useSessionUser((state) => state.user)
 
     const categoryOptions = categories.map((cat) => ({
@@ -49,325 +28,286 @@ const NewsCreateModal = ({ isOpen, onClose }) => {
         value: tag.id,
     }))
 
-    const {
-        control,
-        handleSubmit,
-        reset,
-        formState: { errors, isSubmitting },
-    } = useForm({
-        resolver: zodResolver(createNewsSchema),
-        defaultValues: {
-            title: '',
-            summary: '',
-            content: '',
-            categoryId: '',
-            featuredImageId: '',
-            metaTitle: '',
-            metaDescription: '',
-            metaKeywords: '',
-            scheduledPublishAt: null,
-            tagIds: [],
-        },
-    })
+    const [loading, setLoading] = useState(false)
 
-    const onSubmit = async (data) => {
+    const [title, setTitle] = useState('')
+    const [summary, setSummary] = useState('')
+    const [content, setContent] = useState('')
+    const [categoryId, setCategoryId] = useState('')
+    const [featuredImageId, setFeaturedImageId] = useState('')
+    const [metaTitle, setMetaTitle] = useState('')
+    const [metaDescription, setMetaDescription] = useState('')
+    const [metaKeywords, setMetaKeywords] = useState('')
+    const [scheduledPublishAt, setScheduledPublishAt] = useState(null)
+    const [tagIds, setTagIds] = useState([])
+
+    const resetForm = useCallback(() => {
+        setTitle('')
+        setSummary('')
+        setContent('')
+        setCategoryId('')
+        setFeaturedImageId('')
+        setMetaTitle('')
+        setMetaDescription('')
+        setMetaKeywords('')
+        setScheduledPublishAt(null)
+        setTagIds([])
+    }, [])
+
+    const handleClose = useCallback(() => {
+        resetForm()
+        onClose()
+    }, [resetForm, onClose])
+
+    const handleCreate = async () => {
+        if (!title.trim()) {
+            toast.push(
+                <Notification title="Cảnh báo" type="warning">
+                    Vui lòng nhập tiêu đề bài viết!
+                </Notification>,
+            )
+            return
+        }
+
+        if (!categoryId) {
+            toast.push(
+                <Notification title="Cảnh báo" type="warning">
+                    Vui lòng chọn danh mục!
+                </Notification>,
+            )
+            return
+        }
+
+        setLoading(true)
+
         try {
-            const body = {
-                title: data.title,
-                summary: data.summary,
-                content: data.content,
-                categoryId: data.categoryId || null,
-                featuredImageId: data.featuredImageId || null,
-                metaTitle: data.metaTitle || null,
-                metaDescription: data.metaDescription || null,
-                metaKeywords: data.metaKeywords || null,
-                scheduledPublishAt: data.scheduledPublishAt
-                    ? data.scheduledPublishAt.toISOString()
+            const payload = {
+                authorId: user.id,
+                title: title.trim(),
+                summary: summary.trim(),
+                content: content.trim(),
+                categoryId,
+                featuredImageId: featuredImageId || null,
+                metaTitle: metaTitle.trim() || null,
+                metaDescription: metaDescription.trim() || null,
+                metaKeywords: metaKeywords.trim() || null,
+                scheduledPublishAt: scheduledPublishAt
+                    ? scheduledPublishAt.toISOString()
                     : null,
-                tagIds: data.tagIds || [],
-                assignedToId: user?.id,
+                tagIds,
             }
 
-            await apiCreateNewAdmin(body)
-
-            mutate()
-            onClose()
-            reset()
+            await apiCreateNewPublic(payload)
 
             toast.push(
                 <Notification title="Thành công" type="success">
-                    Tạo tin tức <strong>{data.title}</strong> thành công!
+                    Tạo bài viết thành công!
                 </Notification>,
             )
+            mutate()
+            handleClose()
         } catch (error) {
-            console.error('Lỗi tạo tin tức:', error)
+            console.error('Create news error:', error)
             toast.push(
                 <Notification title="Lỗi" type="danger">
-                    Tạo tin tức thất bại:{' '}
-                    {error?.response?.data?.message || 'Vui lòng thử lại!'}
+                    Tạo bài viết thất bại! Vui lòng thử lại.
                 </Notification>,
             )
+        } finally {
+            setLoading(false)
         }
     }
 
-    const handleClose = () => {
-        reset()
-        onClose()
-    }
-
     return (
-        <Dialog isOpen={isOpen} onClose={handleClose} width={1000}>
-            <div className="flex flex-col">
-                <div className="border-b px-6 py-5 bg-gray-50">
-                    <h3 className="text-2xl font-bold text-gray-900">
-                        Tạo tin tức mới
-                    </h3>
+        <Dialog isOpen={isOpen} onClose={handleClose} width={800}>
+            <div className="p-6 space-y-6 overflow-y-auto max-h-[78vh]">
+                <div className="flex items-center justify-between">
+                    <h5 className="text-xl font-bold">Tạo bài viết mới</h5>
                 </div>
 
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className="p-6 space-y-6 overflow-y-auto max-h-[55vh]"
-                >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Tiêu đề */}
-                        <FormItem
-                            label={
-                                <span>
-                                    Tiêu đề{' '}
-                                    <span className="text-red-600">*</span>
-                                </span>
-                            }
-                        >
-                            <Controller
-                                name="title"
-                                control={control}
-                                render={({ field }) => (
-                                    <Input
-                                        placeholder="Nhập tiêu đề tin tức"
-                                        {...field}
-                                        invalid={!!errors.title}
-                                    />
-                                )}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Cột trái */}
+                    <div className="space-y-5">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Tiêu đề <span className="text-red-500">*</span>
+                            </label>
+                            <Input
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                placeholder="Nhập tiêu đề bài viết"
+                                disabled={loading}
                             />
-                            {errors.title && (
-                                <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                                    <HiExclamationCircle />
-                                    {errors.title.message}
-                                </p>
-                            )}
-                        </FormItem>
+                        </div>
 
-                        {/* Danh mục */}
-                        <FormItem
-                            label={
-                                <span>
-                                    Danh mục{' '}
-                                    <span className="text-red-600">*</span>
-                                </span>
-                            }
-                        >
-                            <Controller
-                                name="categoryId"
-                                control={control}
-                                render={({ field }) => (
-                                    <Select
-                                        options={categoryOptions}
-                                        value={categoryOptions.find(
-                                            (opt) => opt.value === field.value,
-                                        )}
-                                        onChange={(opt) =>
-                                            field.onChange(opt?.value ?? '')
-                                        }
-                                        placeholder={
-                                            isLoadingCategories
-                                                ? 'Đang tải...'
-                                                : 'Chọn danh mục'
-                                        }
-                                        isLoading={isLoadingCategories}
-                                        isSearchable
-                                    />
-                                )}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Tóm tắt
+                            </label>
+                            <Input
+                                textArea
+                                rows={4}
+                                value={summary}
+                                onChange={(e) => setSummary(e.target.value)}
+                                placeholder="Tóm tắt ngắn gọn nội dung bài viết"
+                                disabled={loading}
                             />
-                        </FormItem>
+                        </div>
 
-                        {/* Ảnh nổi bật ID */}
-                        <FormItem label="ID Ảnh nổi bật (featuredImageId)">
-                            <Controller
-                                name="featuredImageId"
-                                control={control}
-                                render={({ field }) => (
-                                    <Input
-                                        placeholder="Nhập GUID ảnh nổi bật (tùy chọn)"
-                                        {...field}
-                                        invalid={!!errors.featuredImageId}
-                                    />
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Danh mục <span className="text-red-500">*</span>
+                            </label>
+                            <Select
+                                options={categoryOptions}
+                                value={categoryOptions.find(
+                                    (opt) => opt.value === categoryId,
                                 )}
+                                onChange={(option) =>
+                                    setCategoryId(option?.value || '')
+                                }
+                                placeholder="Chọn danh mục"
+                                isDisabled={loading}
                             />
-                            {errors.featuredImageId && (
-                                <p className="mt-1 text-sm text-red-600">
-                                    {errors.featuredImageId.message}
-                                </p>
-                            )}
-                        </FormItem>
+                        </div>
 
-                        {/* Lên lịch xuất bản */}
-                        <FormItem label="Lên lịch xuất bản (tùy chọn)">
-                            <Controller
-                                name="scheduledPublishAt"
-                                control={control}
-                                render={({ field }) => (
-                                    <DatePicker
-                                        placeholder="Chọn ngày giờ xuất bản"
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                        showTimeSelect
-                                        clearable
-                                    />
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Tags
+                            </label>
+                            <Select
+                                options={tagOptions}
+                                isMulti
+                                value={tagOptions.filter((opt) =>
+                                    tagIds.includes(opt.value),
                                 )}
+                                onChange={(options) => {
+                                    setTagIds(
+                                        options
+                                            ? options.map((opt) => opt.value)
+                                            : [],
+                                    )
+                                }}
+                                placeholder="Chọn các tag liên quan"
+                                isDisabled={loading}
                             />
-                        </FormItem>
+                        </div>
                     </div>
 
-                    {/* Tóm tắt */}
-                    <FormItem
-                        label={
-                            <span>
-                                Tóm tắt <span className="text-red-600">*</span>
-                            </span>
-                        }
-                    >
-                        <Controller
-                            name="summary"
-                            control={control}
-                            render={({ field }) => (
-                                <Input
-                                    textArea
-                                    rows={3}
-                                    placeholder="Tóm tắt ngắn gọn nội dung tin tức"
-                                    {...field}
-                                    invalid={!!errors.summary}
-                                />
-                            )}
-                        />
-                        {errors.summary && (
-                            <p className="mt-1 text-sm text-red-600">
-                                {errors.summary.message}
-                            </p>
-                        )}
-                    </FormItem>
+                    {/* Cột phải */}
+                    <div className="space-y-5">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Ảnh đại diện (Featured Image)
+                            </label>
+                            {/* Ở đây bạn có thể tích hợp MediaPicker hoặc FilePicker */}
+                            <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                                <p className="text-sm text-gray-500">
+                                    {featuredImageId
+                                        ? 'Đã chọn ảnh (ID: ' +
+                                          featuredImageId +
+                                          ')'
+                                        : 'Chưa chọn ảnh đại diện'}
+                                </p>
+                                {/* Nút mở media library sẽ được thêm sau */}
+                                <Button
+                                    size="sm"
+                                    variant="default"
+                                    className="mt-3"
+                                >
+                                    Chọn từ thư viện
+                                </Button>
+                            </div>
+                        </div>
 
-                    {/* Nội dung chi tiết */}
-                    <FormItem
-                        label={
-                            <span>
-                                Nội dung chi tiết{' '}
-                                <span className="text-red-600">*</span>
-                            </span>
-                        }
-                    >
-                        <Controller
-                            name="content"
-                            control={control}
-                            render={({ field }) => (
-                                <Input
-                                    textArea
-                                    rows={10}
-                                    placeholder="Nhập nội dung đầy đủ của tin tức"
-                                    {...field}
-                                    invalid={!!errors.content}
-                                />
-                            )}
-                        />
-                        {errors.content && (
-                            <p className="mt-1 text-sm text-red-600">
-                                {errors.content.message}
-                            </p>
-                        )}
-                    </FormItem>
-
-                    {/* Tags */}
-                    <FormItem label="Tags">
-                        <Controller
-                            name="tagIds"
-                            control={control}
-                            render={({ field }) => (
-                                <Select
-                                    options={tagOptions}
-                                    value={tagOptions.filter((opt) =>
-                                        field.value?.includes(opt.value),
-                                    )}
-                                    onChange={(opts) =>
-                                        field.onChange(
-                                            opts.map((opt) => opt.value),
-                                        )
-                                    }
-                                    isMulti
-                                    placeholder={
-                                        isLoadingTags
-                                            ? 'Đang tải...'
-                                            : 'Chọn tags'
-                                    }
-                                    isLoading={isLoadingTags}
-                                    isSearchable
-                                />
-                            )}
-                        />
-                    </FormItem>
-
-                    {/* SEO Fields */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <FormItem label="Meta Title (SEO)">
-                            <Controller
-                                name="metaTitle"
-                                control={control}
-                                render={({ field }) => (
-                                    <Input
-                                        placeholder="Tiêu đề SEO (tùy chọn)"
-                                        {...field}
-                                    />
-                                )}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Thời gian đăng lịch
+                            </label>
+                            <DatePicker
+                                showTimeSelect
+                                value={scheduledPublishAt}
+                                onChange={setScheduledPublishAt}
+                                placeholder="Chọn ngày giờ đăng (tùy chọn)"
+                                disabled={loading}
                             />
-                        </FormItem>
+                        </div>
 
-                        <FormItem label="Meta Description (SEO)">
-                            <Controller
-                                name="metaDescription"
-                                control={control}
-                                render={({ field }) => (
-                                    <Input
-                                        placeholder="Mô tả SEO (tùy chọn)"
-                                        {...field}
-                                    />
-                                )}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Meta Title (SEO)
+                            </label>
+                            <Input
+                                value={metaTitle}
+                                onChange={(e) => setMetaTitle(e.target.value)}
+                                placeholder="Tiêu đề SEO (tùy chọn)"
+                                disabled={loading}
                             />
-                        </FormItem>
+                        </div>
 
-                        <FormItem label="Meta Keywords (SEO)">
-                            <Controller
-                                name="metaKeywords"
-                                control={control}
-                                render={({ field }) => (
-                                    <Input
-                                        placeholder="Từ khóa SEO, cách nhau bằng dấu phẩy"
-                                        {...field}
-                                    />
-                                )}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Meta Description (SEO)
+                            </label>
+                            <Input
+                                textArea
+                                rows={3}
+                                value={metaDescription}
+                                onChange={(e) =>
+                                    setMetaDescription(e.target.value)
+                                }
+                                placeholder="Mô tả SEO (tùy chọn)"
+                                disabled={loading}
                             />
-                        </FormItem>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Meta Keywords (SEO)
+                            </label>
+                            <Input
+                                value={metaKeywords}
+                                onChange={(e) =>
+                                    setMetaKeywords(e.target.value)
+                                }
+                                placeholder="Từ khóa cách nhau bằng dấu phẩy"
+                                disabled={loading}
+                            />
+                        </div>
                     </div>
-                </form>
+                </div>
 
-                <div className="border-t px-8 py-5 bg-gray-50 flex justify-end gap-4">
-                    <Button variant="default" size="lg" onClick={handleClose}>
+                {/* Nội dung bài viết */}
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Nội dung bài viết
+                    </label>
+                    <Input
+                        textArea
+                        rows={10}
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        placeholder="Viết nội dung chi tiết bài viết tại đây..."
+                        disabled={loading}
+                    />
+                    {/* Nếu bạn dùng rich text editor (như TipTap, Quill, etc.), thay thế Input này */}
+                </div>
+
+                <div className="flex justify-end gap-4 pt-6 border-t">
+                    <Button
+                        variant="default"
+                        onClick={handleClose}
+                        disabled={loading}
+                    >
                         Hủy
                     </Button>
                     <Button
                         variant="solid"
-                        size="lg"
-                        loading={isSubmitting}
-                        onClick={handleSubmit(onSubmit)}
+                        color="blue-600"
+                        onClick={handleCreate}
+                        loading={loading}
                     >
-                        Tạo tin tức
+                        Tạo bài viết
                     </Button>
                 </div>
             </div>

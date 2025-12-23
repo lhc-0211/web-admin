@@ -3,14 +3,14 @@ import Button from '@/components/ui/Button'
 import Drawer from '@/components/ui/Drawer'
 import { FormItem } from '@/components/ui/Form'
 import Select from '@/components/ui/Select'
+import useAllTags from '@/views/admin/news/tags/hooks/useAllTags'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbFilter, TbSearch } from 'react-icons/tb'
-import useAllCategories from '../../categories/hooks/useAllCategories'
-import useAllTags from '../../tags/hooks/useAllTags'
-import useNews from '../hooks/useNews'
+import useAllCategories from '../../lists/hooks/useAllCategories'
+import useMyNews from '../hooks/useMyNews'
 
-export default function NewsTableTools() {
+export default function MyNewsTableTools() {
     const [filterIsOpen, setFilterIsOpen] = useState(false)
 
     const { control, handleSubmit, reset } = useForm({
@@ -22,7 +22,7 @@ export default function NewsTableTools() {
         },
     })
 
-    const { filterData, setFilterData } = useNews()
+    const { filterData, setFilterData } = useMyNews()
 
     // Lấy danh mục và tags
     const { categories, isLoading: loadingCategories } = useAllCategories()
@@ -108,7 +108,7 @@ export default function NewsTableTools() {
                     onSubmit={handleSubmit(applyFilters)}
                     className="flex flex-col justify-between "
                 >
-                    <div className="space-y-6 overflow-y-auto h-[calc(100vh-180px)]">
+                    <div className="space-y-6 overflow-y-auto h-[calc(100vh-200px)]">
                         {/* Danh mục */}
                         <FormItem label="Danh mục">
                             <Controller
