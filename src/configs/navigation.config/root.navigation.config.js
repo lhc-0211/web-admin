@@ -84,41 +84,6 @@ const rootNavigationConfig = [
                 ],
             },
             {
-                key: 'user-announcements',
-                path: '',
-                title: 'Thông báo',
-                translateKey: 'announcements',
-                icon: 'announce',
-                type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [USER],
-                meta: {
-                    description: {
-                        translateKey: 'announcements',
-                        label: 'announcements',
-                    },
-                },
-                subMenu: [
-                    {
-                        key: 'private',
-                        path: `/announcements/private`,
-                        title: 'Thông báo nội bộ',
-                        translateKey: 'announcements-private',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [USER],
-                        subMenu: [],
-                    },
-                    {
-                        key: 'public',
-                        path: `/announcements/public`,
-                        title: 'Thông báo công khai',
-                        translateKey: 'announcements-public',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [USER],
-                        subMenu: [],
-                    },
-                ],
-            },
-            {
                 key: 'employees',
                 path: '/admin/employees',
                 title: 'Nhân viên',
@@ -258,6 +223,8 @@ const rootNavigationConfig = [
                     },
                 ],
             },
+
+            // ======Thông báo =======
             {
                 key: 'announcements',
                 path: '',
@@ -265,7 +232,7 @@ const rootNavigationConfig = [
                 translateKey: 'announcements',
                 icon: 'announce',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN],
+                authority: [ADMIN, USER],
                 meta: {
                     description: {
                         translateKey: 'announcements',
@@ -274,9 +241,27 @@ const rootNavigationConfig = [
                 },
                 subMenu: [
                     {
-                        key: 'announcements',
+                        key: 'list-announcements',
+                        path: `/announcements`,
+                        title: 'Danh sách thông báo nội bộ',
+                        translateKey: 'list-announcements',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'public-announcements',
+                        path: `/announcements/public`,
+                        title: 'Danh sách thông báo công khai',
+                        translateKey: 'public-announcements',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'announcements-list',
                         path: `/admin/announcements`,
-                        title: 'Danh sách thông báo',
+                        title: 'Quản lý thông báo',
                         translateKey: 'announcements-list',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],
@@ -285,7 +270,7 @@ const rootNavigationConfig = [
                     {
                         key: 'announcements-categories',
                         path: `/admin/announcements/categories`,
-                        title: 'Danh mục thông báo',
+                        title: 'Quản lý danh mục',
                         translateKey: 'announcements-categories',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],
@@ -293,6 +278,8 @@ const rootNavigationConfig = [
                     },
                 ],
             },
+
+            // =====Vi phạm========
             {
                 key: 'violations',
                 path: '',
@@ -300,7 +287,7 @@ const rootNavigationConfig = [
                 translateKey: 'violations',
                 icon: 'violations',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN],
+                authority: [ADMIN, USER],
                 meta: {
                     description: {
                         translateKey: 'violations',
@@ -309,7 +296,25 @@ const rootNavigationConfig = [
                 },
                 subMenu: [
                     {
-                        key: 'violations',
+                        key: 'violations-list-user',
+                        path: `/violations`,
+                        title: 'Danh sách vi phạm được giao',
+                        translateKey: 'violations-list-user',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'violations-history-user',
+                        path: `/violations/history`,
+                        title: 'Lịch sử xử lý vi phạm được giao',
+                        translateKey: 'violations-history-user',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'violations-list',
                         path: `/admin/violations`,
                         title: 'Danh sách vi phạm',
                         translateKey: 'violations-list',

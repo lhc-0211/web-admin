@@ -1,4 +1,4 @@
-import { apiGetPublicAnnouncements } from '@/services/AnnounceService'
+import { apiGetPublicAnnouncements } from '@/services/Announcements'
 import React from 'react'
 import useSWR from 'swr'
 import { useAnnouncePublicListStore } from '../store/useAnnouncePublicListStore'

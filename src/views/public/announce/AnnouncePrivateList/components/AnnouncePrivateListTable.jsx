@@ -1,7 +1,8 @@
 import DataTable from '@/components/shared/DataTable'
 import Tag from '@/components/ui/Tag'
-import { useMemo } from 'react'
-import useAnnouncePublicList from '../hooks/useAnnouncePublicList'
+import { useMemo, useState } from 'react'
+import useAnnouncePrivateList from '../hooks/useAnnouncePrivateList'
+import AnnouncementDetailDrawer from './AnnouncementDetailDrawer'
 
 const priorityColor = {
     Low: 'bg-green-200 text-gray-900',
@@ -12,19 +13,33 @@ const priorityColor = {
 
 const AnnouncePrivateListTable = () => {
     const {
-        announcePublicList,
-        announcePublicListTotal,
+        announcePrivateLis,
+        announcePrivateLisTotal,
         tableData,
         isLoading,
         setTableData,
-    } = useAnnouncePublicList()
+    } = useAnnouncePrivateList()
+    const [selectedId, setSelectedId] = useState(null)
+    const [detailOpen, setDetailOpen] = useState(false)
+
+    const openDetail = (announcement) => {
+        setSelectedId(announcement.id)
+        setDetailOpen(true)
+    }
 
     const columns = useMemo(
         () => [
             {
                 header: 'Tiêu đề',
                 accessorKey: 'title',
-                cell: ({ row }) => row.original.title,
+                cell: ({ row }) => (
+                    <div
+                        className="font-medium text-primary-600 hover:underline cursor-pointer"
+                        onClick={() => openDetail(row.original)}
+                    >
+                        {row.original.title}
+                    </div>
+                ),
             },
             {
                 header: 'Danh mục',
@@ -79,21 +94,31 @@ const AnnouncePrivateListTable = () => {
     }
 
     return (
-        <DataTable
-            selectable={false} // thông báo không cần chọn hàng
-            columns={columns}
-            data={announcePublicList}
-            noData={!isLoading && announcePublicList.length === 0}
-            loading={isLoading}
-            pagingData={{
-                total: announcePublicListTotal,
-                pageIndex: tableData.pageIndex,
-                pageSize: tableData.pageSize,
-            }}
-            onPaginationChange={handlePaginationChange}
-            onSelectChange={handleSelectChange}
-            onSort={handleSort}
-        />
+        <>
+            <DataTable
+                selectable={false} // thông báo không cần chọn hàng
+                columns={columns}
+                data={announcePrivateLis}
+                noData={!isLoading && announcePrivateLis.length === 0}
+                loading={isLoading}
+                pagingData={{
+                    total: announcePrivateLisTotal,
+                    pageIndex: tableData.pageIndex,
+                    pageSize: tableData.pageSize,
+                }}
+                onPaginationChange={handlePaginationChange}
+                onSelectChange={handleSelectChange}
+                onSort={handleSort}
+            />
+            <AnnouncementDetailDrawer
+                isOpen={detailOpen}
+                onClose={() => {
+                    setDetailOpen(false)
+                    setSelectedId(null)
+                }}
+                announcementId={selectedId}
+            />
+        </>
     )
 }
 

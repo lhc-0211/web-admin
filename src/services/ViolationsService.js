@@ -1,5 +1,75 @@
 import ApiService from './ApiService'
 
+// ===========public===========
+export async function apiGetViolations(params) {
+    return ApiService.fetchDataWithAxios({
+        url: '/api/violations',
+        method: 'get',
+        params,
+    })
+}
+export async function apiGetViolation(id) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/violations/${id}`,
+        method: 'get',
+    })
+}
+
+export async function apiCreateViolationsPublic(data) {
+    return ApiService.fetchDataWithAxios({
+        url: '/api/violations',
+        method: 'post',
+        data,
+    })
+}
+
+export async function apiUpdateViolationPublic(id, data) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/violations/${id}`,
+        method: 'put',
+        data,
+    })
+}
+
+//history
+export async function apiGetViolationsHistories(id, params) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/violations/${id}/histories`,
+        method: 'get',
+        params,
+    })
+}
+export async function apiGetViolationHistories(id, historyId) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/violations/${id}/histories/${historyId}`,
+        method: 'get',
+    })
+}
+
+export async function apiCreateViolationsHistoriesPublic(id, data) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/violations/${id}/histories`,
+        method: 'post',
+        data,
+    })
+}
+
+export async function apiUpdateViolationHistoriesPublic(id, editingId, data) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/violations/${id}/histories/${editingId}`,
+        method: 'put',
+        data,
+    })
+}
+
+export async function apiDeleteViolatorHistoriesPublic(id, historyId) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/violators/${id}/histories/${historyId}`,
+        method: 'delete',
+    })
+}
+
+// ========Admin========
 export async function apiGetViolationsAdmin(params) {
     return ApiService.fetchDataWithAxios({
         url: '/api/admin/violations',

@@ -1,4 +1,4 @@
-import { apiGetAnnouncementCategoriesDropdown } from '@/services/AnnounceService'
+import { apiGetAnnouncementCategoriesDropdown } from '@/services/Announcements'
 import useSWR from 'swr'
 
 export function useAnnouncementCategories() {

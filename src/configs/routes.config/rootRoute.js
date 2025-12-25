@@ -11,20 +11,16 @@ const dashboardsRoute = [
             pageContainerType: 'contained',
         },
     },
+
+    // ========Vi phạm========
     {
-        key: 'private',
-        path: `/announcements/private`,
-        component: lazy(() => import('@/views/announce/AnnouncePrivateList')),
-        authority: [USER],
+        key: 'violations-list-user',
+        path: `/violations`,
+        component: lazy(() => import('@/views/public/violations/list')),
+        authority: [ADMIN, USER],
     },
     {
-        key: 'public',
-        path: `/announcements/public`,
-        component: lazy(() => import('@/views/announce/AnnouncePublicList')),
-        authority: [USER],
-    },
-    {
-        key: 'violations',
+        key: 'violations-list',
         path: `/admin/violations`,
         component: lazy(() => import('@/views/admin/violations/list')),
         authority: [ADMIN],
@@ -69,8 +65,25 @@ const dashboardsRoute = [
         authority: [ADMIN],
     },
 
+    // =======Thông báo==========
     {
-        key: 'announcements',
+        key: 'list-announcements',
+        path: `/announcements`,
+        component: lazy(
+            () => import('@/views/public/announce/AnnouncePrivateList'),
+        ),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'public-announcements',
+        path: `/announcements/public`,
+        component: lazy(
+            () => import('@/views/public/announce/AnnouncePublicList'),
+        ),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'announcements-list',
         path: `/admin/announcements`,
         component: lazy(() => import('@/views/admin/announcements/list')),
         authority: [ADMIN],
