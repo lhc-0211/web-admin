@@ -314,15 +314,6 @@ const rootNavigationConfig = [
                         subMenu: [],
                     },
                     {
-                        key: 'history',
-                        path: `/admin/violations/history`,
-                        title: 'Lịch sử xử lý vi phạm',
-                        translateKey: 'violations-history',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN],
-                        subMenu: [],
-                    },
-                    {
                         key: 'list-violators',
                         path: `/admin/violations/list-violators`,
                         title: 'Đối tượng vi phạm',
