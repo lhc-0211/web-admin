@@ -76,7 +76,7 @@ export default function AnnouncementsTableTableTools() {
 
             {/* Drawer bộ lọc */}
             <Drawer
-                title="Bộ lọc thông báo"
+                title="Bộ lọc Quản lý thông báo"
                 isOpen={filterIsOpen}
                 onClose={() => setFilterIsOpen(false)}
                 width={400}

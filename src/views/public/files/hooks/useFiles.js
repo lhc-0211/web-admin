@@ -53,9 +53,6 @@ export default function useFiles() {
     ])
 
     const swrKey = React.useMemo(() => {
-        if (Object.keys(params).length === 2) {
-            return '/api/files/my-files'
-        }
         return ['/api/files/my-files', params]
     }, [params])
 

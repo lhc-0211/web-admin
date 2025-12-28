@@ -40,9 +40,6 @@ export default function useNews() {
     ])
 
     const swrKey = React.useMemo(() => {
-        if (Object.keys(params).length === 2) {
-            return '/api/news/my-news'
-        }
         return ['/api/news/my-news', params]
     }, [params])
 

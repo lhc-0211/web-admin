@@ -4,12 +4,18 @@ import useSWR from 'swr'
 import { useFilesStore } from '../store/useFilesStore'
 
 export default function useFiles() {
-    const { tableData, filterData, setTableData, setFilterData } =
-        useFilesStore((state) => state)
+    const {
+        tableData,
+        filterData,
+        setTableData,
+        setFilterData,
+        resetFilterData,
+    } = useFilesStore((state) => state)
 
     const params = React.useMemo(() => {
         const p = {
             PageNumber: tableData.pageIndex + 1,
+            PageSize: tableData.pageSize,
         }
 
         if (filterData.Search?.trim()) {
@@ -52,9 +58,6 @@ export default function useFiles() {
     ])
 
     const swrKey = React.useMemo(() => {
-        if (Object.keys(params).length === 2) {
-            return '/api/admin/files'
-        }
         return ['/api/admin/files', params]
     }, [params])
 
@@ -91,5 +94,6 @@ export default function useFiles() {
         filterData,
         setTableData,
         setFilterData,
+        resetFilterData,
     }
 }

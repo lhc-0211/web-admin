@@ -1,4 +1,4 @@
-import DebouceInput from '@/components/shared/DebouceInput'
+import DebounceInput from '@/components/shared/DebouceInput'
 import Button from '@/components/ui/Button'
 import DatePicker from '@/components/ui/DatePicker'
 import Drawer from '@/components/ui/Drawer'
@@ -83,18 +83,18 @@ export default function ViolationsListTableTools() {
             {/* Thanh công cụ chính */}
             <div className="flex flex-col md:flex-row gap-4 items-end w-full">
                 <div className="flex-1 min-w-[300px]">
-                    <Controller
-                        name="Search"
-                        control={control}
-                        render={({ field }) => (
-                            <DebouceInput
-                                placeholder="Tìm kiếm nhanh (mã vi phạm, biển số tàu...)"
-                                suffix={<TbSearch className="text-lg" />}
-                                value={field.value}
-                                onChange={(e) => field.onChange(e.target.value)}
-                                className="w-full"
-                            />
-                        )}
+                    <DebounceInput
+                        placeholder="Tìm kiếm nhanh (mã vi phạm, biển số tàu...)"
+                        suffix={<TbSearch className="text-lg" />}
+                        className="w-full"
+                        onChange={(e) => {
+                            const value = e.target.value
+
+                            setFilterData({
+                                ...filterData,
+                                Search: value?.trim() || undefined,
+                            })
+                        }}
                     />
                 </div>
                 <div className="flex gap-2">
@@ -110,7 +110,7 @@ export default function ViolationsListTableTools() {
 
             {/* Drawer filter */}
             <Drawer
-                title="Bộ lọc vi phạm"
+                title="Bộ lọc Quản lý vi phạm"
                 isOpen={filterIsOpen}
                 onClose={() => setFilterIsOpen(false)}
                 width={400}

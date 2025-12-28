@@ -28,11 +28,7 @@ const useViolationsListStore = create((set) => ({
 
     // Actions
     setTableData: (payload) => set({ tableData: payload }),
-
-    setFilterData: (payload) =>
-        set((state) => ({
-            filterData: { ...state.filterData, ...payload },
-        })),
+    setFilterData: (payload) => set(() => ({ filterData: payload })),
 
     // Xử lý chọn từng hàng (checkbox)
     setSelectedViolation: (checked, row) =>

@@ -1,4 +1,4 @@
-import DebouceInput from '@/components/shared/DebouceInput'
+import DebounceInput from '@/components/shared/DebouceInput'
 import Button from '@/components/ui/Button'
 import Drawer from '@/components/ui/Drawer'
 import { FormItem } from '@/components/ui/Form'
@@ -72,17 +72,18 @@ export default function NewsTableTools() {
             {/* Thanh tìm kiếm nhanh */}
             <div className="flex flex-col md:flex-row gap-4 items-end w-full">
                 <div className="flex-1 min-w-[300px]">
-                    <Controller
-                        name="Search"
-                        control={control}
-                        render={({ field }) => (
-                            <DebouceInput
-                                placeholder="Tìm kiếm tin tức (tiêu đề, tóm tắt...)"
-                                suffix={<TbSearch className="text-lg" />}
-                                {...field}
-                                className="w-full"
-                            />
-                        )}
+                    <DebounceInput
+                        placeholder="Tìm kiếm tin tức (tiêu đề, tóm tắt...)"
+                        suffix={<TbSearch className="text-lg" />}
+                        className="w-full"
+                        onChange={(e) => {
+                            const value = e.target.value
+
+                            setFilterData({
+                                ...filterData,
+                                Search: value?.trim() || undefined,
+                            })
+                        }}
                     />
                 </div>
                 <div className="flex gap-2">
@@ -98,7 +99,7 @@ export default function NewsTableTools() {
 
             {/* Drawer bộ lọc */}
             <Drawer
-                title="Bộ lọc tin tức"
+                title="Bộ lọc Quản lý tin tức"
                 isOpen={filterIsOpen}
                 onClose={() => setFilterIsOpen(false)}
                 width={450}
@@ -108,7 +109,7 @@ export default function NewsTableTools() {
                     onSubmit={handleSubmit(applyFilters)}
                     className="flex flex-col justify-between "
                 >
-                    <div className="space-y-6 overflow-y-auto h-[calc(100vh-180px)]">
+                    <div className="space-y-6 overflow-y-auto h-[calc(100vh-200px)]">
                         {/* Danh mục */}
                         <FormItem label="Danh mục">
                             <Controller

@@ -1,6 +1,47 @@
 import ApiService from './ApiService'
 
 // ======Galleries =======
+
+// Public
+export async function apiGetGalleriesPublic(params) {
+    return ApiService.fetchDataWithAxios({
+        url: '/api/galleries',
+        method: 'get',
+        params,
+    })
+}
+
+export async function apiGetGalleryPublic(id) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/galleries/${id}`,
+        method: 'get',
+    })
+}
+
+export async function apiGetGalleryItemsPublic(id) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/galleries/${id}/items`,
+        method: 'get',
+    })
+}
+
+export async function apiGetGalleriesWidgetPublic(params) {
+    return ApiService.fetchDataWithAxios({
+        url: '/api/galleries/widget',
+        method: 'get',
+        params,
+    })
+}
+
+export async function apiGetGalleriesWidgetSlugPublic(categorySlug) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/galleries/widget/${categorySlug}`,
+        method: 'get',
+        params,
+    })
+}
+
+// Admin
 export async function apiGetGalleriesAdmin(params) {
     return ApiService.fetchDataWithAxios({
         url: '/api/admin/galleries',

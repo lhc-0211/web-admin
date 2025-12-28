@@ -243,7 +243,7 @@ const rootNavigationConfig = [
                     {
                         key: 'list-announcements',
                         path: `/announcements`,
-                        title: 'Danh sách thông báo nội bộ',
+                        title: 'Danh sách nội bộ',
                         translateKey: 'list-announcements',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN, USER],
@@ -252,7 +252,7 @@ const rootNavigationConfig = [
                     {
                         key: 'public-announcements',
                         path: `/announcements/public`,
-                        title: 'Danh sách thông báo công khai',
+                        title: 'Danh sách công khai',
                         translateKey: 'public-announcements',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN, USER],
@@ -342,10 +342,12 @@ const rootNavigationConfig = [
                     },
                 ],
             },
+
+            // ======= văn bản =========
             {
                 key: 'document',
                 path: '',
-                title: 'Tài liệu',
+                title: 'Văn bản',
                 translateKey: 'document',
                 icon: 'documents',
                 type: NAV_ITEM_TYPE_COLLAPSE,
@@ -358,9 +360,18 @@ const rootNavigationConfig = [
                 },
                 subMenu: [
                     {
-                        key: 'documents',
+                        key: 'documents-list-public',
+                        path: `/documents`,
+                        title: 'Danh sách văn bản công khai',
+                        translateKey: 'documents-list',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'documents-list',
                         path: `/admin/documents`,
-                        title: 'Danh sách tài liệu',
+                        title: 'Quản lý văn bản',
                         translateKey: 'documents-list',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],
@@ -369,7 +380,7 @@ const rootNavigationConfig = [
                     {
                         key: 'document-categories',
                         path: `/admin/document/categories`,
-                        title: 'Danh mục tài liệu',
+                        title: 'Quản lý danh mục',
                         translateKey: 'document-categories',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],
@@ -378,7 +389,7 @@ const rootNavigationConfig = [
                     {
                         key: 'document-types',
                         path: `/admin/document/types`,
-                        title: 'Loại tài liệu',
+                        title: 'Loại văn bản',
                         translateKey: 'document-types',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],
@@ -387,7 +398,7 @@ const rootNavigationConfig = [
                     {
                         key: 'document-fields',
                         path: `/admin/document/fields`,
-                        title: 'Lĩnh vực tài liệu',
+                        title: 'Lĩnh vực văn bản',
                         translateKey: 'document-fields',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],
@@ -395,6 +406,8 @@ const rootNavigationConfig = [
                     },
                 ],
             },
+
+            // Lịch công tác
             {
                 key: 'schedules',
                 path: '',
@@ -411,9 +424,18 @@ const rootNavigationConfig = [
                 },
                 subMenu: [
                     {
-                        key: 'schedules',
+                        key: 'schedules-list-public',
+                        path: `/schedules`,
+                        title: 'Danh sách lịch công tác',
+                        translateKey: 'schedules',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'schedules-list',
                         path: `/admin/schedules`,
-                        title: 'Lịch công tác',
+                        title: 'Quản lý lịch công tác',
                         translateKey: 'schedules',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],
@@ -446,9 +468,18 @@ const rootNavigationConfig = [
                 },
                 subMenu: [
                     {
-                        key: 'galleries',
+                        key: 'galleries-list-public',
+                        path: `/galleries`,
+                        title: 'Danh sách công khai',
+                        translateKey: 'galleries',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'galleries-list',
                         path: `/admin/galleries`,
-                        title: 'Danh sách bộ sưu tập',
+                        title: 'Quản lý bộ sưu tập',
                         translateKey: 'galleries',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],
@@ -457,7 +488,7 @@ const rootNavigationConfig = [
                     {
                         key: 'gallery-categories',
                         path: '/admin/gallery/categories',
-                        title: 'Danh mục bộ sưu tập',
+                        title: 'Quản lý danh mục',
                         translateKey: 'gallery-categories',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],

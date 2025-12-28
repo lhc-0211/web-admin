@@ -25,7 +25,7 @@ export default function useNews() {
         if (filterData.Search?.trim()) p.SearchTerm = filterData.Search.trim()
         if (filterData.CategoryId?.trim())
             p.CategoryId = filterData.CategoryId.trim()
-        if (filterData.Priority) p.Priority = filterData.Priority
+        if (filterData.TagIds) p.TagIds = filterData.TagIds
         if (filterData.Status) p.Status = filterData.Status
 
         return p
@@ -34,19 +34,18 @@ export default function useNews() {
         tableData.pageSize,
         filterData.Search,
         filterData.CategoryId,
-        filterData.Priority,
+        filterData.TagIds,
         filterData.Status,
     ])
 
-    const swrKey = React.useMemo(() => {
-        return ['/api/admin/news', params]
-    }, [params])
+    const swrKey = params ? ['/api/admin/news', params] : null
 
     const { data, error, isLoading, mutate } = useSWR(
         swrKey,
-        ([_, p]) => apiGetNewsAdmin(p), // Truyền params vào API
+        swrKey ? ([_, p]) => apiGetNewsAdmin(p) : null,
         {
             revalidateOnFocus: false,
+            revalidateOnReconnect: true,
             keepPreviousData: true,
             onError: (err) => {
                 console.error('Lỗi khi gọi API news:', err)

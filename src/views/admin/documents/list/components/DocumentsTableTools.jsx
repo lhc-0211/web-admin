@@ -7,7 +7,7 @@ import Select from '@/components/ui/Select'
 import useAllIssuingAuthorities from '@/views/admin/user/issuing-authorities/hooks/useAllIssuingAuthorities'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { TbFilter, TbSearch } from 'react-icons/tb'
+import { TbFilter } from 'react-icons/tb'
 import useAllCategories from '../../categories/hooks/useAllCategories'
 import useAllFields from '../../fields/hooks/useAllFields'
 import useAllTypes from '../../type/hooks/useAllTypes'
@@ -152,18 +152,17 @@ export default function DocumentsTableTools() {
         <>
             <div className="flex flex-col md:flex-row gap-4 items-end w-full">
                 <div className="flex-1 min-w-[300px]">
-                    <Controller
-                        name="Search"
-                        control={control}
-                        render={({ field }) => (
-                            <DebounceInput
-                                placeholder="Tìm kiếm tài liệu (số hiệu, trích yếu, người ký...)"
-                                suffix={<TbSearch className="text-lg" />}
-                                {...field}
-                                onChange={(e) => field.onChange(e.target.value)}
-                                className="w-full"
-                            />
-                        )}
+                    <DebounceInput
+                        placeholder="Tìm kiếm tài liệu (số hiệu, trích yếu, người ký...)"
+                        className="w-full"
+                        onChange={(e) => {
+                            const value = e.target.value
+
+                            setFilterData({
+                                ...filterData,
+                                Search: value?.trim() || undefined,
+                            })
+                        }}
                     />
                 </div>
                 <div className="flex gap-2">
@@ -179,7 +178,7 @@ export default function DocumentsTableTools() {
 
             {/* Drawer bộ lọc */}
             <Drawer
-                title="Bộ lọc tài liệu"
+                title="Bộ lọc Quản lý tài liệu"
                 isOpen={filterIsOpen}
                 onClose={() => setFilterIsOpen(false)}
                 width={500}

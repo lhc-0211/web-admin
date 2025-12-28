@@ -98,7 +98,7 @@ export default function MyNewsTableTools() {
 
             {/* Drawer bộ lọc */}
             <Drawer
-                title="Bộ lọc tin tức"
+                title="Bộ lọc Danh sách tin tức"
                 isOpen={filterIsOpen}
                 onClose={() => setFilterIsOpen(false)}
                 width={450}

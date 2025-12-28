@@ -4,7 +4,7 @@ import DatePicker from '@/components/ui/DatePicker'
 import Drawer from '@/components/ui/Drawer'
 import { FormItem } from '@/components/ui/Form'
 import Select from '@/components/ui/Select'
-// import useAllUsers from '@/views/admin/user/hooks/useAllUsers'
+import useEmployeeAll from '@/views/admin/employees/EmployeeList/hooks/useEmployeeAll'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbFilter, TbSearch } from 'react-icons/tb'
@@ -14,14 +14,10 @@ export default function FilesTableTools() {
     const [filterIsOpen, setFilterIsOpen] = useState(false)
     const { filterData, setFilterData } = useFiles()
 
-    // Lấy danh sách user để chọn người upload (nếu bạn có hook này)
-    // const { users = [], isLoading: loadingUsers } = useAllUsers?.() || {
-    //     users: [],
-    //     isLoading: false,
-    // }
-
-    let users = []
-    const loadingUsers = false
+    const { users = [], isLoading: loadingUsers } = useEmployeeAll?.() || {
+        users: [],
+        isLoading: false,
+    }
 
     const { control, handleSubmit, reset } = useForm({
         defaultValues: {
@@ -95,18 +91,18 @@ export default function FilesTableTools() {
             {/* Thanh tìm kiếm + nút lọc */}
             <div className="flex flex-col md:flex-row gap-4 items-end w-full">
                 <div className="flex-1 min-w-[300px]">
-                    <Controller
-                        name="Search"
-                        control={control}
-                        render={({ field }) => (
-                            <DebounceInput
-                                placeholder="Tìm kiếm file (tên, mô tả, alt text...)"
-                                suffix={<TbSearch className="text-lg" />}
-                                {...field}
-                                onChange={(e) => field.onChange(e.target.value)}
-                                className="w-full"
-                            />
-                        )}
+                    <DebounceInput
+                        placeholder="Tìm kiếm file (tên, mô tả, alt text...)"
+                        suffix={<TbSearch className="text-lg" />}
+                        className="w-full"
+                        onChange={(e) => {
+                            const value = e.target.value
+
+                            setFilterData({
+                                ...filterData,
+                                Search: value?.trim() || undefined,
+                            })
+                        }}
                     />
                 </div>
                 <Button
@@ -123,7 +119,8 @@ export default function FilesTableTools() {
                 title="Bộ lọc file"
                 isOpen={filterIsOpen}
                 onClose={() => setFilterIsOpen(false)}
-                width={500}
+                width={450}
+                onRequestClose={() => setFilterIsOpen(false)}
             >
                 <form
                     onSubmit={handleSubmit(applyFilters)}

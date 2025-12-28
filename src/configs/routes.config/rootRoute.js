@@ -175,8 +175,16 @@ const dashboardsRoute = [
         component: lazy(() => import('@/views/admin/employees')),
         authority: [ADMIN],
     },
+
+    // Văn bản
     {
-        key: 'documents',
+        key: 'documents-list-public',
+        path: `/documents`,
+        component: lazy(() => import('@/views/public/documents/list')),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'documents-list',
         path: `/admin/documents`,
         component: lazy(() => import('@/views/admin/documents/list')),
         authority: [ADMIN],
@@ -199,8 +207,16 @@ const dashboardsRoute = [
         component: lazy(() => import('@/views/admin/documents/fields')),
         authority: [ADMIN],
     },
+
+    // Lịch công tác
     {
-        key: 'schedules',
+        key: 'schedules-list-public',
+        path: `/schedules`,
+        component: lazy(() => import('@/views/public/schedules/list')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'schedules-list',
         path: `/admin/schedules`,
         component: lazy(() => import('@/views/admin/schedules/list')),
         authority: [ADMIN],
@@ -211,8 +227,16 @@ const dashboardsRoute = [
         component: lazy(() => import('@/views/admin/schedules/types')),
         authority: [ADMIN],
     },
+
+    // Bộ sưu tập
     {
-        key: 'galleries',
+        key: 'galleries-list-public',
+        path: `/galleries`,
+        component: lazy(() => import('@/views/public/galleries')),
+        authority: [ADMIN],
+    },
+    {
+        key: 'galleries-list',
         path: `/admin/galleries`,
         component: lazy(() => import('@/views/admin/galleries/list')),
         authority: [ADMIN],

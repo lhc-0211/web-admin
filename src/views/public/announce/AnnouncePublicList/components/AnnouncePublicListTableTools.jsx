@@ -1,4 +1,4 @@
-import DebouceInput from '@/components/shared/DebouceInput'
+import DebounceInput from '@/components/shared/DebouceInput'
 import Button from '@/components/ui/Button'
 import Drawer from '@/components/ui/Drawer'
 import { FormItem } from '@/components/ui/Form'
@@ -6,7 +6,6 @@ import Select from '@/components/ui/Select'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbFilter, TbSearch } from 'react-icons/tb'
-
 import { useAnnouncementCategories } from '../hooks/useAnnouncementCategories'
 import useAnnouncePublicList from '../hooks/useAnnouncePublicList'
 
@@ -67,21 +66,18 @@ export default function AnnouncePublicListTableTools() {
         <>
             <div className="flex flex-col md:flex-row gap-4 items-end w-full">
                 <div className="flex-1 min-w-[300px]">
-                    <Controller
-                        name="Search"
-                        control={control}
-                        render={({ field }) => (
-                            <DebouceInput
-                                placeholder="Tìm kiếm thông báo (tiêu đề, tóm tắt...)"
-                                suffix={<TbSearch className="text-lg" />}
-                                {...field}
-                                onChange={(e) => {
-                                    field.onChange(e.target.value)
-                                    handleSearchChange(e.target.value)
-                                }}
-                                className="w-full"
-                            />
-                        )}
+                    <DebounceInput
+                        placeholder="Tìm kiếm file (tên, mô tả, alt text...)"
+                        suffix={<TbSearch className="text-lg" />}
+                        className="w-full"
+                        onChange={(e) => {
+                            const value = e.target.value
+
+                            setFilterData({
+                                ...filterData,
+                                Search: value?.trim() || undefined,
+                            })
+                        }}
                     />
                 </div>
 
@@ -98,7 +94,7 @@ export default function AnnouncePublicListTableTools() {
 
             {/* Drawer Bộ lọc */}
             <Drawer
-                title="Bộ lọc thông báo"
+                title="Bộ lọc Danh sách công khai"
                 isOpen={filterIsOpen}
                 onClose={() => setFilterIsOpen(false)}
                 onRequestClose={() => setFilterIsOpen(false)}

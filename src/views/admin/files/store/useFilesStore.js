@@ -14,7 +14,6 @@ const useFilesStore = create((set) => ({
     // State ban đầu
     tableData: initialTableData,
     filterData: initialFilterData,
-    selectedViolation: [], // mảng các violation được chọn (nếu dùng checkbox)
 
     // Actions
     setTableData: (payload) => set({ tableData: payload }),
@@ -24,20 +23,10 @@ const useFilesStore = create((set) => ({
             filterData: { ...state.filterData, ...payload },
         })),
 
-    // Xử lý chọn từng hàng (checkbox)
-    setSelectedViolation: (checked, row) =>
-        set((state) => {
-            const prev = state.selectedViolation
-            if (checked) {
-                return { selectedViolation: [...prev, row] }
-            }
-            return {
-                selectedViolation: prev.filter((item) => item.id !== row.id),
-            }
-        }),
-
-    // Chọn tất cả hàng trên trang hiện tại
-    setSelectAllViolation: (rows) => set({ selectedViolation: rows }),
+    resetFilterData: () =>
+        set(() => ({
+            filterData: initialFilterData,
+        })),
 }))
 
 export { useFilesStore }

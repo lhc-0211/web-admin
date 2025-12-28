@@ -86,33 +86,18 @@ export default function GalleriesTableTools() {
             <div className="flex flex-col md:flex-row gap-4 items-end w-full">
                 {/* Ô tìm kiếm */}
                 <div className="flex-1 min-w-[300px]">
-                    <Controller
-                        name="Search"
-                        control={control}
-                        render={({ field }) => (
-                            <DebounceInput
-                                placeholder="Tìm kiếm bộ sưu tập (tiêu đề, mô tả...)"
-                                suffix={<TbSearch className="text-lg" />}
-                                {...field}
-                                onChange={(value) => {
-                                    field.onChange(value)
-                                    // Tự động áp dụng tìm kiếm nhanh
-                                    if (value.trim() === '') {
-                                        setFilterData((prev) => ({
-                                            ...prev,
-                                            Search: undefined,
-                                        }))
-                                    } else {
-                                        setFilterData((prev) => ({
-                                            ...prev,
-                                            Search: value.trim(),
-                                        }))
-                                    }
-                                }}
-                                className="w-full"
-                                debounceMs={600}
-                            />
-                        )}
+                    <DebounceInput
+                        placeholder="Tìm kiếm bộ sưu tập (tiêu đề, mô tả...)"
+                        suffix={<TbSearch className="text-lg" />}
+                        className="w-full"
+                        onChange={(e) => {
+                            const value = e.target.value
+
+                            setFilterData({
+                                ...filterData,
+                                Search: value?.trim() || undefined,
+                            })
+                        }}
                     />
                 </div>
 
@@ -128,7 +113,7 @@ export default function GalleriesTableTools() {
 
             {/* Drawer bộ lọc nâng cao */}
             <Drawer
-                title="Bộ lọc bộ sưu tập"
+                title="Bộ lọc Quản lý bộ sưu tập"
                 isOpen={filterIsOpen}
                 onClose={() => setFilterIsOpen(false)}
                 onRequestClose={() => setFilterIsOpen(false)}

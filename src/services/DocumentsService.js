@@ -1,6 +1,38 @@
 import ApiService from './ApiService'
 
 // ========Documents===========
+// Public
+export async function apiGetDocumentsPublic(params) {
+    return ApiService.fetchDataWithAxios({
+        url: '/api/documents',
+        method: 'get',
+        params,
+    })
+}
+
+export async function apiGetDocumentPublic({ id, ...params }) {
+    return ApiService.fetchDataWithAxios({
+        url: `/api/documents/${id}`,
+        method: 'get',
+        params,
+    })
+}
+
+export async function apiGetDocumentsCategoriesDropdown() {
+    return ApiService.fetchDataWithAxios({
+        url: '/api/documents/categories/dropdown',
+        method: 'get',
+    })
+}
+
+export async function apiGetDocumentsSearch() {
+    return ApiService.fetchDataWithAxios({
+        url: '/api/documents/search',
+        method: 'get',
+    })
+}
+
+// Admin
 export async function apiGetDocumentsAdmin(params) {
     return ApiService.fetchDataWithAxios({
         url: '/api/admin/documents',

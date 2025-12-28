@@ -10,7 +10,7 @@ const Announcements = () => {
                 <AdaptiveCard>
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                            <h3>Quản lý loại tài liệu</h3>
+                            <h3>Quản lý loại văn bản</h3>
                             <TypesActionTools />
                         </div>
                         <TypesTable />

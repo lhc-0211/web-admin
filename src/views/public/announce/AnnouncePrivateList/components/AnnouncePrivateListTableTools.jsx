@@ -1,4 +1,4 @@
-import DebouceInput from '@/components/shared/DebouceInput'
+import DebounceInput from '@/components/shared/DebouceInput'
 import Button from '@/components/ui/Button'
 import Drawer from '@/components/ui/Drawer'
 import { FormItem } from '@/components/ui/Form'
@@ -72,15 +72,18 @@ export default function AnnouncePrivateListTableTools() {
                         name="Search"
                         control={control}
                         render={({ field }) => (
-                            <DebouceInput
-                                placeholder="Tìm kiếm nhanh (tiêu đề, tóm tắt...)"
+                            <DebounceInput
+                                placeholder="Tìm kiếm file (tên, mô tả, alt text...)"
                                 suffix={<TbSearch className="text-lg" />}
-                                {...field}
-                                onChange={(e) => {
-                                    field.onChange(e.target.value)
-                                    handleSearchChange(e.target.value)
-                                }}
                                 className="w-full"
+                                onChange={(e) => {
+                                    const value = e.target.value
+
+                                    setFilterData({
+                                        ...filterData,
+                                        Search: value?.trim() || undefined,
+                                    })
+                                }}
                             />
                         )}
                     />
@@ -100,7 +103,7 @@ export default function AnnouncePrivateListTableTools() {
 
             {/* Drawer bộ lọc */}
             <Drawer
-                title="Bộ lọc thông báo"
+                title="Bộ lọc Danh sách nội bộ"
                 isOpen={filterIsOpen}
                 onClose={() => setFilterIsOpen(false)}
                 onRequestClose={() => setFilterIsOpen(false)}
