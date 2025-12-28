@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import Drawer from '@/components/ui/Drawer'
-import Button from '@/components/ui/Button'
 import NavToggle from '@/components/shared/NavToggle'
+import Button from '@/components/ui/Button'
+import Drawer from '@/components/ui/Drawer'
+import { useState } from 'react'
 import { NavLink } from 'react-router'
 
 const NavContent = ({ onLinkClick, routes, basePath = '' }) => {
@@ -59,7 +59,7 @@ const MobileNav = ({ routes, basePath }) => {
                 onClick={openDrawer}
             />
             <Drawer
-                title="Navigation"
+                title="Menu"
                 isOpen={isOpen}
                 width={300}
                 placement="left"

@@ -1,14 +1,14 @@
-import { useState, Suspense, lazy } from 'react'
-import classNames from 'classnames'
-import Drawer from '@/components/ui/Drawer'
 import NavToggle from '@/components/shared/NavToggle'
-import { DIR_RTL } from '@/constants/theme.constant'
-import withHeaderItem from '@/utils/hoc/withHeaderItem'
-import navigationConfig from '@/configs/navigation.config'
+import Drawer from '@/components/ui/Drawer'
 import appConfig from '@/configs/app.config'
-import { useThemeStore } from '@/store/themeStore'
-import { useRouteKeyStore } from '@/store/routeKeyStore'
+import navigationConfig from '@/configs/navigation.config'
+import { DIR_RTL } from '@/constants/theme.constant'
 import { useSessionUser } from '@/store/authStore'
+import { useRouteKeyStore } from '@/store/routeKeyStore'
+import { useThemeStore } from '@/store/themeStore'
+import withHeaderItem from '@/utils/hoc/withHeaderItem'
+import classNames from 'classnames'
+import { Suspense, lazy, useState } from 'react'
 
 const VerticalMenuContent = lazy(
     () => import('@/components/template/VerticalMenuContent'),
@@ -38,7 +38,7 @@ const MobileNav = ({ translationSetup = appConfig.activeNavTranslation }) => {
                 <MobileNavToggle toggled={isOpen} />
             </div>
             <Drawer
-                title="Navigation"
+                title="Menu"
                 isOpen={isOpen}
                 bodyClass={classNames('p-0')}
                 width={330}
