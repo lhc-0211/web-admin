@@ -18,11 +18,6 @@ const createFieldSchema = z.object({
         .min(1, 'Vui lòng nhập mã trường')
         .max(20, 'Mã tối đa 20 ký tự'),
     description: z.string().optional(),
-    icon: z.string().min(1, 'Vui lòng nhập tên icon'),
-    color: z
-        .string()
-        .min(1, 'Vui lòng chọn hoặc nhập màu')
-        .regex(/^#[0-9A-F]{6}$/i, 'Màu phải là mã hex hợp lệ (ví dụ: #3B82F6)'),
     displayOrder: z
         .number({ invalid_type_error: 'Thứ tự phải là số' })
         .int('Thứ tự phải là số nguyên')
@@ -56,8 +51,6 @@ const FieldsCreateModal = ({ isOpen, onClose }) => {
                 name: data.name.trim(),
                 code: data.code.trim().toUpperCase(),
                 description: data.description?.trim() || null,
-                icon: data.icon.trim(),
-                color: data.color.toUpperCase(),
                 displayOrder: data.displayOrder,
             }
 
@@ -163,110 +156,6 @@ const FieldsCreateModal = ({ isOpen, onClose }) => {
                                             <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
                                                 <HiExclamationCircle className="h-4 w-4" />
                                                 {errors.code.message}
-                                            </p>
-                                        )}
-                                    </>
-                                )}
-                            />
-                        </FormItem>
-
-                        {/* Icon */}
-                        <FormItem
-                            label={
-                                <span>
-                                    Icon <span className="text-red-600">*</span>
-                                </span>
-                            }
-                        >
-                            <Controller
-                                name="icon"
-                                control={control}
-                                render={({ field }) => (
-                                    <>
-                                        <Input
-                                            placeholder="Ví dụ: HiCalendar, HiPhone, HiMail"
-                                            {...field}
-                                            invalid={!!errors.icon}
-                                        />
-                                        {errors.icon && (
-                                            <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                                                <HiExclamationCircle className="h-4 w-4" />
-                                                {errors.icon.message}
-                                            </p>
-                                        )}
-                                    </>
-                                )}
-                            />
-                        </FormItem>
-
-                        {/* Color */}
-                        <FormItem
-                            label={
-                                <span>
-                                    Màu sắc{' '}
-                                    <span className="text-red-600">*</span>
-                                </span>
-                            }
-                        >
-                            <Controller
-                                name="color"
-                                control={control}
-                                render={({ field }) => (
-                                    <div className="flex items-center gap-3">
-                                        <Input
-                                            type="color"
-                                            className="w-20 h-10 cursor-pointer"
-                                            {...field}
-                                        />
-                                        <Input
-                                            placeholder="#3B82F6"
-                                            {...field}
-                                            invalid={!!errors.color}
-                                            onChange={(e) =>
-                                                field.onChange(
-                                                    e.target.value.toUpperCase(),
-                                                )
-                                            }
-                                        />
-                                    </div>
-                                )}
-                            />
-                            {errors.color && (
-                                <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                                    <HiExclamationCircle className="h-4 w-4" />
-                                    {errors.color.message}
-                                </p>
-                            )}
-                        </FormItem>
-
-                        {/* Thứ tự hiển thị */}
-                        <FormItem label="Thứ tự hiển thị">
-                            <Controller
-                                name="displayOrder"
-                                control={control}
-                                render={({ field }) => (
-                                    <>
-                                        <Input
-                                            type="number"
-                                            min="0"
-                                            placeholder="0"
-                                            {...field}
-                                            onChange={(e) =>
-                                                field.onChange(
-                                                    e.target.value === ''
-                                                        ? 0
-                                                        : parseInt(
-                                                              e.target.value,
-                                                              10,
-                                                          ),
-                                                )
-                                            }
-                                            invalid={!!errors.displayOrder}
-                                        />
-                                        {errors.displayOrder && (
-                                            <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                                                <HiExclamationCircle className="h-4 w-4" />
-                                                {errors.displayOrder.message}
                                             </p>
                                         )}
                                     </>

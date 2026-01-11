@@ -127,7 +127,7 @@ const CategoriesCreateModal = ({ isOpen, onClose }) => {
                         </FormItem>
 
                         {/* Icon */}
-                        <FormItem
+                        {/* <FormItem
                             label={
                                 <span>
                                     Icon <span className="text-red-600">*</span>
@@ -153,10 +153,10 @@ const CategoriesCreateModal = ({ isOpen, onClose }) => {
                                     </>
                                 )}
                             />
-                        </FormItem>
+                        </FormItem> */}
 
                         {/* Màu sắc */}
-                        <FormItem label="Màu sắc (hex)">
+                        {/* <FormItem label="Màu sắc (hex)">
                             <Controller
                                 name="color"
                                 control={control}
@@ -186,7 +186,7 @@ const CategoriesCreateModal = ({ isOpen, onClose }) => {
                                     {errors.color.message}
                                 </p>
                             )}
-                        </FormItem>
+                        </FormItem> */}
 
                         {/* Thứ tự hiển thị */}
                         <FormItem label="Thứ tự hiển thị">

@@ -173,7 +173,7 @@ export default function DocumentsPublicListTableTools() {
             <div className="flex flex-col md:flex-row gap-4 items-end w-full">
                 <div className="flex-1 min-w-[300px]">
                     <DebounceInput
-                        placeholder="Tìm kiếm số hiệu, trích yếu, nội dung văn bản..."
+                        placeholder="Tìm kiếm nhanh(số hiệu, loại, lĩnh vực, ...)"
                         suffix={<TbSearch className="text-lg" />}
                         className="w-full"
                         onChange={(e) => {

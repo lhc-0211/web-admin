@@ -72,35 +72,26 @@ const CategoriesTable = () => {
     const columns = useMemo(
         () => [
             {
-                header: 'Mã danh mục',
-                accessorKey: 'code',
-                size: 150,
+                header: 'Danh mục',
+
                 cell: ({ row }) => (
-                    <span className="font-medium text-primary">
-                        {row.original.code || '-'}
-                    </span>
+                    <div className="flex flex-col gap-1">
+                        <span className="font-semibold text-gray-700">
+                            {row.original.code || '-'}
+                        </span>
+                        <span>{row.original.name || '-'}</span>
+                    </div>
                 ),
             },
-            {
-                header: 'Tên danh mục',
-                accessorKey: 'name',
-                size: 250,
-                cell: ({ row }) => (
-                    <span className="font-semibold text-gray-700">
-                        {row.original.name || '-'}
-                    </span>
-                ),
-            },
+
             {
                 header: 'Mô tả',
-                accessorKey: 'description',
-                size: 300,
+
                 cell: ({ row }) => row.original.description || '-',
             },
             {
                 header: 'Trạng thái',
-                accessorKey: 'isActive',
-                size: 150,
+
                 cell: ({ row }) => {
                     const isActive = row.original.isActive
                     return (
@@ -119,12 +110,11 @@ const CategoriesTable = () => {
             // CỘT HÀNH ĐỘNG
             {
                 header: 'Hành động',
-                id: 'actions',
-                size: 120,
+
                 cell: ({ row }) => {
                     const category = row.original
                     return (
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center gap-2">
                             <Button
                                 size="xs"
                                 variant="twoTone"

@@ -10,7 +10,7 @@ const Tags = () => {
                 <AdaptiveCard>
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                            <h3>Danh sách tag</h3>
+                            <h3>Quản lý tags</h3>
                             <TagsActionTools />
                         </div>
                         <TagsTable />

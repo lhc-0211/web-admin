@@ -73,7 +73,7 @@ export default function AnnouncePrivateListTableTools() {
                         control={control}
                         render={({ field }) => (
                             <DebounceInput
-                                placeholder="Tìm kiếm file (tên, mô tả, alt text...)"
+                                placeholder="Tìm kiếm Thông báo nội bộ (Tiêu đề, danh mục...)"
                                 suffix={<TbSearch className="text-lg" />}
                                 className="w-full"
                                 onChange={(e) => {
@@ -103,7 +103,7 @@ export default function AnnouncePrivateListTableTools() {
 
             {/* Drawer bộ lọc */}
             <Drawer
-                title="Bộ lọc Danh sách nội bộ"
+                title="Bộ lọc Thông báo nội bộ"
                 isOpen={filterIsOpen}
                 onClose={() => setFilterIsOpen(false)}
                 onRequestClose={() => setFilterIsOpen(false)}

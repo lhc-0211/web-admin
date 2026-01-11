@@ -153,7 +153,7 @@ export default function DocumentsTableTools() {
             <div className="flex flex-col md:flex-row gap-4 items-end w-full">
                 <div className="flex-1 min-w-[300px]">
                     <DebounceInput
-                        placeholder="Tìm kiếm tài liệu (số hiệu, trích yếu, người ký...)"
+                        placeholder="Tìm kiếm nhanh (số hiệu, loại, lĩnh vực...)"
                         className="w-full"
                         onChange={(e) => {
                             const value = e.target.value

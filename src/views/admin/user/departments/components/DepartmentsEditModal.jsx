@@ -195,7 +195,7 @@ const DepartmentsEditModal = ({ isOpen, onClose, department }) => {
                         </FormItem>
 
                         {/* Thứ tự hiển thị */}
-                        <FormItem label="Thứ tự hiển thị">
+                        {/* <FormItem label="Thứ tự hiển thị">
                             <Controller
                                 name="order"
                                 control={control}
@@ -213,7 +213,7 @@ const DepartmentsEditModal = ({ isOpen, onClose, department }) => {
                                     />
                                 )}
                             />
-                        </FormItem>
+                        </FormItem> */}
 
                         {/* ID Phòng ban cha - Tùy chọn */}
                         <FormItem label="ID Phòng ban cha (tùy chọn)">

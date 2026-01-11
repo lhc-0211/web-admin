@@ -15,15 +15,6 @@ const createCategorySchema = z.object({
     name: z.string().min(1, 'Vui lòng nhập tên danh mục'),
     description: z.string().optional(),
     icon: z.string().optional(),
-    color: z
-        .string()
-        .regex(/^#[0-9A-F]{6}$/i, 'Màu phải là mã hex hợp lệ (ví dụ: #3B82F6)')
-        .or(z.string().length(0)), // Cho phép rỗng tạm thời nếu cần picker
-    displayOrder: z
-        .number()
-        .int()
-        .nonnegative('Thứ tự hiển thị phải là số không âm')
-        .default(0),
 })
 
 const CategoriesCreateModal = ({ isOpen, onClose }) => {
@@ -50,8 +41,6 @@ const CategoriesCreateModal = ({ isOpen, onClose }) => {
             const body = {
                 name: data.name,
                 description: data.description || null,
-                icon: data.icon,
-                color: data.color || null,
                 displayOrder: data.displayOrder,
             }
 
@@ -123,62 +112,6 @@ const CategoriesCreateModal = ({ isOpen, onClose }) => {
                                     </>
                                 )}
                             />
-                        </FormItem>
-
-                        {/* Icon */}
-                        <FormItem label="Icon">
-                            <Controller
-                                name="icon"
-                                control={control}
-                                render={({ field }) => (
-                                    <>
-                                        <Input
-                                            placeholder="Ví dụ: megaphone, 📢, fa-bullhorn"
-                                            {...field}
-                                            invalid={!!errors.icon}
-                                        />
-                                        {errors.icon && (
-                                            <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                                                <HiExclamationCircle />
-                                                {errors.icon.message}
-                                            </p>
-                                        )}
-                                    </>
-                                )}
-                            />
-                        </FormItem>
-
-                        {/* Màu sắc */}
-                        <FormItem label="Màu sắc (hex)">
-                            <Controller
-                                name="color"
-                                control={control}
-                                render={({ field }) => (
-                                    <div className="flex items-center gap-3">
-                                        <Input
-                                            type="color"
-                                            className="w-20 h-10 cursor-pointer"
-                                            {...field}
-                                        />
-                                        <Input
-                                            placeholder="#3B82F6"
-                                            {...field}
-                                            invalid={!!errors.color}
-                                            onChange={(e) =>
-                                                field.onChange(
-                                                    e.target.value.toUpperCase(),
-                                                )
-                                            }
-                                        />
-                                    </div>
-                                )}
-                            />
-                            {errors.color && (
-                                <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                                    <HiExclamationCircle />
-                                    {errors.color.message}
-                                </p>
-                            )}
                         </FormItem>
 
                         {/* Thứ tự hiển thị */}

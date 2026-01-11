@@ -248,24 +248,18 @@ const AnnouncementsTable = () => {
         () => [
             {
                 header: 'Tiêu đề',
-                accessorKey: 'title',
-                size: 280,
                 cell: ({ row }) => (
-                    <span className="font-medium text-primary">
+                    <span className="font-semibold text-gray-700">
                         {row.original.title || '-'}
                     </span>
                 ),
             },
             {
                 header: 'Danh mục',
-                accessorKey: 'categoryName',
-                size: 200,
                 cell: ({ row }) => row.original.categoryName || '-',
             },
             {
                 header: 'Độ ưu tiên',
-                accessorKey: 'priority',
-                size: 120,
                 cell: ({ row }) => {
                     const priority = row.original.priority
                     const priorityLabel =
@@ -293,8 +287,6 @@ const AnnouncementsTable = () => {
             },
             {
                 header: 'Công khai',
-                accessorKey: 'isPublic',
-                size: 100,
                 cell: ({ row }) => (
                     <span
                         className={`font-medium ${row.original.isPublic ? 'text-green-600' : 'text-red-600'}`}
@@ -305,8 +297,6 @@ const AnnouncementsTable = () => {
             },
             {
                 header: 'Ngày đăng',
-                accessorKey: 'publishedAt',
-                size: 180,
                 cell: ({ row }) => {
                     const date = row.original.publishedAt
                     if (!date) return '-'
@@ -322,12 +312,10 @@ const AnnouncementsTable = () => {
             // CỘT HÀNH ĐỘNG
             {
                 header: 'Hành động',
-                id: 'actions',
-                size: 250,
                 cell: ({ row }) => {
                     const announcement = row.original
                     return (
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center gap-2">
                             {/* Sửa */}
                             <Button
                                 size="xs"

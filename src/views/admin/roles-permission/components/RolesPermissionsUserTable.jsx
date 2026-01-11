@@ -1,15 +1,15 @@
-import { useMemo, useState } from 'react'
-import { Notification, toast } from '@/components/ui'
-import Tag from '@/components/ui/Tag'
 import DataTable from '@/components/shared/DataTable'
-import useRolePermissonsUsers from '../hooks/useRolePermissonsUsers'
-import { HiPencil, HiKey, HiOutlineLink, HiOutlineX } from 'react-icons/hi'
+import { Notification, toast } from '@/components/ui'
 import Button from '@/components/ui/Button'
-import Tooltip from '@/components/ui/Tooltip'
-import RolesUserChangePasswordModal from './RolesUserChangePasswordModal'
-import { HiExclamationTriangle } from 'react-icons/hi2'
-import { apiUpdateStatusUser } from '@/services/AuthRoles'
 import Dialog from '@/components/ui/Dialog'
+import Tag from '@/components/ui/Tag'
+import Tooltip from '@/components/ui/Tooltip'
+import { apiUpdateStatusUser } from '@/services/AuthRoles'
+import { useMemo, useState } from 'react'
+import { HiKey, HiOutlineLink, HiOutlineX, HiPencil } from 'react-icons/hi'
+import { HiExclamationTriangle } from 'react-icons/hi2'
+import useRolePermissonsUsers from '../hooks/useRolePermissonsUsers'
+import RolesUserChangePasswordModal from './RolesUserChangePasswordModal'
 import RolesUserConnectModal from './RolesUserConnectDisconnectModal'
 const RolesPermissionsUserTable = () => {
     const {
@@ -87,7 +87,7 @@ const RolesPermissionsUserTable = () => {
     const [userToDisconnect, setUserToDisconnect] = useState(null)
 
     const openDisconnectModal = (user) => {
-      console.log('MỞ hủy kết nối')
+        console.log('MỞ hủy kết nối')
         setUserToConnect(user)
         setDiconnectModalOpen(true)
     }
@@ -97,12 +97,10 @@ const RolesPermissionsUserTable = () => {
         setUserToDisconnect(null)
     }
 
-
     const columns = useMemo(
         () => [
             {
                 header: 'Mã người dùng',
-                accessorKey: 'id',
                 cell: ({ row }) => (
                     <span className="font-semibold text-primary">
                         {row.original.id || '-'}
@@ -111,7 +109,6 @@ const RolesPermissionsUserTable = () => {
             },
             {
                 header: 'Email người dùng',
-                accessorKey: 'email',
                 cell: ({ row }) => (
                     <span className="font-semibold text-primary">
                         {row.original.email || '-'}
@@ -120,7 +117,6 @@ const RolesPermissionsUserTable = () => {
             },
             {
                 header: 'Vai trò',
-                accessorKey: 'roles',
                 cell: ({ row }) => (
                     <div className="flex gap-1">
                         {row.original.roles?.map((r) => (
@@ -131,7 +127,6 @@ const RolesPermissionsUserTable = () => {
             },
             {
                 header: 'Trạng thái',
-                accessorKey: 'active',
                 cell: ({ row }) => {
                     const isActive = row.original.isActive
 
@@ -151,7 +146,6 @@ const RolesPermissionsUserTable = () => {
             },
             {
                 header: 'Hành động',
-                id: 'action',
                 cell: ({ row }) => {
                     const user = row.original
 
@@ -184,26 +178,28 @@ const RolesPermissionsUserTable = () => {
                             {/* Hủy liên kết employee */}
                             {user.employeeId ? (
                                 <Tooltip title="Hủy liên kết nhân viên">
-                                  <span>
-                                    <Button
-                                        size="xs"
-                                        variant="plain"
-                                        icon={<HiOutlineX />}
-                                        onClick={() => openConnectModal(user)}
-                                    />
+                                    <span>
+                                        <Button
+                                            size="xs"
+                                            variant="plain"
+                                            icon={<HiOutlineX />}
+                                            onClick={() =>
+                                                openConnectModal(user)
+                                            }
+                                        />
                                     </span>
                                 </Tooltip>
                             ) : (
                                 <Tooltip title="Liên kết với nhân viên">
-                                  <span>
-                                    <Button
-                                        size="xs"
-                                        variant="plain"
-                                        icon={<HiOutlineLink />}
-                                        onClick={() =>
-                                            openDisconnectModal(user)
-                                        }
-                                    />
+                                    <span>
+                                        <Button
+                                            size="xs"
+                                            variant="plain"
+                                            icon={<HiOutlineLink />}
+                                            onClick={() =>
+                                                openDisconnectModal(user)
+                                            }
+                                        />
                                     </span>
                                 </Tooltip>
                             )}
@@ -258,17 +254,17 @@ const RolesPermissionsUserTable = () => {
             />
             <RolesUserConnectModal
                 isOpen={
-                    userToConnect?.employeeId 
-                        ? disconnectModalOpen: connectModalOpen
+                    userToConnect?.employeeId
+                        ? disconnectModalOpen
+                        : connectModalOpen
                 }
                 onClose={
                     userToConnect?.employeeId
-                        ?closeDisconnectModal:  closeConnectModal
+                        ? closeDisconnectModal
+                        : closeConnectModal
                 }
                 users={
-                    userToConnect?.employeeId
-                        ?  userToDisconnect:userToConnect
-                        
+                    userToConnect?.employeeId ? userToDisconnect : userToConnect
                 }
             />
             <Dialog

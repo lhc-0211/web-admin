@@ -67,7 +67,7 @@ export default function AnnouncePublicListTableTools() {
             <div className="flex flex-col md:flex-row gap-4 items-end w-full">
                 <div className="flex-1 min-w-[300px]">
                     <DebounceInput
-                        placeholder="Tìm kiếm file (tên, mô tả, alt text...)"
+                        placeholder="Tìm kiếm Thông báo công khai (tiêu đề, danh mục...)"
                         suffix={<TbSearch className="text-lg" />}
                         className="w-full"
                         onChange={(e) => {
@@ -94,7 +94,7 @@ export default function AnnouncePublicListTableTools() {
 
             {/* Drawer Bộ lọc */}
             <Drawer
-                title="Bộ lọc Danh sách công khai"
+                title="Bộ lọc Thông báo công khai"
                 isOpen={filterIsOpen}
                 onClose={() => setFilterIsOpen(false)}
                 onRequestClose={() => setFilterIsOpen(false)}

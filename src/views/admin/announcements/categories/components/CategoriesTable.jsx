@@ -72,10 +72,8 @@ const CategoriesTable = () => {
         () => [
             {
                 header: 'Tên danh mục',
-                accessorKey: 'name',
-                size: 250,
                 cell: ({ row }) => (
-                    <span className="font-medium text-primary">
+                    <span className="font-semibold text-gray-700">
                         {row.original.name || '-'}
                     </span>
                 ),
@@ -83,14 +81,10 @@ const CategoriesTable = () => {
 
             {
                 header: 'Mô tả',
-                accessorKey: 'description',
-                size: 300,
                 cell: ({ row }) => row.original.description || '-',
             },
             {
                 header: 'Ngày tạo',
-                accessorKey: 'createdAtUtc',
-                size: 180,
                 cell: ({ row }) => {
                     const date = row.original.createdAtUtc
                     if (!date) return '-'
@@ -106,12 +100,10 @@ const CategoriesTable = () => {
             // CỘT HÀNH ĐỘNG
             {
                 header: 'Hành động',
-                id: 'actions',
-                size: 120,
                 cell: ({ row }) => {
                     const category = row.original
                     return (
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center gap-2">
                             <Button
                                 size="xs"
                                 variant="twoTone"

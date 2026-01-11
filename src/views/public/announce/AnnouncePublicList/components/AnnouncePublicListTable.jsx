@@ -34,10 +34,9 @@ const AnnouncePrivateListTable = () => {
         () => [
             {
                 header: 'Tiêu đề',
-                accessorKey: 'title',
                 cell: ({ row }) => (
                     <div
-                        className="font-semibold text-primary-600 hover:underline cursor-pointer"
+                        className="font-semibold text-gray-700 hover:underline cursor-pointer"
                         onClick={() => openDetail(row.original)}
                     >
                         {row.original.title}
@@ -46,12 +45,10 @@ const AnnouncePrivateListTable = () => {
             },
             {
                 header: 'Danh mục',
-                accessorKey: 'categoryName',
                 cell: ({ row }) => row.original.categoryName,
             },
             {
                 header: 'Mức độ ưu tiên',
-                accessorKey: 'priority',
                 cell: ({ row }) => (
                     <Tag className={priorityColor[row.original.priority]}>
                         {row.original.priority}
@@ -60,18 +57,15 @@ const AnnouncePrivateListTable = () => {
             },
             {
                 header: 'Ngày xuất bản',
-                accessorKey: 'publishedAt',
                 cell: ({ row }) =>
                     new Date(row.original.publishedAt).toLocaleString(),
             },
             {
                 header: 'Công khai',
-                accessorKey: 'isPublic',
                 cell: ({ row }) => (row.original.isPublic ? 'Có' : 'Không'),
             },
             {
                 header: 'Số file',
-                accessorKey: 'attachments',
                 cell: ({ row }) => row.original.attachments?.length || 0,
             },
         ],

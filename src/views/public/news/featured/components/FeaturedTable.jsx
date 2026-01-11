@@ -10,7 +10,6 @@ const FeaturedTable = () => {
         () => [
             {
                 header: 'Tiêu đề',
-                accessorKey: 'title',
                 size: 400,
                 cell: ({ row }) => {
                     const item = row.original
@@ -41,7 +40,6 @@ const FeaturedTable = () => {
             },
             {
                 header: 'Tóm tắt',
-                accessorKey: 'summary',
                 size: 450,
                 cell: ({ row }) => (
                     <div className="max-w-lg truncate text-sm text-gray-600">
@@ -51,13 +49,11 @@ const FeaturedTable = () => {
             },
             {
                 header: 'Danh mục',
-                accessorKey: 'categoryName',
                 size: 150,
                 cell: ({ row }) => row.original.categoryName || '-',
             },
             {
                 header: 'Trạng thái',
-                accessorKey: 'status',
                 size: 120,
                 cell: ({ row }) => {
                     const status = row.original.status
@@ -79,7 +75,6 @@ const FeaturedTable = () => {
             },
             {
                 header: 'Ngày đăng',
-                accessorKey: 'publishedAt',
                 size: 180,
                 cell: ({ row }) => {
                     const date = row.original.publishedAt

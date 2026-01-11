@@ -71,36 +71,23 @@ const ViolationTypesTable = () => {
     const columns = useMemo(
         () => [
             {
-                header: 'Mã loại vi phạm',
-                accessorKey: 'code',
-                size: 180,
+                header: 'Vi phạm',
                 cell: ({ row }) => (
-                    <span className="font-semibold text-primary">
-                        {row.original.code || '-'}
-                    </span>
+                    <div className="flex flex-col gap-1">
+                        <span className="font-semibold text-gray-700">
+                            {row.original.code || '-'}
+                        </span>{' '}
+                        <span>{row.original.name || '-'}</span>
+                    </div>
                 ),
             },
-            {
-                header: 'Tên loại vi phạm',
-                accessorKey: 'name',
-                size: 300,
-                cell: ({ row }) => (
-                    <span className="font-semibold text-gray-700">
-                        {row.original.name || '-'}
-                    </span>
-                ),
-            },
-
             {
                 header: 'Mô tả',
-                accessorKey: 'description',
                 size: 350,
                 cell: ({ row }) => row.original.description || '-',
             },
             {
                 header: 'Ngày tạo',
-                accessorKey: 'createdAtUtc',
-                size: 180,
                 cell: ({ row }) => {
                     const date = row.original.createdAtUtc
                     if (!date) return '-'
@@ -115,12 +102,11 @@ const ViolationTypesTable = () => {
             },
             {
                 header: 'Hành động',
-                id: 'actions',
-                size: 120,
+
                 cell: ({ row }) => {
                     const type = row.original
                     return (
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center gap-2">
                             <Button
                                 size="xs"
                                 variant="twoTone"

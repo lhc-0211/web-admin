@@ -241,7 +241,6 @@ const NewsTable = () => {
         () => [
             {
                 header: 'Tiêu đề',
-                accessorKey: 'title',
                 size: 300,
                 cell: ({ row }) => (
                     <div className="flex items-center gap-3">
@@ -260,13 +259,11 @@ const NewsTable = () => {
             },
             {
                 header: 'Danh mục',
-                accessorKey: 'categoryName',
                 size: 180,
                 cell: ({ row }) => row.original.categoryName || '-',
             },
             {
                 header: 'Trạng thái',
-                accessorKey: 'status',
                 size: 120,
                 cell: ({ row }) => {
                     const status = row.original.status
@@ -299,13 +296,11 @@ const NewsTable = () => {
             },
             {
                 header: 'Lượt xem',
-                accessorKey: 'viewCount',
                 size: 100,
                 cell: ({ row }) => row.original.viewCount ?? 0,
             },
             {
                 header: 'Ngày đăng',
-                accessorKey: 'publishedAt',
                 size: 180,
                 cell: ({ row }) => {
                     const date = row.original.publishedAt
@@ -322,7 +317,6 @@ const NewsTable = () => {
             // CỘT HÀNH ĐỘNG
             {
                 header: 'Hành động',
-                id: 'actions',
                 size: 260,
                 cell: ({ row }) => {
                     const item = row.original

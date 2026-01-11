@@ -15,12 +15,6 @@ import useCategories from '../hooks/useCategories' // ← Hook đúng cho catego
 const editCategorySchema = z.object({
     name: z.string().min(1, 'Vui lòng nhập tên danh mục'),
     description: z.string().optional(),
-    icon: z.string().min(1, 'Vui lòng nhập icon'),
-    color: z
-        .string()
-        .regex(/^#[0-9A-F]{6}$/i, 'Màu phải là mã hex hợp lệ (ví dụ: #3B82F6)')
-        .optional()
-        .or(z.literal('')),
     displayOrder: z
         .number()
         .int()
@@ -46,8 +40,6 @@ const CategoriesEditModal = ({ isOpen, onClose, category }) => {
             reset({
                 name: category.name || '',
                 description: category.description || '',
-                icon: category.icon || '',
-                color: category.color || '',
                 displayOrder: category.displayOrder ?? 0,
             })
         }
@@ -140,69 +132,6 @@ const CategoriesEditModal = ({ isOpen, onClose, category }) => {
                                 )}
                             />
                         </FormItem>
-
-                        {/* Icon */}
-                        <FormItem
-                            label={
-                                <span>
-                                    Icon <span className="text-red-600">*</span>
-                                </span>
-                            }
-                        >
-                            <Controller
-                                name="icon"
-                                control={control}
-                                render={({ field }) => (
-                                    <>
-                                        <Input
-                                            placeholder="Ví dụ: megaphone, 📢, fa-bullhorn"
-                                            {...field}
-                                            invalid={!!errors.icon}
-                                        />
-                                        {errors.icon && (
-                                            <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                                                <HiExclamationCircle />
-                                                {errors.icon.message}
-                                            </p>
-                                        )}
-                                    </>
-                                )}
-                            />
-                        </FormItem>
-
-                        {/* Màu sắc */}
-                        <FormItem label="Màu sắc (hex)">
-                            <Controller
-                                name="color"
-                                control={control}
-                                render={({ field }) => (
-                                    <div className="flex items-center gap-3">
-                                        <Input
-                                            type="color"
-                                            className="w-20 h-10 cursor-pointer"
-                                            {...field}
-                                        />
-                                        <Input
-                                            placeholder="#3B82F6"
-                                            {...field}
-                                            invalid={!!errors.color}
-                                            onChange={(e) =>
-                                                field.onChange(
-                                                    e.target.value.toUpperCase(),
-                                                )
-                                            }
-                                        />
-                                    </div>
-                                )}
-                            />
-                            {errors.color && (
-                                <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
-                                    <HiExclamationCircle />
-                                    {errors.color.message}
-                                </p>
-                            )}
-                        </FormItem>
-
                         {/* Thứ tự hiển thị */}
                         <FormItem label="Thứ tự hiển thị">
                             <Controller

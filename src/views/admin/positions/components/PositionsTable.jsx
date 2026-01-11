@@ -72,35 +72,22 @@ const PositionsTable = () => {
     const columns = useMemo(
         () => [
             {
-                header: 'Mã chức vụ',
-                accessorKey: 'positionCode',
-                size: 150,
+                header: 'Chức vụ',
                 cell: ({ row }) => (
-                    <span className="font-medium text-primary">
-                        {row.original.positionCode || '-'}
-                    </span>
-                ),
-            },
-            {
-                header: 'Tên chức vụ',
-                accessorKey: 'name',
-                size: 250,
-                cell: ({ row }) => (
-                    <span className="font-semibold text-gray-700">
-                        {row.original.name || '-'}
-                    </span>
+                    <div className="flex flex-col gap-1">
+                        <span className="font-semibold text-gray-700">
+                            {row.original.positionCode || '-'}
+                        </span>{' '}
+                        <span>{row.original.name || '-'}</span>
+                    </div>
                 ),
             },
             {
                 header: 'Mô tả',
-                accessorKey: 'description',
-                size: 350,
                 cell: ({ row }) => row.original.description || '-',
             },
             {
                 header: 'Ngày tạo',
-                accessorKey: 'createdAtUtc',
-                size: 180,
                 cell: ({ row }) => {
                     const date = row.original.createdAtUtc
                     if (!date) return '-'
@@ -116,12 +103,10 @@ const PositionsTable = () => {
             // CỘT HÀNH ĐỘNG
             {
                 header: 'Hành động',
-                id: 'actions',
-                size: 150,
                 cell: ({ row }) => {
                     const position = row.original
                     return (
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center gap-2">
                             <Button
                                 size="xs"
                                 variant="twoTone"

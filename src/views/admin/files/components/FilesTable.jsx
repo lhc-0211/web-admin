@@ -88,7 +88,6 @@ const FilesTable = () => {
         () => [
             {
                 header: 'Tên file gốc',
-                accessorKey: 'originalFileName',
                 size: 250,
                 cell: ({ row }) => (
                     <span className="font-medium">
@@ -98,31 +97,26 @@ const FilesTable = () => {
             },
             {
                 header: 'Mô tả',
-                accessorKey: 'description',
                 size: 300,
                 cell: ({ row }) => row.original.description || '-',
             },
             {
                 header: 'Alt Text',
-                accessorKey: 'altText',
                 size: 250,
                 cell: ({ row }) => row.original.altText || '-',
             },
             {
                 header: 'Loại',
-                accessorKey: 'contentType',
                 size: 150,
                 cell: ({ row }) => row.original.contentType || '-',
             },
             {
                 header: 'Danh mục',
-                accessorKey: 'category',
                 size: 120,
                 cell: ({ row }) => row.original.category || '-',
             },
             {
                 header: 'Ngày tải lên',
-                accessorKey: 'createdAtUtc',
                 size: 180,
                 cell: ({ row }) => {
                     const date = row.original.createdAtUtc
@@ -139,7 +133,6 @@ const FilesTable = () => {
             // CỘT HÀNH ĐỘNG
             {
                 header: 'Hành động',
-                id: 'actions',
                 size: 120,
                 cell: ({ row }) => {
                     const file = row.original

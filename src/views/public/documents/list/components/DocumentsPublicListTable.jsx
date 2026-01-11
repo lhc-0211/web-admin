@@ -26,7 +26,6 @@ const DocumentsPublicListTable = () => {
         () => [
             {
                 header: 'Số hiệu văn bản',
-                accessorKey: 'documentNumber',
                 cell: ({ row }) => (
                     <div
                         className="font-semibold text-primary-600 hover:underline cursor-pointer"
@@ -38,22 +37,18 @@ const DocumentsPublicListTable = () => {
             },
             {
                 header: 'Loại văn bản',
-                accessorKey: 'documentTypeName',
                 cell: ({ row }) => row.original.documentTypeName || '-',
             },
             {
                 header: 'Lĩnh vực',
-                accessorKey: 'documentCategoryName',
                 cell: ({ row }) => row.original.documentCategoryName || '-',
             },
             {
                 header: 'Cơ quan ban hành',
-                accessorKey: 'issuingAuthorityName',
                 cell: ({ row }) => row.original.issuingAuthorityName || '-',
             },
             {
                 header: 'Ngày ban hành',
-                accessorKey: 'issuedDate',
                 cell: ({ row }) =>
                     row.original.issuedDate
                         ? new Date(row.original.issuedDate).toLocaleDateString(
@@ -63,7 +58,6 @@ const DocumentsPublicListTable = () => {
             },
             {
                 header: 'Ngày hiệu lực',
-                accessorKey: 'effectiveDate',
                 cell: ({ row }) =>
                     row.original.effectiveDate
                         ? new Date(
@@ -73,7 +67,6 @@ const DocumentsPublicListTable = () => {
             },
             {
                 header: 'Trạng thái',
-                accessorKey: 'status',
                 cell: ({ row }) => (
                     <Tag
                         className={
@@ -90,12 +83,10 @@ const DocumentsPublicListTable = () => {
             },
             {
                 header: 'Công khai',
-                accessorKey: 'isPublic',
                 cell: ({ row }) => (row.original.isPublic ? 'Có' : 'Không'),
             },
             {
                 header: 'Lượt xem',
-                accessorKey: 'viewCount',
                 cell: ({ row }) => {
                     const views = row.original.viewCount ?? 0
                     return (

@@ -4,7 +4,7 @@ const appConfig = {
     apiPrefix: '',
     authenticatedEntryPath: '/home',
     unAuthenticatedEntryPath: '/sign-in',
-    locale: 'en',
+    locale: 'vi',
     accessTokenPersistStrategy: 'localStorage',
     enableMock: true,
     activeNavTranslation: true,

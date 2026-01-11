@@ -209,7 +209,7 @@ const PositionsCreateModal = ({ isOpen, onClose }) => {
                         </FormItem>
 
                         {/* Thứ tự */}
-                        <FormItem label="Thứ tự hiển thị">
+                        {/* <FormItem label="Thứ tự hiển thị">
                             <Controller
                                 name="order"
                                 control={control}
@@ -235,7 +235,7 @@ const PositionsCreateModal = ({ isOpen, onClose }) => {
                                     {errors.order.message}
                                 </p>
                             )}
-                        </FormItem>
+                        </FormItem> */}
                     </div>
 
                     {/* Mô tả - full width */}

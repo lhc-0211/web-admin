@@ -73,39 +73,27 @@ const FieldsTable = () => {
     const columns = useMemo(
         () => [
             {
-                header: 'Mã trường',
-                accessorKey: 'code',
-                size: 150,
+                header: 'Lĩnh vực',
                 cell: ({ row }) => (
-                    <span className="font-medium text-primary ">
-                        {row.original.code || '-'}
-                    </span>
-                ),
-            },
-            {
-                header: 'Tên trường',
-                accessorKey: 'name',
-                size: 250,
-                cell: ({ row }) => (
-                    <span className="font-semibold text-gray-700">
-                        {row.original.name || '-'}
-                    </span>
+                    <div className="flex flex-col gap-1">
+                        <span className="font-semibold text-gray-700">
+                            {row.original.code || '-'}
+                        </span>{' '}
+                        <span>{row.original.name || '-'}</span>
+                    </div>
                 ),
             },
             {
                 header: 'Mô tả',
-                accessorKey: 'description',
-                size: 300,
+                size: 250,
                 cell: ({ row }) => row.original.description || '-',
             },
             {
                 header: 'Hành động',
-                id: 'actions',
-                size: 120,
                 cell: ({ row }) => {
                     const field = row.original
                     return (
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center gap-2">
                             <Button
                                 size="xs"
                                 variant="twoTone"

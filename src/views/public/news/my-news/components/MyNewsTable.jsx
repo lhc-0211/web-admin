@@ -10,7 +10,6 @@ const MyNewsTable = () => {
         () => [
             {
                 header: 'Tiêu đề',
-                accessorKey: 'title',
                 size: 350,
                 cell: ({ row }) => {
                     const item = row.original
@@ -41,7 +40,6 @@ const MyNewsTable = () => {
             },
             {
                 header: 'Tóm tắt',
-                accessorKey: 'summary',
                 size: 400,
                 cell: ({ row }) => (
                     <div className="max-w-md truncate text-sm text-gray-600">
@@ -51,19 +49,16 @@ const MyNewsTable = () => {
             },
             {
                 header: 'Tác giả',
-                accessorKey: 'authorName',
                 size: 150,
                 cell: ({ row }) => row.original.authorName || '-',
             },
             {
                 header: 'Danh mục',
-                accessorKey: 'categoryName',
                 size: 150,
                 cell: ({ row }) => row.original.categoryName || '-',
             },
             {
                 header: 'Tags',
-                accessorKey: 'tags',
                 size: 200,
                 cell: ({ row }) => {
                     const tags = row.original.tags
@@ -93,7 +88,6 @@ const MyNewsTable = () => {
             },
             {
                 header: 'Trạng thái',
-                accessorKey: 'status',
                 size: 120,
                 cell: ({ row }) => {
                     const status = row.original.status
@@ -115,7 +109,6 @@ const MyNewsTable = () => {
             },
             {
                 header: 'Ngày đăng',
-                accessorKey: 'publishedAt',
                 size: 180,
                 cell: ({ row }) => {
                     const date = row.original.publishedAt

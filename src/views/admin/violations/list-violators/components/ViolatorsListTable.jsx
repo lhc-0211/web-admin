@@ -73,26 +73,22 @@ const ViolatorsListTable = () => {
         () => [
             {
                 header: 'Tên đối tượng',
-                accessorKey: 'name',
                 cell: ({ row }) => (
-                    <span className="font-semibold text-primary">
+                    <span className="font-semibold text-gray-700">
                         {row.original.name || '-'}
                     </span>
                 ),
             },
             {
                 header: 'Số điện thoại',
-                accessorKey: 'phone',
                 cell: ({ row }) => row.original.phone || '-',
             },
             {
                 header: 'Địa chỉ',
-                accessorKey: 'address',
                 cell: ({ row }) => row.original.address || '-',
             },
             {
                 header: 'Ngày tạo',
-                accessorKey: 'createdAtUtc',
                 cell: ({ row }) => {
                     const date = row.original.createdAtUtc
                     if (!date) return '-'
@@ -108,7 +104,6 @@ const ViolatorsListTable = () => {
             // CỘT HÀNH ĐỘNG
             {
                 header: 'Hành động',
-                id: 'actions',
                 cell: ({ row }) => {
                     const violator = row.original
                     return (

@@ -199,36 +199,26 @@ const DocumentsTable = () => {
         () => [
             {
                 header: 'Số hiệu văn bản',
-                accessorKey: 'documentNumber',
-                size: 180,
                 cell: ({ row }) => (
-                    <span className="font-medium">
+                    <span className="font-semibold text-gray-700">
                         {row.original.documentNumber || '-'}
                     </span>
                 ),
             },
             {
                 header: 'Loại văn bản',
-                accessorKey: 'documentTypeName',
-                size: 200,
                 cell: ({ row }) => row.original.documentTypeName || '-',
             },
             {
                 header: 'Lĩnh vực',
-                accessorKey: 'documentCategoryName',
-                size: 200,
                 cell: ({ row }) => row.original.documentCategoryName || '-',
             },
             {
                 header: 'Cơ quan ban hành',
-                accessorKey: 'issuingAuthorityName',
-                size: 220,
                 cell: ({ row }) => row.original.issuingAuthorityName || '-',
             },
             {
                 header: 'Ngày ban hành',
-                accessorKey: 'issuedDate',
-                size: 160,
                 cell: ({ row }) => {
                     const date = row.original.issuedDate
                     if (!date) return '-'
@@ -237,8 +227,6 @@ const DocumentsTable = () => {
             },
             {
                 header: 'Ngày hiệu lực',
-                accessorKey: 'effectiveDate',
-                size: 160,
                 cell: ({ row }) => {
                     const date = row.original.effectiveDate
                     if (!date) return '-'
@@ -247,8 +235,6 @@ const DocumentsTable = () => {
             },
             {
                 header: 'Trạng thái',
-                accessorKey: 'status',
-                size: 120,
                 cell: ({ row }) => (
                     <span
                         className={`font-medium ${row.original.status === 'Active' ? 'text-green-600' : 'text-gray-600'}`}
@@ -261,8 +247,6 @@ const DocumentsTable = () => {
             },
             {
                 header: 'Công khai',
-                accessorKey: 'isPublic',
-                size: 100,
                 cell: ({ row }) => (
                     <span
                         className={`font-medium ${row.original.isPublic ? 'text-green-600' : 'text-red-600'}`}
@@ -274,12 +258,10 @@ const DocumentsTable = () => {
             // CỘT HÀNH ĐỘNG
             {
                 header: 'Hành động',
-                id: 'actions',
-                size: 200,
                 cell: ({ row }) => {
                     const document = row.original
                     return (
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center gap-2">
                             {/* Sửa */}
                             <Button
                                 size="xs"

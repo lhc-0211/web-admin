@@ -76,11 +76,11 @@ const EmployeesTable = () => {
             {
                 header: 'Nhân viên',
                 id: 'employeeInfo',
-                size: 300,
+                size: 250,
                 cell: ({ row }) => {
                     const employee = row.original
                     return (
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-1">
                             <Avatar
                                 src={employee.avatarUrl}
                                 size="md"
@@ -103,25 +103,16 @@ const EmployeesTable = () => {
             },
             {
                 header: 'Phòng ban',
-                accessorKey: 'departmentName',
                 size: 200,
                 cell: ({ row }) => row.original.departmentName || '-',
             },
             {
                 header: 'Chức vụ',
-                accessorKey: 'positionName',
                 size: 180,
                 cell: ({ row }) => row.original.positionName || '-',
             },
             {
-                header: 'Cấp bậc',
-                accessorKey: 'level',
-                size: 100,
-                cell: ({ row }) => row.original.level ?? '-',
-            },
-            {
                 header: 'Trạng thái',
-                accessorKey: 'employmentStatus',
                 size: 150,
                 cell: ({ row }) => {
                     const status = row.original.employmentStatus || 'Unknown'
@@ -142,7 +133,6 @@ const EmployeesTable = () => {
             },
             {
                 header: 'Ngày vào làm',
-                accessorKey: 'joinDate',
                 size: 180,
                 cell: ({ row }) => {
                     const date = row.original.joinDate
@@ -154,27 +144,11 @@ const EmployeesTable = () => {
                     })
                 },
             },
-            {
-                header: 'Ngày tạo',
-                accessorKey: 'createdAtUtc',
-                size: 180,
-                cell: ({ row }) => {
-                    const date = row.original.createdAtUtc
-                    if (!date) return '-'
-                    return new Date(date).toLocaleString('vi-VN', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                    })
-                },
-            },
             // CỘT HÀNH ĐỘNG
             {
                 header: 'Hành động',
                 id: 'actions',
-                size: 120,
+                size: 180,
                 cell: ({ row }) => {
                     const employee = row.original
                     return (

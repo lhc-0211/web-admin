@@ -73,7 +73,7 @@ export default function NewsTableTools() {
             <div className="flex flex-col md:flex-row gap-4 items-end w-full">
                 <div className="flex-1 min-w-[300px]">
                     <DebounceInput
-                        placeholder="Tìm kiếm file (tên, mô tả, alt text...)"
+                        placeholder="Tìm kiếm danh sách suất bản (tiêu đề, tác giả, danh mục...)"
                         suffix={<TbSearch className="text-lg" />}
                         className="w-full"
                         onChange={(e) => {

@@ -147,7 +147,7 @@ const FilesCreateModal = ({ isOpen, onClose, onSuccess }) => {
                                     {selectedFiles.map((file, index) => (
                                         <div
                                             key={index}
-                                            className="flex items-center justify-between bg-gray-50 hover:bg-gray-100 rounded-lg p-3 transition-colors"
+                                            className="flex items-center justify-between bg-gray-50 hover:bg-gray-100 rounded-lg p-1 transition-colors"
                                         >
                                             <div className="flex items-center space-x-3">
                                                 {/* Icon theo loại file */}
@@ -191,7 +191,7 @@ const FilesCreateModal = ({ isOpen, onClose, onSuccess }) => {
                             </div>
                         ) : (
                             <div
-                                className={`relative border-2 border-dashed rounded-lg p-8 transition-all duration-200 text-center ${
+                                className={`relative border-2 border-dashed rounded-lg p-2 transition-all duration-200 text-center ${
                                     uploading
                                         ? 'border-gray-300 bg-gray-50 cursor-not-allowed'
                                         : 'border-gray-300 hover:border-blue-500 hover:bg-blue-50 cursor-pointer'

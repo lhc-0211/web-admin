@@ -73,35 +73,23 @@ const IssuingAuthoritiesTable = () => {
     const columns = useMemo(
         () => [
             {
-                header: 'Mã cơ quan',
-                accessorKey: 'code',
-                size: 150,
+                header: 'Cơ quan',
                 cell: ({ row }) => (
-                    <span className="font-semibold text-primary">
-                        {row.original.code || '-'}
-                    </span>
+                    <div className="flex flex-col gap-1">
+                        <span className="font-semibold text-gray-700">
+                            {row.original.code || '-'}
+                        </span>{' '}
+                        <span>{row.original.name || '-'}</span>
+                    </div>
                 ),
             },
-            {
-                header: 'Tên cơ quan',
-                accessorKey: 'name',
-                size: 300,
-                cell: ({ row }) => (
-                    <span className="font-semibold text-gray-700">
-                        {row.original.name || '-'}
-                    </span>
-                ),
-            },
+
             {
                 header: 'Mô tả',
-                accessorKey: 'description',
-                size: 350,
                 cell: ({ row }) => row.original.description || '-',
             },
             {
                 header: 'Ngày tạo',
-                accessorKey: 'createdAtUtc',
-                size: 180,
                 cell: ({ row }) => {
                     const date = row.original.createdAtUtc
                     if (!date) return '-'
@@ -116,12 +104,10 @@ const IssuingAuthoritiesTable = () => {
             },
             {
                 header: 'Hành động',
-                id: 'actions',
-                size: 120,
                 cell: ({ row }) => {
                     const authority = row.original
                     return (
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center gap-2">
                             <Button
                                 size="xs"
                                 variant="twoTone"
