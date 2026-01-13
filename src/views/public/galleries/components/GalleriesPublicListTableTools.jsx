@@ -87,7 +87,7 @@ export default function GalleriesPublicListTableTools() {
                 {/* Ô tìm kiếm */}
                 <div className="flex-1 min-w-[300px]">
                     <DebounceInput
-                        placeholder="Tìm kiếm bộ sưu tập (tiêu đề, mô tả...)"
+                        placeholder="Tìm kiếm nhanh (tiêu đề, danh mục...)"
                         suffix={<TbSearch className="text-lg" />}
                         className="w-full"
                         onChange={(e) => {

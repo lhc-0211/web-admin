@@ -463,15 +463,6 @@ const rootNavigationConfig = [
                 },
                 subMenu: [
                     {
-                        key: 'galleries-list-public',
-                        path: `/galleries`,
-                        title: 'Danh sách công khai',
-                        translateKey: 'galleries',
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN],
-                        subMenu: [],
-                    },
-                    {
                         key: 'galleries-list',
                         path: `/admin/galleries`,
                         title: 'Quản lý bộ sưu tập',
@@ -485,6 +476,15 @@ const rootNavigationConfig = [
                         path: '/admin/gallery/categories',
                         title: 'Quản lý danh mục',
                         translateKey: 'gallery-categories',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'galleries-list-public',
+                        path: `/galleries`,
+                        title: 'Danh sách công khai',
+                        translateKey: 'galleries',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN],
                         subMenu: [],

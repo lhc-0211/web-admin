@@ -21,7 +21,6 @@ const GalleriesPublicListTable = () => {
         () => [
             {
                 header: 'Hình đại diện',
-                id: 'thumbnail',
                 size: 100,
                 cell: ({ row }) => {
                     const url = row.original.thumbnailImageUrl
@@ -40,7 +39,6 @@ const GalleriesPublicListTable = () => {
             },
             {
                 header: 'Tiêu đề',
-                accessorKey: 'title',
                 size: 300,
                 sortable: true,
                 cell: ({ row }) => (
@@ -58,13 +56,11 @@ const GalleriesPublicListTable = () => {
             },
             {
                 header: 'Danh mục',
-                accessorKey: 'categoryName',
                 size: 180,
                 cell: ({ row }) => row.original.categoryName || '-',
             },
             {
                 header: 'Số ảnh',
-                accessorKey: 'itemCount',
                 size: 100,
                 cell: ({ row }) => (
                     <span className="font-medium">
@@ -74,7 +70,6 @@ const GalleriesPublicListTable = () => {
             },
             {
                 header: 'Trạng thái',
-                accessorKey: 'status',
                 size: 120,
                 cell: ({ row }) => {
                     const status = row.original.status
@@ -107,7 +102,6 @@ const GalleriesPublicListTable = () => {
             },
             {
                 header: 'Ngày đăng',
-                accessorKey: 'publishedAt',
                 size: 160,
                 cell: ({ row }) => {
                     const date = row.original.publishedAt
@@ -123,7 +117,6 @@ const GalleriesPublicListTable = () => {
             },
             {
                 header: 'Hành động',
-                id: 'actions',
                 size: 120,
                 cell: ({ row }) => {
                     const gallery = row.original

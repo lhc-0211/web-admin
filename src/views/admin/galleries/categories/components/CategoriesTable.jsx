@@ -74,19 +74,15 @@ const CategoriesTable = () => {
         () => [
             {
                 header: 'Tên danh mục',
-                accessorKey: 'name',
-                size: 250,
                 sortable: true,
                 cell: ({ row }) => (
-                    <span className="font-semibold text-primary">
+                    <span className="font-semibold text-gray-700">
                         {row.original.name || '-'}
                     </span>
                 ),
             },
             {
                 header: 'Slug',
-                accessorKey: 'slug',
-                size: 200,
                 cell: ({ row }) => (
                     <code className="text-xs bg-gray-100 px-2 py-1 rounded">
                         {row.original.slug || '-'}
@@ -95,14 +91,10 @@ const CategoriesTable = () => {
             },
             {
                 header: 'Mô tả',
-                accessorKey: 'description',
-                size: 300,
                 cell: ({ row }) => row.original.description || '-',
             },
             {
                 header: 'Trạng thái',
-                accessorKey: 'isActive',
-                size: 150,
                 sortable: true,
                 cell: ({ row }) => {
                     const isActive = row.original.isActive
@@ -121,12 +113,10 @@ const CategoriesTable = () => {
             },
             {
                 header: 'Hành động',
-                id: 'actions',
-                size: 120,
                 cell: ({ row }) => {
                     const category = row.original
                     return (
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center gap-2">
                             <Button
                                 size="xs"
                                 variant="twoTone"

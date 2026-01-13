@@ -73,8 +73,6 @@ const GalleriesTable = () => {
         () => [
             {
                 header: 'Hình đại diện',
-                id: 'thumbnail',
-                size: 100,
                 cell: ({ row }) => {
                     const url = row.original.thumbnailImageUrl
                     return url ? (
@@ -92,8 +90,6 @@ const GalleriesTable = () => {
             },
             {
                 header: 'Tiêu đề',
-                accessorKey: 'title',
-                size: 300,
                 sortable: true,
                 cell: ({ row }) => (
                     <div>
@@ -110,14 +106,10 @@ const GalleriesTable = () => {
             },
             {
                 header: 'Danh mục',
-                accessorKey: 'categoryName',
-                size: 180,
                 cell: ({ row }) => row.original.categoryName || '-',
             },
             {
                 header: 'Số ảnh',
-                accessorKey: 'itemCount',
-                size: 100,
                 cell: ({ row }) => (
                     <span className="font-medium">
                         {row.original.itemCount ?? 0}
@@ -126,8 +118,6 @@ const GalleriesTable = () => {
             },
             {
                 header: 'Trạng thái',
-                accessorKey: 'status',
-                size: 120,
                 cell: ({ row }) => {
                     const status = row.original.status
                     const isPublic = row.original.isPublic
@@ -159,8 +149,6 @@ const GalleriesTable = () => {
             },
             {
                 header: 'Ngày đăng',
-                accessorKey: 'publishedAt',
-                size: 160,
                 cell: ({ row }) => {
                     const date = row.original.publishedAt
                     if (!date) return '-'
@@ -175,8 +163,6 @@ const GalleriesTable = () => {
             },
             {
                 header: 'Hành động',
-                id: 'actions',
-                size: 120,
                 cell: ({ row }) => {
                     const gallery = row.original
                     return (
